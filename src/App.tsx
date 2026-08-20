@@ -12,6 +12,7 @@ import { BeforeAfterSlider } from './components/BeforeAfterSlider';
 import { ShopThroughVideo } from './components/ShopThroughVideo';
 import { ComparisonsChart } from './components/ComparisonsChart';
 import { FaqSection } from './components/FaqSection';
+import { ValuePropositionSection } from './components/ValuePropositionSection';
 import { Footer } from './components/Footer';
 import { CartDrawer } from './components/CartDrawer';
 import { PhoneCall, MessageSquare } from 'lucide-react';
@@ -117,6 +118,9 @@ export default function App() {
         {/* 12. COMPARISONS CHART (7-row feature matrix vs traps & poisons) */}
         <ComparisonsChart />
 
+        {/* 14. VALUE PROPOSITION 3-PILLAR HIGHLIGHTS (Effective Protection, Eco-Friendly, Long-Lasting) */}
+        <ValuePropositionSection />
+
         {/* 13. FAQ & INSTALLATION GUIDE SECTION (Accordion tabs) */}
         <FaqSection />
       </main>
@@ -134,18 +138,18 @@ export default function App() {
         onReset={handleResetCart}
       />
 
-      {/* Floating Quick Action Button (Direct WhatsApp / Phone Support) */}
+      {/* Floating Quick Action Button (Direct Chat / Phone Support) */}
       <div className="fixed bottom-6 right-6 z-40 flex flex-col gap-2.5 items-end">
         <a
           href="https://api.whatsapp.com/send?phone=919409445443&text=Hi%20RatGuardPro,%20I%20want%20to%20order%20the%20Ultrasonic%20Rat%20Repellent"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Order on WhatsApp"
-          className="bg-[#25D366] hover:bg-[#20ba59] active:scale-95 text-white p-3.5 rounded-full shadow-2xl flex items-center gap-2 group transition-all duration-300 hover:pr-4"
+          aria-label="Chat with Support"
+          className="bg-[#0066FF] hover:bg-[#0052cc] active:scale-95 text-white p-3.5 rounded-full shadow-2xl flex items-center gap-2 group transition-all duration-300 hover:pr-4 shadow-blue-500/30"
         >
           <MessageSquare className="w-5 h-5 fill-current" />
           <span className="hidden group-hover:inline text-xs font-bold whitespace-nowrap">
-            Order on WhatsApp
+            Chat with Support
           </span>
         </a>
 
@@ -154,7 +158,7 @@ export default function App() {
           aria-label="Call Customer Support"
           className="bg-[#111111] hover:bg-black active:scale-95 text-white p-3.5 rounded-full shadow-2xl flex items-center gap-2 group transition-all duration-300 hover:pr-4 border border-neutral-800"
         >
-          <PhoneCall className="w-5 h-5 text-emerald-400" />
+          <PhoneCall className="w-5 h-5 text-white" />
           <span className="hidden group-hover:inline text-xs font-bold whitespace-nowrap">
             Call +91 9409445443
           </span>

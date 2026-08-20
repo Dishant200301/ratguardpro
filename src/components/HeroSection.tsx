@@ -89,8 +89,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onShopNow }) => {
               }}
             />
             {/* Gradient Overlay (Dark left for high text readability) */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/80 to-black/30 lg:to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/45 via-black/40 to-black/10 lg:to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/10" />
           </div>
         );
       })}

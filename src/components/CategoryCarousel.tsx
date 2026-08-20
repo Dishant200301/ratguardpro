@@ -1,140 +1,137 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { CATEGORY_CAROUSEL_ITEMS } from '../data/mockData';
 
 export const CategoryCarousel: React.FC = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const carouselRef = useRef<HTMLDivElement>(null);
 
-  const totalItems = CATEGORY_CAROUSEL_ITEMS.length;
+  const handleScroll = (direction: 'left' | 'right') => {
+    const nextIdx =
+      direction === 'left'
+        ? Math.max(0, activeIndex - 1)
+        : Math.min(CATEGORY_CAROUSEL_ITEMS.length - 1, activeIndex + 1);
+    handleDotClick(nextIdx);
+  };
 
-  const handlePrev = () => {
-    setCurrentIndex((prev) => (prev > 0 ? prev - 1 : 0));
-    if (containerRef.current) {
-      containerRef.current.scrollBy({ left: -260, behavior: 'smooth' });
+  const handleDotClick = (index: number) => {
+    setActiveIndex(index);
+    const el = carouselRef.current;
+    if (!el) return;
+    const targetChild = el.children[index] as HTMLElement | undefined;
+    if (targetChild) {
+      const targetLeft = targetChild.offsetLeft - el.offsetLeft;
+      el.scrollTo({
+        left: targetLeft,
+        behavior: 'smooth',
+      });
     }
   };
 
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev < totalItems - 1 ? prev + 1 : prev));
-    if (containerRef.current) {
-      containerRef.current.scrollBy({ left: 260, behavior: 'smooth' });
-    }
-  };
+  useEffect(() => {
+    const el = carouselRef.current;
+    if (!el) return;
+
+    const handleScrollEvent = () => {
+      const scrollLeft = el.scrollLeft;
+      const firstChild = el.children[0] as HTMLElement | undefined;
+      const cardStep = firstChild ? firstChild.offsetWidth + 20 : 320;
+      const newIndex = Math.round(scrollLeft / cardStep);
+      setActiveIndex(Math.max(0, Math.min(CATEGORY_CAROUSEL_ITEMS.length - 1, newIndex)));
+    };
+
+    el.addEventListener('scroll', handleScrollEvent, { passive: true });
+    return () => el.removeEventListener('scroll', handleScrollEvent);
+  }, []);
 
   return (
     <section
       id="category-carousel-section"
-      className="w-full bg-white py-14 lg:py-20 border-b border-neutral-100 select-none overflow-hidden"
+      className="w-full bg-white py-16 lg:py-24 border-b border-neutral-100 select-none overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header with Left/Right Controls */}
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <span className="text-xs uppercase font-extrabold tracking-widest text-[#0066FF] block mb-1">
-              TARGETED SPACES
-            </span>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#111111] tracking-tight">
-              Explore By Category
-            </h2>
-          </div>
-
-          {/* Navigation Arrows (Desktop & Mobile) */}
-          <div className="flex items-center gap-3">
-            <button
-              id="category-carousel-prev-btn"
-              onClick={handlePrev}
-              disabled={currentIndex === 0}
-              aria-label="Previous Category"
-              className="w-11 h-11 rounded-full bg-white border border-neutral-200 text-neutral-800 flex items-center justify-center shadow-md hover:bg-neutral-50 active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-
-            <button
-              id="category-carousel-next-btn"
-              onClick={handleNext}
-              disabled={currentIndex >= totalItems - 1}
-              aria-label="Next Category"
-              className="w-11 h-11 rounded-full bg-white border border-neutral-200 text-neutral-800 flex items-center justify-center shadow-md hover:bg-neutral-50 active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-          </div>
+      {/* Section Heading centered within max-width */}
+      <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+          <span className="text-xs uppercase font-extrabold tracking-widest text-[#0066FF] bg-blue-50 px-3.5 py-1 rounded-full font-sans">
+            TARGETED SPACES & ENVIRONMENTS
+          </span>
+          <h2 className="text-xl md:text-3xl lg:text-5xl font-semibold text-[#111111] tracking-tight font-sans mt-3">
+            Explore By <span className="text-[#0066FF]">Category</span>
+          </h2>
+          <p className="text-neutral-500 text-sm sm:text-base md:text-lg mt-2.5 font-sans font-medium">
+            Find the right RatGuardPro setup for your specific space.
+          </p>
         </div>
+      </div>
 
-        {/* 1. DESKTOP / LAPTOP: Horizontal Carousel (5 visible, all 8 reachable) */}
-        <div className="hidden lg:block relative">
-          <div
-            ref={containerRef}
-            className="flex gap-4 overflow-x-auto no-scrollbar scroll-smooth pb-4"
-          >
-            {CATEGORY_CAROUSEL_ITEMS.map((item) => (
-              <div
-                key={item.id}
-                className="shrink-0 w-[calc(20%-13px)] min-w-[220px] h-80 rounded-3xl overflow-hidden relative shadow-sm hover:shadow-lg transition-all duration-300 group cursor-pointer"
-              >
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
-                {/* Dark Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent flex flex-col justify-end p-5">
-                  <span className="text-white font-extrabold text-lg tracking-tight drop-shadow-sm group-hover:text-emerald-300 transition-colors">
-                    {item.name}
-                  </span>
-                  <span className="text-[11px] font-medium text-neutral-300 mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                    View Protection Setup →
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+      {/* Full-width Carousel Container matching Reels layout across all devices */}
+      <div className="w-full relative group/carousel">
+        {/* Left Arrow Button */}
+        <button
+          id="category-carousel-prev-btn"
+          onClick={() => handleScroll('left')}
+          aria-label="Previous Category"
+          className="absolute left-2 sm:left-4 lg:left-8 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/95 backdrop-blur-md text-neutral-800 shadow-2xl border border-neutral-200/90 flex items-center justify-center hover:bg-[#0066FF] hover:text-white hover:border-[#0066FF] active:scale-90 transition-all cursor-pointer"
+        >
+          <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+        </button>
 
-        {/* 2. TABLET: 2-Column Responsive Grid */}
-        <div className="hidden sm:grid lg:hidden grid-cols-2 gap-4">
+        {/* Right Arrow Button */}
+        <button
+          id="category-carousel-next-btn"
+          onClick={() => handleScroll('right')}
+          aria-label="Next Category"
+          className="absolute right-2 sm:right-4 lg:right-8 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/95 backdrop-blur-md text-neutral-800 shadow-2xl border border-neutral-200/90 flex items-center justify-center hover:bg-[#0066FF] hover:text-white hover:border-[#0066FF] active:scale-90 transition-all cursor-pointer"
+        >
+          <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+        </button>
+
+        {/* Category Cards Reel Scroll Container - Increased card size & top-left badge */}
+        <div
+          ref={carouselRef}
+          className="flex gap-4 sm:gap-5 lg:gap-6 overflow-x-auto no-scrollbar scroll-smooth py-3 px-[calc((100vw-min(78vw,325px))/2)] sm:px-6 lg:pl-[max(2rem,calc((100vw-1500px)/2+2rem))] lg:pr-8 snap-x snap-mandatory"
+        >
           {CATEGORY_CAROUSEL_ITEMS.map((item) => (
             <div
               key={item.id}
-              className="h-64 rounded-3xl overflow-hidden relative shadow-sm group cursor-pointer"
+              className="shrink-0 w-[78vw] sm:w-[285px] lg:w-[310px] xl:w-[325px] max-w-[340px] aspect-[4/5] bg-neutral-950 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 relative flex flex-col group cursor-pointer border border-neutral-200/60 select-none snap-center"
             >
-              <img
-                src={item.image}
-                alt={item.name}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent flex items-end p-5">
-                <span className="text-white font-extrabold text-lg tracking-tight">
+              {/* Top-Left: Category Name Badge */}
+              <div className="absolute top-4 left-4 z-20 flex items-center gap-1.5 bg-black/60 backdrop-blur-md px-3.5 py-1.5 rounded-full text-white border border-white/20 shadow-md select-none">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#0066FF]" />
+                <span className="text-xs sm:text-sm font-bold text-white tracking-tight font-sans">
                   {item.name}
                 </span>
+              </div>
+
+              {/* Background Image with Zoom on Hover */}
+              <div className="absolute inset-0 w-full h-full bg-neutral-900 overflow-hidden">
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 select-none"
+                  loading="lazy"
+                />
               </div>
             </div>
           ))}
         </div>
+      </div>
 
-        {/* 3. MOBILE: Single-Card View / 1 Column Slider */}
-        <div className="block sm:hidden">
-          <div className="relative h-72 rounded-3xl overflow-hidden shadow-md">
-            <img
-              src={CATEGORY_CAROUSEL_ITEMS[currentIndex].image}
-              alt={CATEGORY_CAROUSEL_ITEMS[currentIndex].name}
-              className="w-full h-full object-cover animate-in fade-in duration-300"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent flex flex-col justify-end p-6">
-              <span className="text-white font-black text-2xl tracking-tight">
-                {CATEGORY_CAROUSEL_ITEMS[currentIndex].name}
-              </span>
-              <div className="flex items-center justify-between mt-2 text-xs text-neutral-300">
-                <span>Category {currentIndex + 1} of {totalItems}</span>
-                <span className="font-bold text-emerald-400">Swipe or tap arrows</span>
-              </div>
-            </div>
-          </div>
-        </div>
+      {/* Bottom Pagination Indicator Dots */}
+      <div className="flex justify-center items-center gap-2.5 mt-8 sm:mt-10">
+        {CATEGORY_CAROUSEL_ITEMS.map((item, idx) => (
+          <button
+            key={item.id}
+            onClick={() => handleDotClick(idx)}
+            aria-label={`Go to category ${idx + 1}`}
+            className={`transition-all duration-300 rounded-full cursor-pointer ${
+              activeIndex === idx
+                ? 'w-7 h-2.5 bg-[#0066FF] shadow-xs'
+                : 'w-2.5 h-2.5 bg-neutral-300 hover:bg-neutral-400'
+            }`}
+          />
+        ))}
       </div>
     </section>
   );

@@ -65,3 +65,26 @@ body {
 .animate-pulse-slow {
   animation: pulseSlow 3.5s ease-in-out infinite;
 }
+
+/* Smooth left-to-right animated underline with natural reverse */
+.footer-link-animated {
+  position: relative;
+  display: inline-block;
+  transition: color 0.25s ease;
+}
+
+.footer-link-animated::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1.5px;
+  bottom: -1.5px;
+  left: 0;
+  background-color: #0066FF;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.footer-link-animated:hover::after {
+  width: 100%;
+}
+

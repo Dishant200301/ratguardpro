@@ -5,22 +5,22 @@ export const TrustBadgesSection: React.FC = () => {
     {
       id: 'industrial',
       text: 'Industrial Grade Performance',
-      image: '/trust-badges/industrial-grade.svg',
+      image: '/icons/factory.png',
     },
     {
       id: 'customers',
       text: '50,000+ happy customer',
-      image: '/trust-badges/happy-customers.svg',
+      image: '/icons/user.png',
     },
     {
       id: 'guarantee',
       text: '7-day money-back guarantee',
-      image: '/trust-badges/money-back.svg',
+      image: '/icons/money.png',
     },
     {
       id: 'india',
       text: 'Made in india',
-      image: '/trust-badges/made-in-india.svg',
+      image: '/icons/made-in-india.png',
     },
   ];
 

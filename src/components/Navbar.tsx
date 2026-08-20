@@ -68,42 +68,42 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="relative w-full flex items-center">
           <div className="animate-marquee whitespace-nowrap flex items-center text-white">
             <span className="inline-flex items-center gap-2 px-6">
-              <ShoppingCart className="w-3.5 h-3.5 text-emerald-400" />
+              <ShoppingCart className="w-3.5 h-3.5 text-white" />
               <span>Order Now</span>
             </span>
             <span className="text-neutral-500">|</span>
             <span className="inline-flex items-center gap-2 px-6">
-              <Truck className="w-3.5 h-3.5 text-yellow-400" />
+              <Truck className="w-3.5 h-3.5 text-white" />
               <span>Free COD Available Across India</span>
             </span>
             <span className="text-neutral-500">|</span>
             <span className="inline-flex items-center gap-2 px-6">
-              <Zap className="w-3.5 h-3.5 text-amber-400" />
+              <Zap className="w-3.5 h-3.5 text-white" />
               <span>Delivery in Just 5 Days</span>
             </span>
             <span className="text-neutral-500">|</span>
             <span className="inline-flex items-center gap-2 px-6">
-              <Flame className="w-3.5 h-3.5 text-orange-400" />
+              <Flame className="w-3.5 h-3.5 text-white" />
               <span>Products Upto 50% Off</span>
             </span>
             <span className="text-neutral-500">|</span>
             <span className="inline-flex items-center gap-2 px-6">
-              <ShoppingCart className="w-3.5 h-3.5 text-emerald-400" />
+              <ShoppingCart className="w-3.5 h-3.5 text-white" />
               <span>Order Now</span>
             </span>
             <span className="text-neutral-500">|</span>
             <span className="inline-flex items-center gap-2 px-6">
-              <Truck className="w-3.5 h-3.5 text-yellow-400" />
+              <Truck className="w-3.5 h-3.5 text-white" />
               <span>Free COD Available Across India</span>
             </span>
             <span className="text-neutral-500">|</span>
             <span className="inline-flex items-center gap-2 px-6">
-              <Zap className="w-3.5 h-3.5 text-amber-400" />
+              <Zap className="w-3.5 h-3.5 text-white" />
               <span>Delivery in Just 5 Days</span>
             </span>
             <span className="text-neutral-500">|</span>
             <span className="inline-flex items-center gap-2 px-6">
-              <Flame className="w-3.5 h-3.5 text-orange-400" />
+              <Flame className="w-3.5 h-3.5 text-white" />
               <span>Products Upto 50% Off</span>
             </span>
             <span className="text-neutral-500">|</span>
@@ -114,20 +114,8 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* 2. MAIN NAVBAR ROW */}
       <nav className="w-full bg-white border-b border-neutral-100">
         <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 h-16 md:h-18 flex items-center justify-between relative">
-          {/* Mobile / Tablet Left: Hamburger Menu */}
-          <div className="flex lg:hidden items-center">
-            <button
-              id="mobile-menu-toggle-btn"
-              onClick={() => setIsMobileMenuOpen(true)}
-              aria-label="Open Navigation Menu"
-              className="p-2 text-neutral-800 hover:text-black focus:outline-none focus:ring-2 focus:ring-[#0066FF] rounded-lg transition-colors"
-            >
-              <Menu className="w-6 h-6" />
-            </button>
-          </div>
-
-          {/* Desktop Left / Mobile Center: Brand Logo */}
-          <div className="flex items-center lg:static absolute left-1/2 -translate-x-1/2 lg:translate-x-0">
+          {/* Left Side: Brand Logo (Aligned left on Mobile, Tablet & Desktop) */}
+          <div className="flex items-center">
             <a
               href="#hero-section"
               onClick={(e) => {
@@ -145,7 +133,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="nav-link-home"
               onClick={() => handleNavClick('hero-section')}
-              className="hover:text-[#0066FF] transition-colors py-2"
+              className="hover:text-[#0066FF] transition-colors py-2 cursor-pointer"
             >
               Home
             </button>
@@ -153,7 +141,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="nav-link-about"
               onClick={() => handleNavClick('about-section')}
-              className="hover:text-[#0066FF] transition-colors py-2"
+              className="hover:text-[#0066FF] transition-colors py-2 cursor-pointer"
             >
               About
             </button>
@@ -161,7 +149,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="nav-link-product"
               onClick={() => handleNavClick('product-showcase-section')}
-              className="hover:text-[#0066FF] transition-colors py-2"
+              className="hover:text-[#0066FF] transition-colors py-2 cursor-pointer"
             >
               Product
             </button>
@@ -169,7 +157,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="nav-link-features"
               onClick={() => handleNavClick('features-tech-section')}
-              className="hover:text-[#0066FF] transition-colors py-2"
+              className="hover:text-[#0066FF] transition-colors py-2 cursor-pointer"
             >
               Features
             </button>
@@ -179,7 +167,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 id="nav-dropdown-solutions"
                 onClick={() => setIsSolutionsOpen(!isSolutionsOpen)}
-                className="flex items-center gap-1 hover:text-[#0066FF] transition-colors py-2"
+                className="flex items-center gap-1 hover:text-[#0066FF] transition-colors py-2 cursor-pointer"
               >
                 <span>Solutions</span>
                 <ChevronDown className="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" />
@@ -190,7 +178,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   <button
                     key={item.label}
                     onClick={() => handleNavClick('bento-grid-section')}
-                    className="w-full text-left px-4 py-2 text-xs font-medium text-neutral-700 hover:bg-neutral-50 hover:text-[#0066FF] transition-colors"
+                    className="w-full text-left px-4 py-2 text-xs font-medium text-neutral-700 hover:bg-neutral-50 hover:text-[#0066FF] transition-colors cursor-pointer"
                   >
                     {item.label}
                   </button>
@@ -201,7 +189,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="nav-link-faq"
               onClick={() => handleNavClick('faq-section')}
-              className="hover:text-[#0066FF] transition-colors py-2"
+              className="hover:text-[#0066FF] transition-colors py-2 cursor-pointer"
             >
               FAQ
             </button>
@@ -209,20 +197,20 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               id="nav-link-contact"
               onClick={() => handleNavClick('footer-section')}
-              className="hover:text-[#0066FF] transition-colors py-2"
+              className="hover:text-[#0066FF] transition-colors py-2 cursor-pointer"
             >
               Contact
             </button>
           </div>
 
-          {/* Right Action Icons: Search + Account + Cart */}
-          <div className="flex items-center space-x-3 md:space-x-4">
-            {/* Search Icon (Desktop & Wide tablet) */}
+          {/* Desktop Right Action Icons: Search + Account + Cart (Hidden on Mobile & Tablet) */}
+          <div className="hidden lg:flex items-center space-x-3 md:space-x-4">
+            {/* Search Icon */}
             <button
               id="navbar-search-btn"
               onClick={() => setIsSearchOpen(!isSearchOpen)}
               aria-label="Search"
-              className="p-2 text-neutral-700 hover:text-[#0066FF] hover:bg-neutral-100 rounded-full transition-colors"
+              className="p-2 text-neutral-700 hover:text-[#0066FF] hover:bg-neutral-100 rounded-full transition-colors cursor-pointer"
             >
               <Search className="w-5 h-5" />
             </button>
@@ -232,7 +220,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               id="navbar-account-btn"
               aria-label="My Account"
               onClick={() => alert('Welcome to RatGuardPro Account Portal. Order tracking & fast re-orders are enabled.')}
-              className="p-2 text-neutral-700 hover:text-[#0066FF] hover:bg-neutral-100 rounded-full transition-colors"
+              className="p-2 text-neutral-700 hover:text-[#0066FF] hover:bg-neutral-100 rounded-full transition-colors cursor-pointer"
             >
               <User className="w-5 h-5" />
             </button>
@@ -242,16 +230,27 @@ export const Navbar: React.FC<NavbarProps> = ({
               id="navbar-cart-btn"
               onClick={onOpenCart}
               aria-label={`Shopping cart with ${cartCount} items`}
-              className="p-2 text-neutral-700 hover:text-[#0066FF] hover:bg-neutral-100 rounded-full transition-colors relative"
+              className="p-2 text-neutral-700 hover:text-[#0066FF] hover:bg-neutral-100 rounded-full transition-colors relative cursor-pointer"
             >
               <ShoppingBag className="w-5 h-5" />
-              {/* Red Circular Badge matching reference image */}
               <span
                 id="navbar-cart-badge"
                 className="absolute -top-0.5 -right-0.5 bg-[#E50914] text-white text-[10px] font-black w-4 h-4 rounded-full flex items-center justify-center shadow-sm ring-2 ring-white"
               >
                 {cartCount}
               </span>
+            </button>
+          </div>
+
+          {/* Mobile / Tablet Right: Hamburger Menu Icon (Only element on right in mobile & tablet) */}
+          <div className="flex lg:hidden items-center">
+            <button
+              id="mobile-menu-toggle-btn"
+              onClick={() => setIsMobileMenuOpen(true)}
+              aria-label="Open Navigation Menu"
+              className="p-2 text-neutral-800 hover:text-[#0066FF] focus:outline-none rounded-lg transition-colors cursor-pointer"
+            >
+              <Menu className="w-6 h-6" />
             </button>
           </div>
         </div>
@@ -338,42 +337,47 @@ export const Navbar: React.FC<NavbarProps> = ({
                 >
                   Categories
                 </button>
-                <button
-                  onClick={() => handleNavClick('features-tech-section')}
-                  className="text-left py-2 hover:text-[#0066FF] transition-colors border-b border-neutral-50"
-                >
-                  Features
-                </button>
+                {/* Mobile Solutions Collapsible Dropdown */}
+                <div className="border-b border-neutral-50 pb-2">
+                  <button
+                    onClick={() => setIsSolutionsOpen(!isSolutionsOpen)}
+                    className="w-full flex items-center justify-between py-2 text-left hover:text-[#0066FF] transition-colors cursor-pointer"
+                  >
+                    <span>Solutions</span>
+                    <ChevronDown
+                      className={`w-4 h-4 transition-transform duration-200 ${
+                        isSolutionsOpen ? 'rotate-180 text-[#0066FF]' : 'text-neutral-400'
+                      }`}
+                    />
+                  </button>
+
+                  {isSolutionsOpen && (
+                    <div className="flex flex-col space-y-1 pt-2 pb-1 pl-3 text-sm font-medium text-neutral-700 animate-in fade-in slide-in-from-top-1 duration-200">
+                      {SOLUTIONS_LIST.map((sol) => (
+                        <button
+                          key={sol.label}
+                          onClick={() => handleNavClick('bento-grid-section')}
+                          className="text-left py-2 px-3 rounded-lg hover:bg-blue-50 hover:text-[#0066FF] transition-all cursor-pointer"
+                        >
+                          {sol.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
                 <button
                   onClick={() => handleNavClick('faq-section')}
-                  className="text-left py-2 hover:text-[#0066FF] transition-colors border-b border-neutral-50"
+                  className="text-left py-2 hover:text-[#0066FF] transition-colors border-b border-neutral-50 cursor-pointer"
                 >
                   FAQ
                 </button>
                 <button
                   onClick={() => handleNavClick('footer-section')}
-                  className="text-left py-2 hover:text-[#0066FF] transition-colors border-b border-neutral-50"
+                  className="text-left py-2 hover:text-[#0066FF] transition-colors border-b border-neutral-50 cursor-pointer"
                 >
                   Contact
                 </button>
-
-                {/* Mobile Solutions Accordion */}
-                <div className="pt-2">
-                  <div className="text-xs uppercase tracking-wider text-neutral-400 mb-2">
-                    Solutions by Space
-                  </div>
-                  <div className="grid grid-cols-2 gap-2 text-xs font-normal text-neutral-700">
-                    {SOLUTIONS_LIST.map((sol) => (
-                      <button
-                        key={sol.label}
-                        onClick={() => handleNavClick('bento-grid-section')}
-                        className="text-left py-1.5 px-2.5 rounded bg-neutral-50 hover:bg-blue-50 hover:text-[#0066FF]"
-                      >
-                        {sol.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
               </div>
             </div>
 

@@ -45,6 +45,16 @@ export interface VideoProductItem {
   customerName?: string;
 }
 
+export interface CustomerReelItem {
+  id: string;
+  name: string;
+  role: string;
+  quote: string;
+  thumbnail: string;
+  videoUrl: string;
+  youtubeId?: string;
+}
+
 export interface FaqItem {
   id: number;
   question: string;

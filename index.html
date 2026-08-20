@@ -8,6 +8,28 @@
     <meta property="og:title" content="RatGuardPro | Advanced Ultrasonic Rat Repellent" />
     <meta property="og:description" content="Protect your home, vehicles, garage, and business from rats with RatGuardPro Ultrasonic Rat Repellent." />
     <meta property="og:type" content="website" />
+    
+    <!-- Theme-Adaptive Favicons (Dark & Light Browser Themes) -->
+    <link rel="icon" type="image/x-icon" href="/favicon-light.ico" media="(prefers-color-scheme: light)" />
+    <link rel="icon" type="image/x-icon" href="/favicon-dark.ico" media="(prefers-color-scheme: dark)" />
+    <link id="dynamic-favicon" rel="icon" type="image/x-icon" href="/favicon-light.ico" />
+    <script>
+      (function() {
+        function updateFavicon() {
+          var isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var link = document.getElementById('dynamic-favicon');
+          if (link) {
+            link.href = isDark ? '/favicon-dark.ico' : '/favicon-light.ico';
+          }
+        }
+        try {
+          var matcher = window.matchMedia('(prefers-color-scheme: dark)');
+          matcher.addEventListener('change', updateFavicon);
+          updateFavicon();
+        } catch (e) {}
+      })();
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">

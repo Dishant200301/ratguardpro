@@ -1,0 +1,13 @@
+# ===============================================
+# Robots.txt for RatGuardPro
+# Advanced Ultrasonic Rat Repellent
+# ===============================================
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /private/
+
+# Host & Sitemap
+Host: https://ratguardpro.com
+Sitemap: https://ratguardpro.com/sitemap.xml
