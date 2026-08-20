@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <circle cx="100" cy="100" r="92" fill="#bd1d2c"/>
+  <circle cx="100" cy="100" r="86" fill="none" stroke="#ffffff" stroke-width="3" stroke-dasharray="4 4"/>
+  <circle cx="100" cy="100" r="80" fill="none" stroke="#e0a93b" stroke-width="2"/>
+  <g font-family="'Brush Script MT', 'Palatino', serif" font-weight="bold" text-anchor="middle" fill="#ffffff">
+    <text x="100" y="92" font-size="34" letter-spacing="1">kailash</text>
+    <path d="M50 102 Q100 108 150 102" fill="none" stroke="#e0a93b" stroke-width="2"/>
+    <text x="100" y="122" font-family="'Montserrat', sans-serif" font-size="12" font-weight="700" letter-spacing="1.5" fill="#ffffff">DAIRY &amp; SWEETS</text>
+  </g>
+  <circle cx="100" cy="142" r="4" fill="#e0a93b"/>
+  <path d="M82 142 Q92 138 95 142" fill="none" stroke="#e0a93b" stroke-width="1.5"/>
+  <path d="M118 142 Q108 138 105 142" fill="none" stroke="#e0a93b" stroke-width="1.5"/>
+</svg>

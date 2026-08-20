@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 100" width="340" height="100">
+  <g transform="translate(10, 10)">
+    <path d="M10 10 C35 5, 60 15, 60 40 C60 65, 35 75, 10 70 Z" fill="#f37021"/>
+    <path d="M25 22 C45 18, 65 30, 65 52 C65 74, 45 82, 25 78 Z" fill="#f37021" opacity="0.85"/>
+    <path d="M40 34 C55 30, 72 42, 72 62 C72 82, 55 88, 40 85 Z" fill="#f37021" opacity="0.7"/>
+  </g>
+  <text x="100" y="42" font-family="'Mukta', 'Arial', sans-serif" font-size="26" font-weight="800" fill="#f37021">बैंक ऑफ़ बड़ौदा</text>
+  <text x="100" y="72" font-family="'Montserrat', sans-serif" font-size="24" font-weight="800" fill="#002b66" letter-spacing="-0.5">Bank of Baroda</text>
+  <rect x="100" y="82" width="25" height="6" fill="#d32f2f"/>
+  <rect x="127" y="82" width="25" height="6" fill="#fbc02d"/>
+  <rect x="154" y="82" width="25" height="6" fill="#0288d1"/>
+</svg>

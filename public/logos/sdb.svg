@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 100" width="260" height="100">
+  <polygon points="45,15 75,40 45,85 15,40" fill="none" stroke="#0f4c81" stroke-width="4"/>
+  <polygon points="45,25 65,40 45,75 25,40" fill="#0f4c81" opacity="0.15"/>
+  <circle cx="45" cy="40" r="8" fill="#c5a059"/>
+  <text x="90" y="50" font-family="'Montserrat', sans-serif" font-size="26" font-weight="800" fill="#0f4c81" letter-spacing="1">SURAT</text>
+  <text x="90" y="74" font-family="'Montserrat', sans-serif" font-size="14" font-weight="700" fill="#c5a059" letter-spacing="2">DIAMOND BOURSE</text>
+</svg>

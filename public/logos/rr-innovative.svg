@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 120" width="380" height="120">
+  <g transform="translate(10, 10)">
+    <circle cx="50" cy="50" r="45" fill="none" stroke="#c5a059" stroke-width="6"/>
+    <circle cx="50" cy="50" r="37" fill="none" stroke="#c5a059" stroke-width="2"/>
+    <text x="50" y="63" font-family="'Cinzel', 'Times New Roman', serif" font-size="34" font-weight="bold" fill="#c5a059" text-anchor="middle">RR</text>
+  </g>
+  <text x="120" y="58" font-family="'Cinzel', 'Times New Roman', serif" font-size="32" font-weight="700" fill="#c5a059" letter-spacing="2">RR INNOVATIVE</text>
+  <text x="122" y="85" font-family="'Montserrat', sans-serif" font-size="13" font-weight="600" fill="#555555" letter-spacing="0.5">Importer &amp; Exporter of all type of chemicals</text>
+</svg>

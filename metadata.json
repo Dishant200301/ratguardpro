@@ -1,0 +1,6 @@
+{
+  "name": "RatGuardPro - Ultrasonic Rat Repellent",
+  "description": "Official homepage for RatGuardPro Ultrasonic Rat Repellent devices protecting cars, homes, warehouses, hotels, and businesses.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

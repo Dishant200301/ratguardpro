@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 100" width="260" height="100">
+  <defs>
+    <linearGradient id="adaniGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0072bc" />
+      <stop offset="50%" stop-color="#702082" />
+      <stop offset="100%" stop-color="#c11867" />
+    </linearGradient>
+  </defs>
+  <text x="130" y="55" font-family="'Montserrat', 'Arial', sans-serif" font-size="54" font-weight="800" fill="url(#adaniGrad)" text-anchor="middle" letter-spacing="-1">adani</text>
+  <rect x="50" y="65" width="160" height="4" rx="2" fill="url(#adaniGrad)"/>
+  <text x="130" y="90" font-family="'Montserrat', 'Arial', sans-serif" font-size="22" font-weight="600" fill="#444444" text-anchor="middle" letter-spacing="1">Power</text>
+</svg>

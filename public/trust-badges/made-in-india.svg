@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Outer Stamp Circle -->
+  <circle cx="32" cy="32" r="26" stroke-width="2" stroke-dasharray="4 2" />
+  <circle cx="32" cy="32" r="22" stroke-width="1.5" />
+  <!-- Center Banner Box for INDIA -->
+  <rect x="13" y="24" width="38" height="16" rx="2" stroke-width="1.8" fill="none" />
+  <text x="32" y="36" text-anchor="middle" font-size="9" font-weight="900" fill="#FFFFFF" stroke="none" font-family="system-ui, -apple-system, sans-serif" letter-spacing="1.5">INDIA</text>
+  <!-- Top Text: MADE IN -->
+  <text x="32" y="19" text-anchor="middle" font-size="4.2" font-weight="800" fill="#FFFFFF" stroke="none" font-family="system-ui, -apple-system, sans-serif" letter-spacing="1">MADE IN</text>
+  <!-- Decorative Stars -->
+  <path d="M20 18l.5 1 1.2.2-.8.8.2 1.2-1.1-.6-1.1.6.2-1.2-.8-.8 1.2-.2z" fill="#FFFFFF" stroke="none" />
+  <path d="M44 18l.5 1 1.2.2-.8.8.2 1.2-1.1-.6-1.1.6.2-1.2-.8-.8 1.2-.2z" fill="#FFFFFF" stroke="none" />
+  <!-- Bottom Chakra Motif -->
+  <circle cx="32" cy="46" r="3.5" stroke-width="1.2" />
+  <path d="M32 42.5v7M28.5 46h7M29.5 43.5l5 5M29.5 48.5l5-5" stroke-width="0.8" />
+</svg>

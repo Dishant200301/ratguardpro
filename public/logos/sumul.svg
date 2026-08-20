@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <circle cx="100" cy="100" r="95" fill="#ffffff" stroke="#1c4391" stroke-width="6"/>
+  <circle cx="100" cy="100" r="84" fill="none" stroke="#1c4391" stroke-width="2" stroke-dasharray="4 3"/>
+  <circle cx="100" cy="100" r="62" fill="#1c4391"/>
+  <rect x="65" y="65" width="70" height="70" rx="8" fill="#d32f2f" stroke="#ffffff" stroke-width="3"/>
+  <path d="M78 112 C78 98, 85 90, 100 90 C115 90, 122 98, 122 112 C122 122, 115 125, 100 125 C85 125, 78 122, 78 112 Z" fill="#ffffff"/>
+  <circle cx="93" cy="96" r="2.5" fill="#1c4391"/>
+  <path d="M88 86 Q100 76 112 86" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round"/>
+  <path id="textPathSumul" d="M 24, 100 A 76,76 0 1,1 176, 100 A 76,76 0 1,1 24, 100" fill="none"/>
+  <text font-family="'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="bold" fill="#1c4391">
+    <textPath href="#textPathSumul" startOffset="50%" text-anchor="middle">
+      ધી સુરત ડિ.કો.-ઓપ. દૂધ ઉત્પાદક સંઘ લિ. • SUMUL
+    </textPath>
+  </text>
+</svg>

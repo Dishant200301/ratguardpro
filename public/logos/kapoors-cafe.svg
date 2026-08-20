@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <circle cx="100" cy="100" r="92" fill="#111111" stroke="#ffffff" stroke-width="4"/>
+  <circle cx="100" cy="100" r="84" fill="none" stroke="#e0a93b" stroke-width="2"/>
+  <path d="M70 70 C70 50, 130 50, 130 70 C130 82, 70 82, 70 70 Z" fill="#ff9900"/>
+  <path d="M85 55 Q100 45 115 55" fill="none" stroke="#ffffff" stroke-width="3"/>
+  <circle cx="100" cy="90" r="16" fill="#fcd299"/>
+  <circle cx="93" cy="88" r="4" fill="#111111"/>
+  <circle cx="107" cy="88" r="4" fill="#111111"/>
+  <path d="M82 96 C82 90, 118 90, 118 96 C118 112, 82 112, 82 96 Z" fill="#111111"/>
+  <path id="textPathKapoor" d="M 24, 100 A 76,76 0 1,1 176, 100" fill="none"/>
+  <text font-family="'Montserrat', sans-serif" font-size="14" font-weight="900" fill="#ffffff" letter-spacing="2">
+    <textPath href="#textPathKapoor" startOffset="50%" text-anchor="middle">
+      KAPOOR'S CAFE
+    </textPath>
+  </text>
+  <rect x="40" y="130" width="120" height="20" rx="3" fill="#ff9900"/>
+  <text x="100" y="144" font-family="'Montserrat', sans-serif" font-size="10" font-weight="900" fill="#111111" text-anchor="middle">PURE VEG</text>
+  <text x="100" y="166" font-family="'Montserrat', sans-serif" font-size="8" font-weight="700" fill="#ffffff" text-anchor="middle">AUTHENTIC PUNJABI CUISINE</text>
+</svg>

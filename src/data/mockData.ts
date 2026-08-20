@@ -1,0 +1,517 @@
+import {
+  HeroSlide,
+  BentoCategory,
+  FeatureCardItem,
+  VideoProductItem,
+  FaqItem,
+  ComparisonRow,
+  BrandItem,
+} from '../types';
+
+export const HERO_SLIDES: HeroSlide[] = [
+  {
+    id: 'car-truck',
+    category: 'Car & Truck Owners',
+    kicker: 'VEHICLE PROTECTION',
+    heading: 'PROTECT YOUR CAR',
+    paragraph: 'Ratguard SonicArmor X Ultrasonic Car Rat Repellent Device',
+    features: [
+      { icon: 'play', label: 'Plug & Play' },
+      { icon: 'power', label: 'Low Power' },
+      { icon: 'eco', label: 'Eco & Chemical Free' },
+      { icon: 'water', label: 'Water & Heat Proof' },
+    ],
+    ctaText: 'SHOP NOW',
+    bgImage: '/hero/hero-1.png',
+    accentBadge: 'RATS 24/7',
+  },
+  {
+    id: 'garage',
+    category: 'Garage',
+    kicker: 'GARAGE PROTECTION',
+    heading: 'PROTECT YOUR GARAGE',
+    paragraph: 'Ratguard SonicArmor X Ultrasonic Garage Rat Repellent Device',
+    features: [
+      { icon: 'play', label: 'Plug & Play' },
+      { icon: 'power', label: 'Low Power' },
+      { icon: 'eco', label: 'Eco & Chemical Free' },
+      { icon: 'water', label: 'Water & Heat Proof' },
+    ],
+    ctaText: 'SHOP NOW',
+    bgImage: '/hero/hero-2.png',
+    accentBadge: 'RATS 24/7',
+  },
+  {
+    id: 'hotels',
+    category: 'Hotels',
+    kicker: 'HOTEL PROTECTION',
+    heading: 'PROTECT YOUR HOTEL',
+    paragraph: 'Ratguard SonicArmor X Ultrasonic Hotel Rat Repellent Device',
+    features: [
+      { icon: 'play', label: 'Plug & Play' },
+      { icon: 'power', label: 'Low Power' },
+      { icon: 'eco', label: 'Eco & Chemical Free' },
+      { icon: 'water', label: 'Water & Heat Proof' },
+    ],
+    ctaText: 'SHOP NOW',
+    bgImage: '/hero/hero-3.png',
+    accentBadge: 'RATS 24/7',
+  },
+  {
+    id: 'hospital',
+    category: 'Hospital',
+    kicker: 'HOSPITAL PROTECTION',
+    heading: 'PROTECT YOUR HOSPITAL',
+    paragraph: 'Ratguard SonicArmor X Ultrasonic Hospital Rat Repellent Device',
+    features: [
+      { icon: 'play', label: 'Plug & Play' },
+      { icon: 'power', label: 'Low Power' },
+      { icon: 'eco', label: 'Eco & Chemical Free' },
+      { icon: 'water', label: 'Water & Heat Proof' },
+    ],
+    ctaText: 'SHOP NOW',
+    bgImage: '/hero/hero-4.png',
+    accentBadge: 'RATS 24/7',
+  },
+  {
+    id: 'factory',
+    category: 'Factory',
+    kicker: 'FACTORY PROTECTION',
+    heading: 'PROTECT YOUR FACTORY',
+    paragraph: 'Ratguard SonicArmor X Ultrasonic Industrial Rat Repellent Device',
+    features: [
+      { icon: 'play', label: 'Plug & Play' },
+      { icon: 'power', label: 'Low Power' },
+      { icon: 'eco', label: 'Eco & Chemical Free' },
+      { icon: 'water', label: 'Water & Heat Proof' },
+    ],
+    ctaText: 'SHOP NOW',
+    bgImage: '/hero/hero-5.png',
+    accentBadge: 'RATS 24/7',
+  },
+  {
+    id: 'shop',
+    category: 'Shop',
+    kicker: 'SHOP PROTECTION',
+    heading: 'PROTECT YOUR SHOP',
+    paragraph: 'Ratguard SonicArmor X Ultrasonic Retail Shop Rat Repellent Device',
+    features: [
+      { icon: 'play', label: 'Plug & Play' },
+      { icon: 'power', label: 'Low Power' },
+      { icon: 'eco', label: 'Eco & Chemical Free' },
+      { icon: 'water', label: 'Water & Heat Proof' },
+    ],
+    ctaText: 'SHOP NOW',
+    bgImage: '/hero/hero-6.png',
+    accentBadge: 'RATS 24/7',
+  },
+  {
+    id: 'godown',
+    category: 'Godown',
+    kicker: 'GODOWN PROTECTION',
+    heading: 'PROTECT YOUR GODOWN',
+    paragraph: 'Ratguard SonicArmor X Ultrasonic Warehouse Rat Repellent Device',
+    features: [
+      { icon: 'play', label: 'Plug & Play' },
+      { icon: 'power', label: 'Low Power' },
+      { icon: 'eco', label: 'Eco & Chemical Free' },
+      { icon: 'water', label: 'Water & Heat Proof' },
+    ],
+    ctaText: 'SHOP NOW',
+    bgImage: '/hero/hero-7.png',
+    accentBadge: 'RATS 24/7',
+  },
+  {
+    id: 'home',
+    category: 'Home Owners',
+    kicker: 'HOME PROTECTION',
+    heading: 'PROTECT YOUR HOME',
+    paragraph: 'Ratguard SonicArmor X Ultrasonic Home Rat Repellent Device',
+    features: [
+      { icon: 'play', label: 'Plug & Play' },
+      { icon: 'power', label: 'Low Power' },
+      { icon: 'eco', label: 'Eco & Chemical Free' },
+      { icon: 'water', label: 'Water & Heat Proof' },
+    ],
+    ctaText: 'SHOP NOW',
+    bgImage: '/hero/hero-8.png',
+    accentBadge: 'RATS 24/7',
+  },
+];
+
+export const TRUSTED_BRANDS_LEFT: BrandItem[] = [
+  { name: 'Sumul Dairy', label: 'SUMUL', subtext: 'Surat Milk Union', logo: '/logos/sumul.svg' },
+  { name: 'Rajhans Cinemas', label: 'RAJHANS CINEMAS', subtext: 'Enjoy The Movie!', logo: '/logos/rajhans.svg' },
+  { name: 'Kailash Sweets', label: 'KAILASH', subtext: 'Dairy & Sweets', logo: '/logos/kailash.svg' },
+  { name: 'Adani Power', label: 'adani', subtext: 'Power', logo: '/logos/adani.svg' },
+  { name: 'Bank of Baroda', label: 'बैंक ऑफ़ बड़ौदा', subtext: 'Bank of Baroda', logo: '/logos/bank-of-baroda.svg' },
+  { name: 'GIFT City', label: 'GIFT', subtext: 'Gujarat Intl Finance Tec-City', logo: '/logos/gift-city.svg' },
+];
+
+export const TRUSTED_BRANDS_RIGHT: BrandItem[] = [
+  { name: 'Amul', label: 'Amul', subtext: 'The Taste of India', logo: '/logos/amul.svg' },
+  { name: "Kapoor's Cafe", label: "KAPOOR'S CAFE", subtext: 'Pure Veg Punjabi Cuisine', logo: '/logos/kapoors-cafe.svg' },
+  { name: 'RR Innovative', label: 'RR INNOVATIVE', subtext: 'Chemical Exporters', logo: '/logos/rr-innovative.svg' },
+  { name: 'Jani Locho House', label: 'જાની લોચો હાઉસ', subtext: 'Surat Famous Snacks', logo: '/logos/jani-locho.svg' },
+  { name: 'L&T Infotech', label: 'L&T', subtext: 'Engineering & Infra', logo: '/logos/l-and-t.svg' },
+  { name: 'Surat Diamond Bourse', label: 'SDB', subtext: 'Diamond Association', logo: '/logos/sdb.svg' },
+];
+
+
+export const BENTO_CATEGORIES: BentoCategory[] = [
+  {
+    id: 'home',
+    name: 'Home Owners',
+    image: '/bento/home.jpg',
+  },
+  {
+    id: 'garage',
+    name: 'Garage',
+    image: '/bento/garage.jpg',
+  },
+  {
+    id: 'car-truck',
+    name: 'Car-Truck Owners',
+    image: '/bento/car-truck.jpg',
+  },
+  {
+    id: 'hospital',
+    name: 'Hospital',
+    image: '/bento/hospital.jpg',
+  },
+  {
+    id: 'godown',
+    name: 'Godown',
+    image: '/bento/godown.jpg',
+  },
+  {
+    id: 'hotels',
+    name: 'Hotels',
+    image: '/bento/hotels.jpg',
+  },
+  {
+    id: 'factory',
+    name: 'Factory',
+    image: '/bento/factory.jpg',
+  },
+  {
+    id: 'shop',
+    name: 'Shop',
+    image: '/bento/shop.jpg',
+  },
+];
+
+export const PRODUCT_INFO_CHECKLIST = [
+  'Home',
+  'Office',
+  'Store Rooms',
+  'Kitchen',
+  'Home Elevation and Ceiling',
+  'Study Room',
+  'Pet Areas',
+  'Computer Work Station',
+  'Hospital Rooms',
+  'Farm House',
+  'Hotel Rooms',
+  'Car Parking',
+];
+
+export const CATEGORY_CAROUSEL_ITEMS = [
+  {
+    id: 'garage',
+    name: 'Garage',
+    image: 'https://images.unsplash.com/photo-1590674899484-d5640e854abe?q=80&w=700&auto=format&fit=crop',
+  },
+  {
+    id: 'hotels',
+    name: 'Hotels',
+    image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=700&auto=format&fit=crop',
+  },
+  {
+    id: 'hospital',
+    name: 'Hospital',
+    image: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=700&auto=format&fit=crop',
+  },
+  {
+    id: 'factory',
+    name: 'Factory',
+    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=700&auto=format&fit=crop',
+  },
+  {
+    id: 'shop',
+    name: 'Shop',
+    image: 'https://images.unsplash.com/photo-1555421689-491a97ff2040?q=80&w=700&auto=format&fit=crop',
+  },
+  {
+    id: 'godown',
+    name: 'Godown',
+    image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=700&auto=format&fit=crop',
+  },
+  {
+    id: 'car-truck',
+    name: 'Car-Truck Owners',
+    image: 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=700&auto=format&fit=crop',
+  },
+  {
+    id: 'home',
+    name: 'Home Owners',
+    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=700&auto=format&fit=crop',
+  },
+];
+
+export const LEFT_FEATURES: FeatureCardItem[] = [
+  {
+    id: 'f1',
+    title: 'Advanced Ultrasonic Technology',
+    description: 'Intelligent high-frequency sound waves that repel rats',
+    iconType: 'waves',
+  },
+  {
+    id: 'f2',
+    title: 'Energy Efficient',
+    description: 'Operates on minimal power, saving energy and costs',
+    iconType: 'energy',
+  },
+  {
+    id: 'f3',
+    title: 'Easy Installation',
+    description: 'Just plug it into a standard outlet and let it work',
+    iconType: 'plug',
+  },
+  {
+    id: 'f4',
+    title: 'Safe & Eco-Friendly',
+    description: 'Totally non-hazardous and safe for humans and pets',
+    iconType: 'shield',
+  },
+  {
+    id: 'f5',
+    title: 'Wide Coverage',
+    description: 'Protect up to 2,500 sq. ft.',
+    iconType: 'radar',
+  },
+  {
+    id: 'f6',
+    title: 'Durable & Reliable',
+    description: 'Built with high-quality materials for long-lasting performance',
+    iconType: 'durable',
+  },
+];
+
+export const RIGHT_FEATURES: FeatureCardItem[] = [
+  {
+    id: 'f7',
+    title: 'Versatile Placement',
+    description: 'Can be used in residential, commercial, and industrial spaces.',
+    iconType: 'placement',
+  },
+  {
+    id: 'f8',
+    title: 'Dual LED Indicators',
+    description: 'Visual status indicators for power and active operation.',
+    iconType: 'led',
+  },
+  {
+    id: 'f9',
+    title: 'Maintenance-Free',
+    description: 'No recurring costs or refills required.',
+    iconType: 'maintenance',
+  },
+  {
+    id: 'f10',
+    title: 'Temperature Resistant',
+    description: 'Works efficiently in a wide range of temperatures.',
+    iconType: 'temp',
+  },
+  {
+    id: 'f11',
+    title: 'Designed, Developed & Made in India',
+    description: 'Ultrasonic rat repellent',
+    iconType: 'india',
+  },
+  {
+    id: 'f12',
+    title: '1 Year Warranty',
+    description: 'Product is backed by a 1-year warranty to ensure your satisfaction.',
+    iconType: 'warranty',
+  },
+];
+
+export const VIDEO_PRODUCTS: VideoProductItem[] = [
+  {
+    id: 'v1',
+    title: 'Ratguard Pro 360 Degree – Ultrasonic Rat Repellent for Warehouses & Godowns',
+    videoType: 'mp4',
+    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-man-working-in-a-warehouse-operating-machinery-43641-large.mp4',
+    thumbnail: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop',
+    productImage: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=300&auto=format&fit=crop',
+    price: 'Rs. 6,699',
+    originalPrice: 'Rs. 9,000',
+    discount: '25% off',
+    customerName: 'Warehouse Manager, Surat',
+  },
+  {
+    id: 'v2',
+    title: 'Ratguard Pro 360 Degree – Ultrasonic Rat Repellent for Warehouses & Godowns',
+    videoType: 'mp4',
+    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-mechanic-working-under-a-car-in-a-workshop-43647-large.mp4',
+    thumbnail: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=600&auto=format&fit=crop',
+    productImage: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=300&auto=format&fit=crop',
+    price: 'Rs. 6,699',
+    originalPrice: 'Rs. 9,000',
+    discount: '25% off',
+    customerName: 'Auto Workshop Owner',
+  },
+  {
+    id: 'v3',
+    title: 'Ratguard Pro 360 Degree – Ultrasonic Rat Repellent for Warehouses & Godowns',
+    videoType: 'mp4',
+    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-retail-store-owner-arranging-shelves-41908-large.mp4',
+    thumbnail: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=600&auto=format&fit=crop',
+    productImage: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=300&auto=format&fit=crop',
+    price: 'Rs. 6,699',
+    originalPrice: 'Rs. 9,000',
+    discount: '25% off',
+    customerName: 'Kirana Store Merchant',
+  },
+  {
+    id: 'v4',
+    title: 'Ratguard Pro 360 Degree – Ultrasonic Rat Repellent for Warehouses & Godowns',
+    videoType: 'mp4',
+    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-hotel-staff-in-corridor-42478-large.mp4',
+    thumbnail: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=600&auto=format&fit=crop',
+    productImage: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=300&auto=format&fit=crop',
+    price: 'Rs. 6,699',
+    originalPrice: 'Rs. 9,000',
+    discount: '25% off',
+    customerName: 'Commercial Hotel Admin',
+  },
+  {
+    id: 'v5',
+    title: 'Ratguard MINI – Ultrasonic Rat Repellent for Small Commercial Spaces',
+    videoType: 'mp4',
+    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-technician-soldering-wires-in-circuit-board-43759-large.mp4',
+    thumbnail: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=600&auto=format&fit=crop',
+    productImage: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=300&auto=format&fit=crop',
+    price: 'Rs. 2,999',
+    originalPrice: 'Rs. 4,999',
+    discount: '40% off',
+    customerName: 'Electronics Service Center',
+  },
+];
+
+export const COMPARISON_ROWS: ComparisonRow[] = [
+  {
+    feature: 'Eco-Friendly',
+    icon: '🌿',
+    ratguard: true,
+    traditional: false,
+    chemical: false,
+  },
+  {
+    feature: 'Safe for Pets & Children',
+    icon: '🐾',
+    ratguard: true,
+    traditional: false,
+    chemical: false,
+  },
+  {
+    feature: 'Maintenance-Free',
+    icon: '⚙️',
+    ratguard: true,
+    traditional: false,
+    chemical: false,
+  },
+  {
+    feature: 'Coverage Area',
+    icon: '📐',
+    ratguard: true,
+    traditional: false,
+    chemical: false,
+  },
+  {
+    feature: 'Effectiveness',
+    icon: '💡',
+    ratguard: true,
+    traditional: false,
+    chemical: false,
+  },
+  {
+    feature: 'Cost-Effective',
+    icon: '💰',
+    ratguard: true,
+    traditional: false,
+    chemical: false,
+  },
+  {
+    feature: 'Chemical-Free',
+    icon: '☢️',
+    ratguard: true,
+    traditional: false,
+    chemical: false,
+  },
+];
+
+export const BENEFIT_CARDS = [
+  {
+    id: 'b1',
+    icon: 'shield',
+    title: 'Effective Protection',
+    description: 'Shields Vehicle & Home',
+  },
+  {
+    id: 'b2',
+    icon: 'leaf',
+    title: 'Eco-Friendly Formula',
+    description: 'Safe for Pets & Humans',
+  },
+  {
+    id: 'b3',
+    icon: 'hourglass',
+    title: 'Long-Lasting Effect',
+    description: 'Long-Lasting Protection',
+  },
+];
+
+export const FAQS: FaqItem[] = [
+  {
+    id: 1,
+    question: 'How does Ratguard work?',
+    answer:
+      'Ratguard uses ultrasonic sound waves that disturb rats and rodents, making the environment uncomfortable for them and forcing them to leave.',
+  },
+  {
+    id: 2,
+    question: 'Is Ratguard safe for pets and humans?',
+    answer:
+      'Yes, 100%! The ultrasonic frequencies generated by Ratguard are inaudible and completely harmless to humans, dogs, cats, birds, and children.',
+  },
+  {
+    id: 3,
+    question: 'How long does it take to see results?',
+    answer:
+      'Most customers observe a significant reduction in rodent activity within 3 to 7 days. Permanent deterrence occurs within 10 to 14 days as rodents migrate away.',
+  },
+  {
+    id: 8,
+    question: 'Where should I place the Ratguard device?',
+    answer:
+      'Place the device plugged into a 220V wall socket roughly 1 to 2 feet above the floor facing open space. For car and truck engines, secure the device under the hood.',
+  },
+  {
+    id: 9,
+    question: 'Can I use Ratguard in my car, warehouse, or farm?',
+    answer:
+      'Yes! Ratguard is engineered with industrial-grade casing that works reliably across car engine bays, agricultural farms, multi-story godowns, restaurant kitchens, and home garages.',
+  },
+  {
+    id: 10,
+    question: 'Does Ratguard consume a lot of electricity?',
+    answer:
+      'Not at all. Ratguard uses ultra-low energy circuitry consuming only 3-5 Watts of electricity. Running it continuously 24/7 costs less than ₹20-₹30 per month.',
+  },
+  
+];
+
+export const FAQ_ITEMS = FAQS;
+

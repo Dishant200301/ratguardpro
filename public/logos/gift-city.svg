@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 110" width="280" height="110">
+  <g transform="translate(30, 15)">
+    <path d="M0 0 H35 V12 H12 V48 H35 V28 H22 V18 H47 V58 H0 Z" fill="#eb6909"/>
+    <rect x="52" y="0" width="4" height="58" fill="#eb6909"/>
+    <rect x="62" y="0" width="12" height="58" fill="#eb6909"/>
+    <rect x="80" y="0" width="4" height="58" fill="#eb6909"/>
+    <path d="M90 0 H125 V12 H102 V24 H120 V34 H102 V58 H90 Z" fill="#eb6909"/>
+    <rect x="130" y="0" width="4" height="58" fill="#eb6909"/>
+    <path d="M140 0 H180 V12 H166 V58 H154 V12 H140 Z" fill="#eb6909"/>
+  </g>
+  <text x="140" y="90" font-family="'Montserrat', sans-serif" font-size="11" font-weight="800" fill="#555555" text-anchor="middle" letter-spacing="1">GUJARAT INTERNATIONAL</text>
+  <text x="140" y="103" font-family="'Montserrat', sans-serif" font-size="10" font-weight="700" fill="#777777" text-anchor="middle" letter-spacing="2">FINANCE TEC-CITY</text>
+</svg>
