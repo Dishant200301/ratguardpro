@@ -4,59 +4,86 @@ import { CATEGORY_CAROUSEL_ITEMS } from '../data/mockData';
 
 export const CategoryCarousel: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
   const carouselRef = useRef<HTMLDivElement>(null);
 
-  const handleScroll = (direction: 'left' | 'right') => {
-    const nextIdx =
-      direction === 'left'
-        ? Math.max(0, activeIndex - 1)
-        : Math.min(CATEGORY_CAROUSEL_ITEMS.length - 1, activeIndex + 1);
-    handleDotClick(nextIdx);
-  };
-
-  const handleDotClick = (index: number) => {
-    setActiveIndex(index);
+  // Check scroll position to dynamically show/hide Left and Right arrows
+  const checkScrollButtons = () => {
     const el = carouselRef.current;
     if (!el) return;
-    const targetChild = el.children[index] as HTMLElement | undefined;
-    if (targetChild) {
-      const targetLeft = targetChild.offsetLeft - el.offsetLeft;
-      el.scrollTo({
-        left: targetLeft,
-        behavior: 'smooth',
-      });
-    }
+    const { scrollLeft, scrollWidth, clientWidth } = el;
+    
+    setCanScrollLeft(scrollLeft > 15);
+    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 15);
+
+    const firstChild = el.children[0] as HTMLElement | undefined;
+    const cardStep = firstChild ? firstChild.offsetWidth + 24 : 400;
+    const newIndex = Math.round(scrollLeft / cardStep);
+    setActiveIndex(Math.max(0, Math.min(CATEGORY_CAROUSEL_ITEMS.length - 1, newIndex)));
   };
 
   useEffect(() => {
     const el = carouselRef.current;
     if (!el) return;
 
-    const handleScrollEvent = () => {
-      const scrollLeft = el.scrollLeft;
-      const firstChild = el.children[0] as HTMLElement | undefined;
-      const cardStep = firstChild ? firstChild.offsetWidth + 20 : 320;
-      const newIndex = Math.round(scrollLeft / cardStep);
-      setActiveIndex(Math.max(0, Math.min(CATEGORY_CAROUSEL_ITEMS.length - 1, newIndex)));
-    };
+    checkScrollButtons();
+    el.addEventListener('scroll', checkScrollButtons, { passive: true });
+    window.addEventListener('resize', checkScrollButtons);
 
-    el.addEventListener('scroll', handleScrollEvent, { passive: true });
-    return () => el.removeEventListener('scroll', handleScrollEvent);
+    return () => {
+      el.removeEventListener('scroll', checkScrollButtons);
+      window.removeEventListener('resize', checkScrollButtons);
+    };
   }, []);
+
+  const handleScroll = (direction: 'left' | 'right') => {
+    const el = carouselRef.current;
+    if (!el) return;
+    const firstChild = el.children[0] as HTMLElement | undefined;
+    const cardStep = firstChild ? firstChild.offsetWidth + 24 : 400;
+
+    el.scrollBy({
+      left: direction === 'left' ? -cardStep : cardStep,
+      behavior: 'smooth',
+    });
+  };
+
+  const handleDotClick = (index: number) => {
+    setActiveIndex(index);
+    const el = carouselRef.current;
+    if (!el) return;
+    if (index === 0) {
+      el.scrollTo({
+        left: 0,
+        behavior: 'smooth',
+      });
+      return;
+    }
+    const targetChild = el.children[index] as HTMLElement | undefined;
+    if (targetChild) {
+      const paddingLeft = parseFloat(window.getComputedStyle(el).paddingLeft || '0');
+      const targetLeft = targetChild.offsetLeft - el.offsetLeft - paddingLeft;
+      el.scrollTo({
+        left: Math.max(0, targetLeft),
+        behavior: 'smooth',
+      });
+    }
+  };
 
   return (
     <section
       id="category-carousel-section"
-      className="w-full bg-white py-16 lg:py-24 border-b border-neutral-100 select-none overflow-hidden"
+      className="w-full bg-white py-10 sm:py-14 lg:py-20 overflow-hidden"
     >
       {/* Section Heading centered within max-width */}
       <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-          <span className="text-xs uppercase font-extrabold tracking-widest text-[#0066FF] bg-blue-50 px-3.5 py-1 rounded-full font-sans">
-            TARGETED SPACES & ENVIRONMENTS
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+          <span className="text-xs md:text-sm font-semibold tracking-widest text-[#0066FF] bg-blue-50 px-3.5 py-1 rounded-full font-sans">
+            Targeted Spaces & Environments
           </span>
-          <h2 className="text-xl md:text-3xl lg:text-5xl font-semibold text-[#111111] tracking-tight font-sans mt-3">
-            Explore By <span className="text-[#0066FF]">Category</span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-[#111111] tracking-tight font-sans mt-3">
+            Explore By <span className="text-[#0066FF]">Industry</span>
           </h2>
           <p className="text-neutral-500 text-sm sm:text-base md:text-lg mt-2.5 font-sans font-medium">
             Find the right RatGuardPro setup for your specific space.
@@ -64,74 +91,65 @@ export const CategoryCarousel: React.FC = () => {
         </div>
       </div>
 
-      {/* Full-width Carousel Container matching Reels layout across all devices */}
+      {/* Full-width Carousel Container with Dynamic Show/Hide Arrows */}
       <div className="w-full relative group/carousel">
-        {/* Left Arrow Button */}
-        <button
-          id="category-carousel-prev-btn"
-          onClick={() => handleScroll('left')}
-          aria-label="Previous Category"
-          className="absolute left-2 sm:left-4 lg:left-8 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/95 backdrop-blur-md text-neutral-800 shadow-2xl border border-neutral-200/90 flex items-center justify-center hover:bg-[#0066FF] hover:text-white hover:border-[#0066FF] active:scale-90 transition-all cursor-pointer"
-        >
-          <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
-        </button>
+        
+        {/* Left Arrow Button (Hidden at start, shows when scrolled) */}
+        {canScrollLeft && (
+          <button
+            id="category-carousel-prev-btn"
+            onClick={() => handleScroll('left')}
+            aria-label="Previous Category"
+            className="absolute left-3 sm:left-6 lg:left-10 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-white/95 backdrop-blur-md text-neutral-800 shadow-2xl border border-neutral-200/90 flex items-center justify-center hover:bg-[#0066FF] hover:text-white hover:border-[#0066FF] active:scale-90 transition-all duration-200 cursor-pointer"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+        )}
 
-        {/* Right Arrow Button */}
-        <button
-          id="category-carousel-next-btn"
-          onClick={() => handleScroll('right')}
-          aria-label="Next Category"
-          className="absolute right-2 sm:right-4 lg:right-8 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/95 backdrop-blur-md text-neutral-800 shadow-2xl border border-neutral-200/90 flex items-center justify-center hover:bg-[#0066FF] hover:text-white hover:border-[#0066FF] active:scale-90 transition-all cursor-pointer"
-        >
-          <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
-        </button>
+        {/* Right Arrow Button (Shows during scroll, hidden at the end) */}
+        {canScrollRight && (
+          <button
+            id="category-carousel-next-btn"
+            onClick={() => handleScroll('right')}
+            aria-label="Next Category"
+            className="absolute right-3 sm:right-6 lg:right-10 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-white/95 backdrop-blur-md text-neutral-800 shadow-2xl border border-neutral-200/90 flex items-center justify-center hover:bg-[#0066FF] hover:text-white hover:border-[#0066FF] active:scale-90 transition-all duration-200 cursor-pointer"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+        )}
 
-        {/* Category Cards Reel Scroll Container - Increased card size & top-left badge */}
+        {/* Category Cards Reel Scroll Track with Container Alignment on Start/Left only */}
         <div
           ref={carouselRef}
-          className="flex gap-4 sm:gap-5 lg:gap-6 overflow-x-auto no-scrollbar scroll-smooth py-3 px-[calc((100vw-min(78vw,325px))/2)] sm:px-6 lg:pl-[max(2rem,calc((100vw-1500px)/2+2rem))] lg:pr-8 snap-x snap-mandatory"
+          className="category-carousel-track flex gap-5 sm:gap-6 overflow-x-auto no-scrollbar scroll-smooth py-4 snap-x snap-mandatory"
         >
           {CATEGORY_CAROUSEL_ITEMS.map((item) => (
             <div
               key={item.id}
-              className="shrink-0 w-[78vw] sm:w-[285px] lg:w-[310px] xl:w-[325px] max-w-[340px] aspect-[4/5] bg-neutral-950 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 relative flex flex-col group cursor-pointer border border-neutral-200/60 select-none snap-center"
+              className="shrink-0 w-[84vw] xs:w-[360px] sm:w-[420px] md:w-[400px] lg:w-[380px] h-[480px] sm:h-[500px] lg:h-[525px] rounded-xl sm:rounded-3xl overflow-hidden shadow-md transition-all duration-500 relative flex flex-col justify-between p-5 sm:p-6 lg:p-7 group cursor-pointer border border-neutral-200/60 select-none snap-start bg-neutral-100"
             >
-              {/* Top-Left: Category Name Badge */}
-              <div className="absolute top-4 left-4 z-20 flex items-center gap-1.5 bg-black/60 backdrop-blur-md px-3.5 py-1.5 rounded-full text-white border border-white/20 shadow-md select-none">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#0066FF]" />
-                <span className="text-xs sm:text-sm font-bold text-white tracking-tight font-sans">
+              {/* Top: Category Heading Only (Z-20 with high contrast) */}
+              <div className="relative z-20">
+                <h3 className="text-xl sm:text-2xl lg:text-[24px] font-semibold tracking-tight leading-tight text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]">
                   {item.name}
-                </span>
+                </h3>
               </div>
 
-              {/* Background Image with Zoom on Hover */}
-              <div className="absolute inset-0 w-full h-full bg-neutral-900 overflow-hidden">
+              {/* Top Dark Gradient for Text Legibility & Visual Contrast */}
+              <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/30 to-transparent h-44 pointer-events-none z-10" />
+
+              {/* Card Image */}
+              <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 select-none"
+                  className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 select-none"
                   loading="lazy"
                 />
               </div>
             </div>
           ))}
         </div>
-      </div>
-
-      {/* Bottom Pagination Indicator Dots */}
-      <div className="flex justify-center items-center gap-2.5 mt-8 sm:mt-10">
-        {CATEGORY_CAROUSEL_ITEMS.map((item, idx) => (
-          <button
-            key={item.id}
-            onClick={() => handleDotClick(idx)}
-            aria-label={`Go to category ${idx + 1}`}
-            className={`transition-all duration-300 rounded-full cursor-pointer ${
-              activeIndex === idx
-                ? 'w-7 h-2.5 bg-[#0066FF] shadow-xs'
-                : 'w-2.5 h-2.5 bg-neutral-300 hover:bg-neutral-400'
-            }`}
-          />
-        ))}
       </div>
     </section>
   );

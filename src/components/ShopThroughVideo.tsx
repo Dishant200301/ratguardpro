@@ -8,10 +8,33 @@ interface ShopThroughVideoProps {
 
 export const ShopThroughVideo: React.FC<ShopThroughVideoProps> = () => {
   const [playingVideoId, setPlayingVideoId] = useState<string | null>(null);
-  const [isMuted, setIsMuted] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [isMuted, setIsMuted] = useState(true);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
   const videoRefs = useRef<{ [key: string]: HTMLVideoElement | null }>({});
   const carouselRef = useRef<HTMLDivElement>(null);
+
+  const checkScrollButtons = () => {
+    const el = carouselRef.current;
+    if (!el) return;
+    const { scrollLeft, scrollWidth, clientWidth } = el;
+    setCanScrollLeft(scrollLeft > 15);
+    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 15);
+  };
+
+  useEffect(() => {
+    const el = carouselRef.current;
+    if (!el) return;
+
+    checkScrollButtons();
+    el.addEventListener('scroll', checkScrollButtons, { passive: true });
+    window.addEventListener('resize', checkScrollButtons);
+
+    return () => {
+      el.removeEventListener('scroll', checkScrollButtons);
+      window.removeEventListener('resize', checkScrollButtons);
+    };
+  }, []);
 
   const handleCardMouseEnter = (id: string) => {
     setPlayingVideoId(id);
@@ -20,7 +43,7 @@ export const ShopThroughVideo: React.FC<ShopThroughVideoProps> = () => {
       video.muted = isMuted;
       video.play().catch(() => {
         video.muted = true;
-        video.play().catch(() => { });
+        video.play().catch(() => {});
       });
     }
   };
@@ -43,7 +66,6 @@ export const ShopThroughVideo: React.FC<ShopThroughVideoProps> = () => {
       if (video) video.pause();
       setPlayingVideoId(null);
     } else {
-      // Pause any previously playing video
       if (playingVideoId && videoRefs.current[playingVideoId]) {
         videoRefs.current[playingVideoId]?.pause();
       }
@@ -53,7 +75,7 @@ export const ShopThroughVideo: React.FC<ShopThroughVideoProps> = () => {
         video.muted = isMuted;
         video.play().catch(() => {
           video.muted = true;
-          video.play().catch(() => { });
+          video.play().catch(() => {});
         });
       }
     }
@@ -63,84 +85,63 @@ export const ShopThroughVideo: React.FC<ShopThroughVideoProps> = () => {
     const el = carouselRef.current;
     if (!el) return;
     const firstChild = el.children[0] as HTMLElement | undefined;
-    const cardStep = firstChild ? firstChild.offsetWidth + 24 : 320;
-    const scrollAmount = direction === 'left' ? -cardStep : cardStep;
-    el.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    const cardStep = firstChild ? firstChild.offsetWidth + 24 : 400;
+    el.scrollBy({
+      left: direction === 'left' ? -cardStep : cardStep,
+      behavior: 'smooth',
+    });
   };
-
-  const handleDotClick = (index: number) => {
-    setActiveIndex(index);
-    const el = carouselRef.current;
-    if (!el) return;
-    const targetChild = el.children[index] as HTMLElement | undefined;
-    if (targetChild) {
-      const targetLeft = targetChild.offsetLeft - el.offsetLeft;
-      el.scrollTo({
-        left: targetLeft,
-        behavior: 'smooth',
-      });
-    }
-  };
-
-  useEffect(() => {
-    const el = carouselRef.current;
-    if (!el) return;
-
-    const handleScrollEvent = () => {
-      const scrollLeft = el.scrollLeft;
-      const firstChild = el.children[0] as HTMLElement | undefined;
-      const cardStep = firstChild ? firstChild.offsetWidth + 24 : 320;
-      const newIndex = Math.round(scrollLeft / cardStep);
-      setActiveIndex(Math.max(0, Math.min(CUSTOMER_REELS.length - 1, newIndex)));
-    };
-
-    el.addEventListener('scroll', handleScrollEvent, { passive: true });
-    return () => el.removeEventListener('scroll', handleScrollEvent);
-  }, []);
 
   return (
     <section
       id="customer-stories-section"
-      className="w-full bg-white py-16 lg:py-24 border-b border-neutral-100 select-none overflow-hidden"
+      className="w-full bg-white py-10 sm:py-14 lg:py-20 border-b border-neutral-100 overflow-hidden"
     >
       {/* Section Heading centered within max-width */}
       <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-          <h2 className="text-xl md:text-3xl lg:text-5xl font-semibold text-[#111111] tracking-tight font-sans">
-            Real Stories, <span className="text-[#0066FF]">Real Results</span>
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+          <span className="text-xs md:text-sm font-semibold tracking-widest text-[#0066FF] bg-blue-50 px-3.5 py-1 rounded-full font-sans">
+            Real Stories, Real Results
+          </span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-[#111111] tracking-tight font-sans mt-3">
+            Customer <span className="text-[#0066FF]">Experiences</span>
           </h2>
           <p className="text-neutral-500 text-sm sm:text-base md:text-lg mt-2.5 font-sans font-medium">
-            Watch how Ratguard is making a difference.
+            Watch how Ratguard is making a difference across real homes & businesses.
           </p>
         </div>
       </div>
 
-      {/* Full-width Carousel Container touching right side of screen on laptop view */}
+      {/* Full-width Carousel Container with Dynamic Show/Hide Arrows */}
       <div className="w-full relative group/carousel">
         {/* Left Arrow Button */}
-        <button
-          id="reels-carousel-prev-btn"
-          onClick={() => handleScroll('left')}
-          aria-label="Previous Stories"
-          className="absolute left-2 sm:left-4 lg:left-8 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/95 backdrop-blur-md text-neutral-800 shadow-2xl border border-neutral-200/90 flex items-center justify-center hover:bg-[#0066FF] hover:text-white hover:border-[#0066FF] active:scale-90 transition-all cursor-pointer"
-        >
-          <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
-        </button>
+        {canScrollLeft && (
+          <button
+            id="reels-carousel-prev-btn"
+            onClick={() => handleScroll('left')}
+            aria-label="Previous Stories"
+            className="absolute left-3 sm:left-6 lg:left-10 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-white/95 backdrop-blur-md text-neutral-800 shadow-2xl border border-neutral-200/90 flex items-center justify-center hover:bg-[#0066FF] hover:text-white hover:border-[#0066FF] active:scale-90 transition-all duration-200 cursor-pointer"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+        )}
 
         {/* Right Arrow Button */}
-        <button
-          id="reels-carousel-next-btn"
-          onClick={() => handleScroll('right')}
-          aria-label="Next Stories"
-          className="absolute right-2 sm:right-4 lg:right-8 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/95 backdrop-blur-md text-neutral-800 shadow-2xl border border-neutral-200/90 flex items-center justify-center hover:bg-[#0066FF] hover:text-white hover:border-[#0066FF] active:scale-90 transition-all cursor-pointer"
-        >
-          <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
-        </button>
+        {canScrollRight && (
+          <button
+            id="reels-carousel-next-btn"
+            onClick={() => handleScroll('right')}
+            aria-label="Next Stories"
+            className="absolute right-3 sm:right-6 lg:right-10 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-white/95 backdrop-blur-md text-neutral-800 shadow-2xl border border-neutral-200/90 flex items-center justify-center hover:bg-[#0066FF] hover:text-white hover:border-[#0066FF] active:scale-90 transition-all duration-200 cursor-pointer"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+        )}
 
-        {/* Video Cards Reel Scroll Container - Centered cards on mobile, preserved tablet & laptop */}
+        {/* Reels Cards Reel Scroll Track with Container Alignment matching Category Carousel */}
         <div
           ref={carouselRef}
-          className="flex gap-4 sm:gap-5 lg:gap-6 overflow-x-auto no-scrollbar scroll-smooth py-3 px-[calc((100vw-min(82vw,320px))/2)] sm:px-6 lg:pl-[max(2rem,calc((100vw-1500px)/2+2rem))] lg:pr-8 snap-x snap-mandatory"
+          className="category-carousel-track flex gap-5 sm:gap-6 overflow-x-auto no-scrollbar scroll-smooth py-4 snap-x snap-mandatory"
         >
           {CUSTOMER_REELS.map((item) => {
             const isPlaying = playingVideoId === item.id;
@@ -150,59 +151,63 @@ export const ShopThroughVideo: React.FC<ShopThroughVideoProps> = () => {
                 onMouseEnter={() => handleCardMouseEnter(item.id)}
                 onMouseLeave={() => handleCardMouseLeave(item.id)}
                 onClick={(e) => handleTogglePlayPause(e, item.id)}
-                className="shrink-0 w-[82vw] sm:w-[390px] lg:w-[320px] xl:w-[335px] max-w-[320px] sm:max-w-[350px] aspect-9/16 bg-neutral-950 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 relative flex flex-col group cursor-pointer border border-neutral-200/60 select-none snap-center"
+                className="shrink-0 w-[84vw] xs:w-[360px] sm:w-[420px] md:w-[400px] lg:w-[380px] h-[480px] sm:h-[500px] lg:h-[525px] rounded-xl sm:rounded-3xl overflow-hidden shadow-md transition-all duration-500 relative flex flex-col justify-between p-5 sm:p-6 lg:p-7 group cursor-pointer border border-neutral-200/60 select-none snap-start bg-neutral-900"
               >
-                {/* Top-Left: Navbar-style RatGuardPro Brand Logo Overlay Badge */}
-                <div className="absolute top-4 left-4 z-20 flex items-center gap-1.5 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full text-white select-none">
-                  <img
-                    src="/apple-touch-icon.png"
-                    alt="RatGuardPro Logo"
-                    className="w-4 h-4 rounded-md object-contain"
-                  />
-                  <span className="text-xs font-bold text-white tracking-tight font-sans">
-                    RatGuard<span className="text-[#0066FF]">Pro</span>
-                  </span>
+                {/* Top: Customer Name & Role matching Category Heading style */}
+                <div className="relative z-20 flex items-start justify-between">
+                  <div>
+                    <h3 className="text-xl sm:text-2xl lg:text-[24px] font-semibold tracking-tight leading-tight text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]">
+                      {item.name}
+                    </h3>
+                    <p className="text-blue-300 text-xs sm:text-sm font-medium mt-1 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
+                      {item.role}
+                    </p>
+                  </div>
+
+                  {/* Sound Mute/Unmute toggle (Visible when playing) */}
+                  {isPlaying && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        const nextMuted = !isMuted;
+                        setIsMuted(nextMuted);
+                        const video = videoRefs.current[item.id];
+                        if (video) video.muted = nextMuted;
+                      }}
+                      aria-label="Toggle Audio"
+                      className="p-2 rounded-full bg-black/60 text-white backdrop-blur-md hover:bg-black/90 transition-all cursor-pointer shadow-md"
+                    >
+                      {isMuted ? (
+                        <VolumeX className="w-4 h-4 text-neutral-300" />
+                      ) : (
+                        <Volume2 className="w-4 h-4 text-blue-400" />
+                      )}
+                    </button>
+                  )}
                 </div>
 
-                {/* Top-Right: Sound Mute/Unmute toggle (Visible when playing) */}
-                {isPlaying && (
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      const nextMuted = !isMuted;
-                      setIsMuted(nextMuted);
-                      const video = videoRefs.current[item.id];
-                      if (video) video.muted = nextMuted;
-                    }}
-                    aria-label="Toggle Audio"
-                    className="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/60 text-white backdrop-blur-md hover:bg-black/90 transition-all cursor-pointer shadow-md"
-                  >
-                    {isMuted ? (
-                      <VolumeX className="w-4 h-4 text-neutral-300" />
-                    ) : (
-                      <Volume2 className="w-4 h-4 text-blue-400" />
-                    )}
-                  </button>
-                )}
+                {/* Top Dark Gradient for Text Legibility & Visual Contrast */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/30 to-transparent h-44 pointer-events-none z-10" />
 
-                {/* Video & Fallback Poster Container (Never empty) */}
-                <div className="absolute inset-0 w-full h-full bg-neutral-900 overflow-hidden">
-                  {/* Underlying Poster Image (Always visible so card is never empty) */}
+                {/* Video & Fallback Poster Container */}
+                <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
                   <img
                     src={item.thumbnail}
                     alt={item.name}
-                    className="absolute inset-0 w-full h-full object-cover select-none"
+                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
+                      isPlaying ? 'opacity-0' : 'opacity-100'
+                    }`}
                     loading="lazy"
                   />
 
-                  {/* YouTube Shorts Embed or HTML5 Video Playback */}
                   {isPlaying && item.youtubeId ? (
                     <iframe
-                      src={`https://www.youtube-nocookie.com/embed/${item.youtubeId}?autoplay=1&mute=${isMuted ? 1 : 0
-                        }&controls=0&loop=1&playlist=${item.youtubeId}&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&disablekb=1`}
+                      src={`https://www.youtube-nocookie.com/embed/${item.youtubeId}?autoplay=1&mute=${
+                        isMuted ? 1 : 0
+                      }&controls=0&loop=1&playlist=${item.youtubeId}&rel=0&modestbranding=1&playsinline=1`}
                       title={item.name}
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      className="absolute inset-0 w-full h-full object-cover scale-[1.35] pointer-events-none transition-opacity duration-300"
+                      className="absolute inset-0 w-full h-full object-cover scale-[1.35] pointer-events-none transition-opacity duration-300 z-0"
                     />
                   ) : (
                     <video
@@ -211,24 +216,26 @@ export const ShopThroughVideo: React.FC<ShopThroughVideoProps> = () => {
                       }}
                       src={item.videoUrl}
                       poster={item.thumbnail}
-                      preload="auto"
+                      preload="metadata"
                       muted={isMuted}
                       loop
                       playsInline
-                      className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${isPlaying ? 'opacity-100' : 'opacity-0'
-                        }`}
+                      className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${
+                        isPlaying ? 'opacity-100' : 'opacity-0'
+                      }`}
                     />
                   )}
                 </div>
 
                 {/* Center Frosted Glass Play / Pause Button Overlay */}
                 <div
-                  className={`absolute inset-0 flex items-center justify-center transition-all duration-300 z-10 ${isPlaying
-                    ? 'opacity-0 hover:opacity-100 bg-black/10'
-                    : 'opacity-100 bg-black/20 group-hover:bg-black/30'
-                    }`}
+                  className={`absolute inset-0 flex items-center justify-center transition-all duration-300 z-10 ${
+                    isPlaying
+                      ? 'opacity-0 hover:opacity-100 bg-black/10'
+                      : 'opacity-100 bg-black/15 group-hover:bg-black/25'
+                  }`}
                 >
-                  <div className="w-14 h-14 rounded-full bg-white/25 backdrop-blur-md border border-white/40 text-white flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-[#0066FF] group-hover:border-[#0066FF] transition-all">
+                  <div className="w-14 h-14 rounded-full bg-white/30 backdrop-blur-md border border-white/40 text-white flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-[#0066FF] group-hover:border-[#0066FF] transition-all">
                     {isPlaying ? (
                       <Pause className="w-6 h-6 fill-current" />
                     ) : (
@@ -237,41 +244,21 @@ export const ShopThroughVideo: React.FC<ShopThroughVideoProps> = () => {
                   </div>
                 </div>
 
-                {/* Bottom Information Overlay matching exact screenshot structure */}
-                <div className="absolute inset-x-0 bottom-0 pt-20 pb-5 px-5 bg-gradient-to-t from-black/95 via-black/65 to-transparent z-20 flex flex-col justify-end text-left pointer-events-none">
-                  <h4 className="text-white font-bold text-base sm:text-lg leading-tight font-sans">
-                    {item.name}
-                  </h4>
-                  <p className="text-neutral-300 text-xs sm:text-sm mt-0.5 font-sans font-normal">
-                    {item.role}
-                  </p>
-
-                  {/* Customer Quote with Website Blue Left Accent */}
-                  <div className="mt-2.5 border-l-2 border-[#0066FF] pl-2.5">
-                    <p className="text-neutral-200 text-xs sm:text-sm leading-snug font-medium italic font-sans">
+                {/* Bottom: Customer Quote with Dark Gradient Overlay */}
+                <div className="relative z-20 pt-16">
+                  <div className="border-l-2 border-[#0066FF] pl-3 py-1">
+                    <p className="text-white text-sm sm:text-base leading-snug font-medium italic drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
                       {item.quote}
                     </p>
                   </div>
                 </div>
+
+                {/* Bottom Dark Gradient for Quote Legibility */}
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent h-40 pointer-events-none z-10" />
               </div>
             );
           })}
         </div>
-      </div>
-
-      {/* Bottom Pagination Indicator Dots */}
-      <div className="flex justify-center items-center gap-2.5 mt-8 sm:mt-10">
-        {CUSTOMER_REELS.map((item, idx) => (
-          <button
-            key={item.id}
-            onClick={() => handleDotClick(idx)}
-            aria-label={`Go to story ${idx + 1}`}
-            className={`transition-all duration-300 rounded-full cursor-pointer ${activeIndex === idx
-              ? 'w-7 h-2.5 bg-[#0066FF] shadow-xs'
-              : 'w-2.5 h-2.5 bg-neutral-300 hover:bg-neutral-400'
-              }`}
-          />
-        ))}
       </div>
     </section>
   );

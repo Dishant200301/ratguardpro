@@ -46,12 +46,12 @@ export const BeforeAfterSlider: React.FC = () => {
   return (
     <section
       id="before-after-section"
-      className="w-full bg-white py-16 lg:py-24 border-b border-neutral-100 select-none overflow-hidden"
+      className="w-full bg-white py-16 lg:py-24 border-b border-neutral-100 overflow-hidden"
     >
       <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Heading */}
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <span className="text-xs font-extrabold tracking-widest text-[#0066FF] bg-blue-50 px-3.5 py-1 rounded-full font-sans">
+          <span className="text-xs font-bold tracking-widest text-[#0066FF] bg-blue-50 px-3.5 py-1 rounded-full font-sans">
             REAL IMPACT & PROOF
           </span>
           <h2 className="text-xl md:text-3xl lg:text-4xl font-bold text-[#111111] mt-3 uppercase tracking-tight font-sans">

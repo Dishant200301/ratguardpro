@@ -213,7 +213,7 @@ export const ValuePropositionSection: React.FC = () => {
   return (
     <section
       id="value-proposition-section"
-      className="w-full bg-white py-10 sm:py-14 select-none"
+      className="w-full bg-white py-10 sm:py-14"
     >
       <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* 1. LAPTOP / DESKTOP VIEW (3-COLUMN GRID WITHOUT PAGINATION DOTS) */}

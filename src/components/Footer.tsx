@@ -276,7 +276,7 @@ export const Footer: React.FC = () => {
   return (
     <footer
       id="footer-section"
-      className="w-full bg-[#111111] text-neutral-300 pt-10 pb-10 select-none border-t border-neutral-800 font-sans"
+      className="w-full bg-[#111111] text-neutral-300 pt-10 pb-10 border-t border-neutral-800 font-sans"
     >
       {/* 1. TOP TRUST HIGHLIGHTS BAR - FULL SCREEN-WIDTH BORDER */}
       <div className="w-full border-b border-neutral-800 pb-10 mb-2">

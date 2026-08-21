@@ -16,6 +16,8 @@ import {
   Volume2,
   HeartHandshake,
   Clock,
+  ShoppingCart,
+  ArrowRight,
 } from 'lucide-react';
 import { LEFT_FEATURES, RIGHT_FEATURES } from '../data/mockData';
 
@@ -58,27 +60,32 @@ export const FeaturesTechSection: React.FC<FeaturesTechSectionProps> = ({ onBuyN
   const TOP_SPECS = [
     {
       title: 'Creatures Safety',
-      desc: 'Safe for Pets & Children',
+      line1: '100% Safe For',
+      line2: 'Pets & Children',
       icon: <HeartHandshake className="w-5 h-5 text-[#0066FF]" />,
     },
     {
       title: 'ECO Friendly',
-      desc: 'No Harmful Chemicals & Non-Toxic',
+      line1: 'Chemical Free',
+      line2: '& Non-Toxic',
       icon: <Leaf className="w-5 h-5 text-[#0066FF]" />,
     },
     {
       title: 'Life Durability',
-      desc: 'Product Shelf Life 4-5 Years',
+      line1: 'Long Life Span',
+      line2: 'Up to 4-5 Years',
       icon: <Clock className="w-5 h-5 text-[#0066FF]" />,
     },
     {
-      title: 'Powerful Frequency',
-      desc: '20 Hz To 65 kHz Sweep',
+      title: 'Powerful Waves',
+      line1: '20 kHz - 65 kHz',
+      line2: 'Frequency Sweep',
       icon: <Volume2 className="w-5 h-5 text-[#0066FF]" />,
     },
     {
       title: 'Electricity Saver',
-      desc: 'Ultra Low 3 - 4 Watt',
+      line1: 'Ultra Low Power',
+      line2: 'Only 3 - 4 Watt',
       icon: <Plug className="w-5 h-5 text-[#0066FF]" />,
     },
   ];
@@ -86,35 +93,33 @@ export const FeaturesTechSection: React.FC<FeaturesTechSectionProps> = ({ onBuyN
   return (
     <section
       id="features-tech-section"
-      className="w-full bg-white py-16 lg:py-24 border-b border-neutral-100 select-none overflow-hidden"
+      className="w-full bg-white py-10 md:py-14 xl:py-16 border-b border-neutral-100 overflow-hidden"
     >
-      <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
-        {/* 1. TOP BRAND HEADING MATCHING REFERENCE SCREENSHOT */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-          <h3 className="text-xl md:text-3xl lg:text-4xl font-bold text-[#111111] uppercase tracking-wider font-sans">
-            RATGUARDS
-          </h3>
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-neutral-800 tracking-tight mt-1.5 font-sans">
-            Advanced Ultrasonic Rat Repellent
+      <div className="max-w-[1500px] mx-auto px-4 sm:px-6 xl:px-8">
+        {/* 1. Section Header: Features & Specifications */}
+        <div className="text-center max-w-5xl mx-auto mb-10 sm:mb-10">
+          <span className="text-sm font-semibold tracking-widest text-[#0066FF] bg-blue-50 px-3.5 py-1 rounded-full font-sans">
+            Features & Specifications
+          </span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl xl:text-5xl font-semibold text-[#111111] tracking-tight font-sans mt-3">
+            Engineered For <span className="text-[#0066FF]">Maximum Protection</span>
           </h2>
-          <div className="text-xs sm:text-sm font-extrabold text-[#0066FF] tracking-widest uppercase mt-2 font-sans">
-            ADVANCED. EFFECTIVE. DURABLE.
-          </div>
+          <p className="text-neutral-500 text-sm sm:text-base mt-2.5 font-sans font-medium">
+            Advanced ultrasonic frequency technology built for high performance, durability, and complete safety.
+          </p>
         </div>
 
-        {/* 2. 3-COLUMN COMPOSITION: Left 6 Cards | Center Specs + Product + Buy Now | Right 6 Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
-          {/* Left Column: 6 Feature Cards */}
-          <div className="lg:col-span-3 xl:col-span-3 flex flex-col space-y-3.5 order-2 lg:order-1">
+        {/* 2. 3-COLUMN COMPOSITION: Left 5 Cards | Center Specs + Product + Buy Now | Right 5 Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-12 gap-6 xl:gap-6 items-start xl:items-start">
+          {/* Left Column: 5 Feature Cards (1 col on mobile, left column of 5 on tablet, left sidebar on desktop) */}
+          <div className="sm:col-span-1 xl:col-span-3 xl:col-span-3 flex flex-col space-y-3.5 order-2 xl:order-1">
             {LEFT_FEATURES.map((item) => (
               <div
                 key={item.id}
-                className="bg-white border border-neutral-200/90 rounded-2xl p-3.5 sm:p-4 shadow-2xs hover:shadow-md hover:border-[#0066FF] transition-all duration-200 flex items-center gap-3.5 group cursor-default"
+                className="bg-white border border-neutral-200/80 rounded-2xl p-3.5 sm:p-4 shadow-2xs flex items-center gap-3.5 cursor-default"
               >
-                <div className="w-10 h-10 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0 group-hover:bg-[#0066FF] transition-colors">
-                  <div className="group-hover:brightness-0 group-hover:invert transition-all">
-                    {getFeatureIcon(item.iconType)}
-                  </div>
+                <div className="w-10 h-10 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0">
+                  {getFeatureIcon(item.iconType)}
                 </div>
                 <div className="flex flex-col">
                   <h4 className="text-xs sm:text-sm font-extrabold text-[#111111] tracking-tight font-sans">
@@ -128,61 +133,97 @@ export const FeaturesTechSection: React.FC<FeaturesTechSectionProps> = ({ onBuyN
             ))}
           </div>
 
-          {/* Center Column: Top 5 Specs Icons + Real Product Image with Ultrasonic Waves + Buy Now CTA */}
-          <div className="lg:col-span-6 xl:col-span-6 flex flex-col items-center justify-center order-1 lg:order-2 my-6 lg:my-0">
-            {/* Top 5 Spec Badges Directly Above Product Image */}
-            <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 sm:gap-3 w-full max-w-2xl mb-6 px-2 text-center">
+          {/* Center Column: Top 4 Specs Icons (4 in row on desktop) + Real Product Image + Buy Now CTA */}
+          <div className="sm:col-span-2 xl:col-span-6 xl:col-span-6 flex flex-col items-center justify-between h-full order-1 xl:order-2 my-6 xl:my-0">
+            {/* Top Spec Badges Desktop (4 in 1 row) / Tablet (Row 1: 3 cards, Row 2: 2 cards centered) */}
+            <div className="hidden sm:grid sm:grid-cols-6 xl:grid-cols-4 gap-2.5 sm:gap-3.5 w-full max-w-2xl mb-0 px-1 sm:px-2">
               {TOP_SPECS.map((spec, idx) => (
                 <div
                   key={idx}
-                  className="flex flex-col items-center p-2 rounded-xl bg-neutral-50/80 border border-neutral-100 hover:border-blue-200 transition-all group"
+                  className={`bg-white border border-neutral-100 rounded-2xl sm:rounded-[20px] p-3 sm:p-3.5 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex flex-col items-center text-center justify-start cursor-default h-full min-h-[115px]  ${
+                    idx < 3
+                      ? 'sm:col-span-2 xl:col-span-1'
+                      : idx === 3
+                      ? 'sm:col-span-2 sm:col-start-2 xl:col-start-auto xl:col-span-1'
+                      : 'sm:col-span-2 xl:hidden'
+                  }`}
                 >
-                  <div className="w-8 h-8 rounded-full bg-blue-50 border border-blue-100/80 flex items-center justify-center mb-1 group-hover:scale-110 transition-transform">
+                  <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-blue-50/80 border border-blue-100/60 flex items-center justify-center shrink-0 mb-2.5">
                     {spec.icon}
                   </div>
-                  <span className="text-[10px] sm:text-[11px] font-bold text-neutral-800 leading-tight">
-                    {spec.title}
-                  </span>
-                  <span className="text-[9px] text-neutral-500 leading-tight mt-0.5">
-                    {spec.desc}
-                  </span>
+                  <div className="flex flex-col items-center justify-center w-full">
+                    <h5 className="text-[11px] sm:text-xs font-bold text-[#111111] tracking-tight font-sans leading-tight whitespace-nowrap truncate w-full text-center">
+                      {spec.title}
+                    </h5>
+                    <div className="text-[9px] sm:text-[10px] text-neutral-500 font-medium leading-tight mt-1 font-sans text-center flex flex-col items-center justify-center">
+                      <span>{spec.line1}</span>
+                      <span>{spec.line2}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Top 5 Spec Badges Mobile Only: 2.5 Cards Visible Horizontal Scroll */}
+            <div className="flex sm:hidden gap-2.5 overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory py-1 w-full mb-6">
+              {TOP_SPECS.map((spec, idx) => (
+                <div
+                  key={idx}
+                  className="shrink-0 w-[38vw] xs:w-[140px] bg-white border border-neutral-100 rounded-2xl p-2.5 sm:p-3 shadow-[0_2px_12px_rgba(0,0,0,0.03)] flex flex-col items-center text-center justify-start min-h-[110px] snap-start"
+                >
+                  <div className="w-9 h-9 rounded-full bg-blue-50/80 border border-blue-100/60 flex items-center justify-center shrink-0 mb-2">
+                    {spec.icon}
+                  </div>
+                  <div className="flex flex-col items-center justify-center w-full">
+                    <h5 className="text-[11px] font-bold text-[#111111] tracking-tight font-sans leading-tight whitespace-nowrap truncate w-full text-center">
+                      {spec.title}
+                    </h5>
+                    <div className="text-[9.5px] text-neutral-500 font-medium leading-tight mt-1 font-sans text-center flex flex-col items-center justify-center">
+                      <span>{spec.line1}</span>
+                      <span>{spec.line2}</span>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
 
             {/* Central Product Image */}
-            <div className="relative w-full max-w-md sm:max-w-lg aspect-4/3 flex items-center justify-center p-2 group">
+            <div className="relative w-full max-w-md sm:max-w-lg aspect-4/2 flex items-center justify-center p-2 mt-6 group">
               <img
                 src="/product/product.png"
                 alt="RatGuardPro Ultrasonic Device"
-                className="w-full h-auto max-h-[290px] sm:max-h-[330px] object-contain drop-shadow-2xl transform group-hover:scale-105 transition-transform duration-300 select-none pointer-events-none"
+                className="w-full h-auto max-h-[290px] sm:max-h-[250px] object-contain drop-shadow-2xl transform transition-transform duration-300  pointer-events-none"
                 loading="eager"
               />
             </div>
 
-            {/* Pill-shaped Buy Now Button below Central Device (Website Theme Blue #0066FF) */}
-            <div className="mt-6">
+            {/* Pill-shaped Buy Now Button matching Hero Section design */}
+            <div className="mt-6 flex justify-center">
               <button
                 id="tech-section-buy-now-btn"
                 onClick={onBuyNow}
-                className="inline-flex items-center justify-center bg-[#0066FF] hover:bg-[#0052cc] active:bg-[#004099] text-white text-sm sm:text-base font-extrabold px-10 py-3 rounded-full shadow-lg shadow-blue-500/30 transition-all duration-200 cursor-pointer hover:scale-105 active:scale-95 font-sans"
+                className="inline-flex items-center gap-3 sm:gap-4 bg-[#0D0D0D] hover:bg-black active:scale-[0.98] text-white pl-1.5 pr-5 py-1.5 sm:pl-2 sm:pr-6 sm:py-2 rounded-full shadow-2xl transition-all duration-200 group cursor-pointer border border-neutral-800"
               >
-                <span>Buy Now</span>
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#0066FF] flex items-center justify-center text-white shrink-0 shadow-md transition-transform">
+                  <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                </div>
+                <span className="font-bold text-sm sm:text-base tracking-wider uppercase text-white font-sans whitespace-nowrap">
+                  BUY NOW
+                </span>
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white transition-transform duration-200 group-hover:translate-x-1" />
               </button>
             </div>
           </div>
 
-          {/* Right Column: 6 Feature Cards */}
-          <div className="lg:col-span-3 xl:col-span-3 flex flex-col space-y-3.5 order-3">
+          {/* Right Column: 5 Feature Cards (1 col on mobile, right column of 5 on tablet, right sidebar on desktop) */}
+          <div className="sm:col-span-1 xl:col-span-3 xl:col-span-3 flex flex-col space-y-3.5 order-3">
             {RIGHT_FEATURES.map((item) => (
               <div
                 key={item.id}
-                className="bg-white border border-neutral-200/90 rounded-2xl p-3.5 sm:p-4 shadow-2xs hover:shadow-md hover:border-[#0066FF] transition-all duration-200 flex items-center gap-3.5 group cursor-default"
+                className="bg-white border border-neutral-200/80 rounded-2xl p-3.5 sm:p-4 shadow-2xs flex items-center gap-3.5 cursor-default "
               >
-                <div className="w-10 h-10 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0 group-hover:bg-[#0066FF] transition-colors">
-                  <div className="group-hover:brightness-0 group-hover:invert transition-all">
-                    {getFeatureIcon(item.iconType)}
-                  </div>
+                <div className="w-10 h-10 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0">
+                  {getFeatureIcon(item.iconType)}
                 </div>
                 <div className="flex flex-col">
                   <h4 className="text-xs sm:text-sm font-extrabold text-[#111111] tracking-tight font-sans">

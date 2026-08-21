@@ -15,17 +15,21 @@ import { FaqSection } from './components/FaqSection';
 import { ValuePropositionSection } from './components/ValuePropositionSection';
 import { Footer } from './components/Footer';
 import { CartDrawer } from './components/CartDrawer';
+import { BuyNowModal } from './components/BuyNowModal';
 import { PhoneCall, MessageSquare } from 'lucide-react';
 
 export default function App() {
   const [productQuantity, setProductQuantity] = useState(1);
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
+  const [isBuyModalOpen, setIsBuyModalOpen] = useState(false);
+
+  const handleOpenBuyModal = () => {
+    setIsBuyModalOpen(true);
+  };
 
   const handleAddToCart = () => {
-    setIsAddedToCart(true);
-    setProductQuantity(1);
-    setCartDrawerOpen(true);
+    setIsBuyModalOpen(true);
   };
 
   const handleIncreaseQty = () => {
@@ -53,17 +57,8 @@ export default function App() {
     }
   };
 
-  const handleShopNow = () => {
-    const el = document.getElementById('product-showcase-section');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   const handleQuickAddVideoItem = (_title: string, _price: string) => {
-    setIsAddedToCart(true);
-    setProductQuantity((prev) => (prev === 0 ? 1 : prev + 1));
-    setCartDrawerOpen(true);
+    setIsBuyModalOpen(true);
   };
 
   return (
@@ -78,7 +73,7 @@ export default function App() {
       {/* MAIN CONTENT SECTIONS IN REQUESTED STRUCTURE */}
       <main className="flex-1 w-full">
         {/* 2. HERO SECTION (8 slides, 5s auto-slide, pause on hover, dots pagination) */}
-        <HeroSection onShopNow={handleShopNow} />
+        <HeroSection onShopNow={handleOpenBuyModal} />
 
        
 
@@ -87,27 +82,23 @@ export default function App() {
 
         {/* 4. PRODUCT SHOWCASE SECTION (Interactive Add to Cart / - 1 + Quantity control) */}
         <ProductSection
-          quantity={productQuantity}
-          isAdded={isAddedToCart}
-          onAddToCart={handleAddToCart}
-          onIncreaseQty={handleIncreaseQty}
-          onDecreaseQty={handleDecreaseQty}
+          onBuyNow={handleOpenBuyModal}
         />
 
         {/* 5. BENTO GRID SECTION (9-area layout, center large product, 8 space categories) */}
         <BentoGridSection />
 
         {/* 6. PLUG IT IN / HOW IT WORKS SECTION (White info left + Dark visual right) */}
-        <ProductInfoSection onBuyNow={handleShopNow} />
+        <ProductInfoSection onBuyNow={handleOpenBuyModal} />
 
         {/* 7. ABOUT / FOUNDER STORY SECTION (Bharat Parmar & Shyam Innovations) */}
-        <AboutSection />
+        {/* <AboutSection /> */}
 
         {/* 8. CATEGORY CAROUSEL (8 spaces, horizontal scroll, tablet/mobile responsive) */}
         <CategoryCarousel />
 
         {/* 9. FEATURES / TECHNOLOGY 12-POINT SECTION (Left 6, Center Product, Right 6) */}
-        <FeaturesTechSection onBuyNow={handleShopNow} />
+        <FeaturesTechSection onBuyNow={handleOpenBuyModal} />
 
         {/* 10. INTERACTIVE BEFORE & AFTER SLIDER (Kitchen pest comparison) */}
         <BeforeAfterSlider />
@@ -128,7 +119,13 @@ export default function App() {
       {/* 14. FOOTER SECTION (Trust badges, links, support info, copyright) */}
       <Footer />
 
-      {/* 15. CART & QUICK CHECKOUT DRAWER */}
+      {/* 15. BUY NOW / CONTACT POPUP MODAL (Matching Reference Design) */}
+      <BuyNowModal
+        isOpen={isBuyModalOpen}
+        onClose={() => setIsBuyModalOpen(false)}
+      />
+
+      {/* 16. CART & QUICK CHECKOUT DRAWER */}
       <CartDrawer
         isOpen={cartDrawerOpen}
         onClose={() => setCartDrawerOpen(false)}
@@ -139,7 +136,7 @@ export default function App() {
       />
 
       {/* Floating Quick Action Button (Direct Chat / Phone Support) */}
-      <div className="fixed bottom-6 right-6 z-40 flex flex-col gap-2.5 items-end">
+      {/* <div className="fixed bottom-6 right-6 z-40 flex flex-col gap-2.5 items-end">
         <a
           href="https://api.whatsapp.com/send?phone=919409445443&text=Hi%20RatGuardPro,%20I%20want%20to%20order%20the%20Ultrasonic%20Rat%20Repellent"
           target="_blank"
@@ -163,7 +160,7 @@ export default function App() {
             Call +91 9409445443
           </span>
         </a>
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Search,
-  User,
-  ShoppingBag,
   Menu,
   X,
   ChevronDown,
@@ -14,8 +11,8 @@ import {
 import { Logo } from './Logo';
 
 interface NavbarProps {
-  cartCount: number;
-  onOpenCart: () => void;
+  cartCount?: number;
+  onOpenCart?: () => void;
   onNavigateSection: (sectionId: string) => void;
 }
 
@@ -31,14 +28,10 @@ const SOLUTIONS_LIST = [
 ];
 
 export const Navbar: React.FC<NavbarProps> = ({
-  cartCount,
-  onOpenCart,
   onNavigateSection,
 }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -59,7 +52,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header className="w-full bg-white z-50 sticky top-0 shadow-sm select-none">
+    <header className="w-full bg-white z-50 sticky top-0 shadow-sm">
       {/* 1. TOP ANNOUNCEMENT BAR (Black #000000 with continuous smooth right-to-left marquee) */}
       <div
         id="top-announcement-bar"
@@ -122,14 +115,14 @@ export const Navbar: React.FC<NavbarProps> = ({
                 e.preventDefault();
                 handleNavClick('hero-section');
               }}
-              className="flex items-center transition-transform duration-200 hover:scale-[1.02]"
+              className="flex items-center transition-transform duration-200"
             >
               <Logo size="md" />
             </a>
           </div>
 
-          {/* Desktop Center: Navigation Links */}
-          <div className="hidden lg:flex items-center space-x-7 font-semibold text-sm text-[#111111]">
+          {/* Desktop Center: Navigation Links (Centrally aligned) */}
+          <div className="hidden lg:flex items-center space-x-8 font-semibold text-sm text-[#111111] absolute left-1/2 -translate-x-1/2">
             <button
               id="nav-link-home"
               onClick={() => handleNavClick('hero-section')}
@@ -203,193 +196,138 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
           </div>
 
-          {/* Desktop Right Action Icons: Search + Account + Cart (Hidden on Mobile & Tablet) */}
-          <div className="hidden lg:flex items-center space-x-3 md:space-x-4">
-            {/* Search Icon */}
-            <button
-              id="navbar-search-btn"
-              onClick={() => setIsSearchOpen(!isSearchOpen)}
-              aria-label="Search"
-              className="p-2 text-neutral-700 hover:text-[#0066FF] hover:bg-neutral-100 rounded-full transition-colors cursor-pointer"
-            >
-              <Search className="w-5 h-5" />
-            </button>
-
-            {/* Account / User Icon */}
-            <button
-              id="navbar-account-btn"
-              aria-label="My Account"
-              onClick={() => alert('Welcome to RatGuardPro Account Portal. Order tracking & fast re-orders are enabled.')}
-              className="p-2 text-neutral-700 hover:text-[#0066FF] hover:bg-neutral-100 rounded-full transition-colors cursor-pointer"
-            >
-              <User className="w-5 h-5" />
-            </button>
-
-            {/* Shopping Cart Icon with Red Badge */}
-            <button
-              id="navbar-cart-btn"
-              onClick={onOpenCart}
-              aria-label={`Shopping cart with ${cartCount} items`}
-              className="p-2 text-neutral-700 hover:text-[#0066FF] hover:bg-neutral-100 rounded-full transition-colors relative cursor-pointer"
-            >
-              <ShoppingBag className="w-5 h-5" />
-              <span
-                id="navbar-cart-badge"
-                className="absolute -top-0.5 -right-0.5 bg-[#E50914] text-white text-[10px] font-black w-4 h-4 rounded-full flex items-center justify-center shadow-sm ring-2 ring-white"
-              >
-                {cartCount}
-              </span>
-            </button>
-          </div>
-
-          {/* Mobile / Tablet Right: Hamburger Menu Icon (Only element on right in mobile & tablet) */}
+          {/* Mobile / Tablet Right: Hamburger Menu Icon with Smooth Morphing to Close Icon */}
           <div className="flex lg:hidden items-center">
             <button
               id="mobile-menu-toggle-btn"
-              onClick={() => setIsMobileMenuOpen(true)}
-              aria-label="Open Navigation Menu"
-              className="p-2 text-neutral-800 hover:text-[#0066FF] focus:outline-none rounded-lg transition-colors cursor-pointer"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label={isMobileMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
+              className="p-2 text-neutral-800 hover:text-[#0066FF] focus:outline-none rounded-lg transition-colors cursor-pointer w-10 h-10 flex flex-col items-center justify-center gap-1.5"
             >
-              <Menu className="w-6 h-6" />
+              <span
+                className={`w-6 h-0.5 bg-neutral-800 rounded-full transition-all duration-300 ease-in-out transform ${
+                  isMobileMenuOpen ? 'rotate-45 translate-y-2 bg-[#0066FF]' : ''
+                }`}
+              />
+              <span
+                className={`w-6 h-0.5 bg-neutral-800 rounded-full transition-all duration-200 ease-in-out ${
+                  isMobileMenuOpen ? 'opacity-0 scale-x-0' : 'opacity-100 scale-x-100'
+                }`}
+              />
+              <span
+                className={`w-6 h-0.5 bg-neutral-800 rounded-full transition-all duration-300 ease-in-out transform ${
+                  isMobileMenuOpen ? '-rotate-45 -translate-y-2 bg-[#0066FF]' : ''
+                }`}
+              />
             </button>
           </div>
         </div>
-
-        {/* Search Bar Dropdown */}
-        {isSearchOpen && (
-          <div
-            id="navbar-search-panel"
-            className="w-full bg-neutral-50 border-t border-neutral-200 px-4 py-3 animate-in fade-in slide-in-from-top-2 duration-200"
-          >
-            <div className="max-w-3xl mx-auto flex items-center gap-2">
-              <Search className="w-5 h-5 text-neutral-400" />
-              <input
-                type="text"
-                placeholder="Search rat repellent models, car protection, warehouse devices..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                autoFocus
-                className="w-full bg-transparent text-sm focus:outline-none text-neutral-800 placeholder-neutral-400 py-1"
-              />
-              <button
-                onClick={() => setIsSearchOpen(false)}
-                className="text-xs text-neutral-500 hover:text-black px-2 py-1"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        )}
       </nav>
 
-      {/* 3. MOBILE & TABLET SLIDE-IN MENU PANEL (Smooth right-to-left drawer) */}
-      {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-50 flex justify-end">
-          {/* Backdrop Overlay */}
-          <div
-            id="mobile-drawer-backdrop"
-            onClick={() => setIsMobileMenuOpen(false)}
-            className="fixed inset-0 bg-black/40 backdrop-blur-xs transition-opacity duration-300"
-          />
+      {/* 3. MOBILE & TABLET FULL-HEIGHT SLIDE-DOWN MENU (Touches screen bottom) */}
+      <div
+        id="mobile-dropdown-panel"
+        className={`lg:hidden absolute top-full left-0 right-0 w-full bg-white z-50 shadow-2xl border-t border-neutral-100 flex flex-col overflow-y-auto transition-all duration-300 ease-in-out ${
+          isMobileMenuOpen
+            ? 'visible opacity-100 translate-y-0 pointer-events-auto'
+            : 'invisible opacity-0 -translate-y-2 pointer-events-none'
+        }`}
+        style={{
+          height: isMobileMenuOpen ? 'calc(100dvh - 100%)' : '0px',
+        }}
+      >
+        <div className="max-w-[1500px] w-full mx-auto px-5 sm:px-8 py-5 flex flex-col justify-between flex-1 h-full min-h-[calc(100dvh-100%)]">
+          {/* Navigation Links */}
+          <div className="flex flex-col space-y-1.5 text-base sm:text-lg font-bold text-[#111111] pt-1">
+            <button
+              onClick={() => handleNavClick('hero-section')}
+              className="text-left py-3 px-4 rounded-xl hover:bg-blue-50 hover:text-[#0066FF] transition-colors cursor-pointer"
+            >
+              Home
+            </button>
+            <button
+              onClick={() => handleNavClick('about-section')}
+              className="text-left py-3 px-4 rounded-xl hover:bg-blue-50 hover:text-[#0066FF] transition-colors cursor-pointer"
+            >
+              About
+            </button>
+            <button
+              onClick={() => handleNavClick('product-showcase-section')}
+              className="text-left py-3 px-4 rounded-xl hover:bg-blue-50 hover:text-[#0066FF] transition-colors cursor-pointer"
+            >
+              Product
+            </button>
+            <button
+              onClick={() => handleNavClick('features-tech-section')}
+              className="text-left py-3 px-4 rounded-xl hover:bg-blue-50 hover:text-[#0066FF] transition-colors cursor-pointer"
+            >
+              Features
+            </button>
 
-          {/* White Side Panel */}
-          <div
-            id="mobile-drawer-panel"
-            className="relative w-full max-w-xs sm:max-w-sm bg-white h-full shadow-2xl p-6 flex flex-col justify-between overflow-y-auto z-10 animate-in slide-in-from-right duration-300"
-          >
-            <div>
-              {/* Top Row: Logo + Close Button */}
-              <div className="flex items-center justify-between pb-6 border-b border-neutral-100">
-                <Logo size="sm" />
-                <button
-                  id="mobile-menu-close-btn"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  aria-label="Close menu"
-                  className="p-2 text-neutral-600 hover:text-black rounded-lg transition-colors"
-                >
-                  <X className="w-6 h-6" />
-                </button>
-              </div>
+            {/* Mobile Solutions Collapsible Dropdown */}
+            <div className="py-0.5">
+              <button
+                onClick={() => setIsSolutionsOpen(!isSolutionsOpen)}
+                className="w-full flex items-center justify-between py-3 px-4 rounded-xl hover:bg-blue-50 hover:text-[#0066FF] transition-colors cursor-pointer"
+              >
+                <span>Solutions</span>
+                <ChevronDown
+                  className={`w-5 h-5 transition-transform duration-300 ${
+                    isSolutionsOpen ? 'rotate-180 text-[#0066FF]' : 'text-neutral-400'
+                  }`}
+                />
+              </button>
 
-              {/* Navigation Links */}
-              <div className="flex flex-col space-y-4 pt-6 text-base font-semibold text-[#111111]">
-                <button
-                  onClick={() => handleNavClick('hero-section')}
-                  className="text-left py-2 hover:text-[#0066FF] transition-colors border-b border-neutral-50"
-                >
-                  Home
-                </button>
-                <button
-                  onClick={() => handleNavClick('about-section')}
-                  className="text-left py-2 hover:text-[#0066FF] transition-colors border-b border-neutral-50"
-                >
-                  About
-                </button>
-                <button
-                  onClick={() => handleNavClick('product-showcase-section')}
-                  className="text-left py-2 hover:text-[#0066FF] transition-colors border-b border-neutral-50"
-                >
-                  Product
-                </button>
-                <button
-                  onClick={() => handleNavClick('bento-grid-section')}
-                  className="text-left py-2 hover:text-[#0066FF] transition-colors border-b border-neutral-50"
-                >
-                  Categories
-                </button>
-                {/* Mobile Solutions Collapsible Dropdown */}
-                <div className="border-b border-neutral-50 pb-2">
-                  <button
-                    onClick={() => setIsSolutionsOpen(!isSolutionsOpen)}
-                    className="w-full flex items-center justify-between py-2 text-left hover:text-[#0066FF] transition-colors cursor-pointer"
-                  >
-                    <span>Solutions</span>
-                    <ChevronDown
-                      className={`w-4 h-4 transition-transform duration-200 ${
-                        isSolutionsOpen ? 'rotate-180 text-[#0066FF]' : 'text-neutral-400'
-                      }`}
-                    />
-                  </button>
-
-                  {isSolutionsOpen && (
-                    <div className="flex flex-col space-y-1 pt-2 pb-1 pl-3 text-sm font-medium text-neutral-700 animate-in fade-in slide-in-from-top-1 duration-200">
-                      {SOLUTIONS_LIST.map((sol) => (
-                        <button
-                          key={sol.label}
-                          onClick={() => handleNavClick('bento-grid-section')}
-                          className="text-left py-2 px-3 rounded-lg hover:bg-blue-50 hover:text-[#0066FF] transition-all cursor-pointer"
-                        >
-                          {sol.label}
-                        </button>
-                      ))}
-                    </div>
-                  )}
+              <div
+                className={`grid transition-[grid-template-rows,opacity] duration-300 ease-in-out overflow-hidden ${
+                  isSolutionsOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+                }`}
+              >
+                <div className="overflow-hidden">
+                  <div className="flex flex-col space-y-1 pt-1 pb-1.5 pl-4 text-sm sm:text-base font-medium text-neutral-700">
+                    {SOLUTIONS_LIST.map((sol) => (
+                      <button
+                        key={sol.label}
+                        onClick={() => handleNavClick('bento-grid-section')}
+                        className="text-left py-2 px-3 rounded-lg hover:bg-blue-50 hover:text-[#0066FF] transition-colors cursor-pointer"
+                      >
+                        {sol.label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
-
-                <button
-                  onClick={() => handleNavClick('faq-section')}
-                  className="text-left py-2 hover:text-[#0066FF] transition-colors border-b border-neutral-50 cursor-pointer"
-                >
-                  FAQ
-                </button>
-                <button
-                  onClick={() => handleNavClick('footer-section')}
-                  className="text-left py-2 hover:text-[#0066FF] transition-colors border-b border-neutral-50 cursor-pointer"
-                >
-                  Contact
-                </button>
               </div>
             </div>
 
-            {/* Bottom Support Info */}
-            <div className="pt-8 border-t border-neutral-100 text-xs text-neutral-500">
-              <p className="font-semibold text-black mb-1">RatGuardPro Customer Care</p>
-              <p>Mon - Sat: 10:00 AM - 7:00 PM</p>
-              <p className="font-bold text-[#0066FF] mt-1">+91 9409445443</p>
+            <button
+              onClick={() => handleNavClick('faq-section')}
+              className="text-left py-3 px-4 rounded-xl hover:bg-blue-50 hover:text-[#0066FF] transition-colors cursor-pointer"
+            >
+              FAQ
+            </button>
+            <button
+              onClick={() => handleNavClick('footer-section')}
+              className="text-left py-3 px-4 rounded-xl hover:bg-blue-50 hover:text-[#0066FF] transition-colors cursor-pointer"
+            >
+              Contact
+            </button>
+          </div>
+
+          {/* Bottom Support Info pinned to screen bottom */}
+          <div className="pt-5 pb-2 mt-auto border-t border-neutral-100 text-xs text-neutral-500 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 px-4">
+            <div>
+              <p className="font-bold text-sm text-black mb-0.5">RatGuardPro Customer Care</p>
+              <p className="text-xs text-neutral-500">Mon - Sat: 10:00 AM - 7:00 PM</p>
             </div>
+            <a
+              href="tel:+919409445443"
+              className="font-extrabold text-[#0066FF] text-base hover:underline"
+            >
+              +91 9409445443
+            </a>
           </div>
         </div>
-      )}
+      </div>
     </header>
   );
 };

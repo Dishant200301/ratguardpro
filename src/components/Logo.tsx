@@ -27,7 +27,7 @@ export const Logo: React.FC<LogoProps> = ({
       <img
         src="/common/logo.png"
         alt="RatGuard Pro Logo"
-        className={`${sizeClasses[size] || sizeClasses.md} w-auto object-contain transition-transform duration-200 hover:scale-[1.02] ${
+        className={`${sizeClasses[size] || sizeClasses.md} w-auto object-contain transition-transform duration-200${
           variant === 'light' ? 'brightness-0 invert' : ''
         }`}
         loading="eager"

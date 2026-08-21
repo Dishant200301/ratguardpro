@@ -24,7 +24,7 @@ export const FaqSection: React.FC = () => {
   return (
     <section
       id="faq-section"
-      className="w-full bg-neutral-50/50 py-12 sm:py-16 lg:py-24 border-b border-neutral-200/60 select-none overflow-hidden"
+      className="w-full bg-neutral-50/50 py-12 sm:py-16 lg:py-24 border-b border-neutral-200/60 overflow-hidden"
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top FAQs Heading */}

@@ -6,7 +6,7 @@ export const AboutSection: React.FC = () => {
   return (
     <section
       id="about-section"
-      className="w-full bg-white py-16 lg:py-24 border-b border-neutral-100 select-none overflow-hidden"
+      className="w-full bg-white py-16 lg:py-24 border-b border-neutral-100 overflow-hidden"
     >
       <div className="max-w-[1450px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">

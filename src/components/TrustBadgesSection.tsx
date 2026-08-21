@@ -27,7 +27,7 @@ export const TrustBadgesSection: React.FC = () => {
   return (
     <section
       id="trust-badges-section"
-      className="w-full bg-[#111111] py-8 sm:py-10 border-y border-neutral-800/80 select-none overflow-hidden"
+      className="w-full bg-[#111111] py-8 sm:py-10 border-y border-neutral-800/80 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 items-center justify-items-center">

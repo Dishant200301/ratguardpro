@@ -20,7 +20,7 @@ export const ComparisonsChart: React.FC = () => {
   return (
     <section
       id="comparisons-chart-section"
-      className="w-full bg-white py-14 sm:py-20 select-none overflow-hidden"
+      className="w-full bg-white py-14 sm:py-20 overflow-hidden"
     >
       {/* Laptop / Desktop container with increased width */}
       <div className="max-w-5xl lg:max-w-7xl xl:max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">

@@ -15,7 +15,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     category: 'Car & Truck Owners',
     kicker: 'VEHICLE PROTECTION',
     heading: 'PROTECT YOUR CAR',
-    paragraph: 'Ratguard SonicArmor X Ultrasonic Car Rat Repellent Device',
+    paragraph: 'Stop rats from chewing engine wiring and sensor cables with powerful 24/7 ultrasonic wave protection.',
     features: [
       { icon: 'play', label: 'Plug & Play' },
       { icon: 'power', label: 'Low Power' },
@@ -31,7 +31,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     category: 'Garage',
     kicker: 'GARAGE PROTECTION',
     heading: 'PROTECT YOUR GARAGE',
-    paragraph: 'Ratguard SonicArmor X Ultrasonic Garage Rat Repellent Device',
+    paragraph: 'Prevent rodents from nesting in parked vehicles and dark storage corners with silent repellent sound waves.',
     features: [
       { icon: 'play', label: 'Plug & Play' },
       { icon: 'power', label: 'Low Power' },
@@ -47,7 +47,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     category: 'Hotels',
     kicker: 'HOTEL PROTECTION',
     heading: 'PROTECT YOUR HOTEL',
-    paragraph: 'Ratguard SonicArmor X Ultrasonic Hotel Rat Repellent Device',
+    paragraph: 'Keep dining areas, pantry stores, and guest rooms 100% rodent-free with chemical-free ultrasonic technology.',
     features: [
       { icon: 'play', label: 'Plug & Play' },
       { icon: 'power', label: 'Low Power' },
@@ -63,7 +63,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     category: 'Hospital',
     kicker: 'HOSPITAL PROTECTION',
     heading: 'PROTECT YOUR HOSPITAL',
-    paragraph: 'Ratguard SonicArmor X Ultrasonic Hospital Rat Repellent Device',
+    paragraph: 'Ensure sterile, zero-poison rodent protection around ICU units, diagnostic labs, and medical equipment.',
     features: [
       { icon: 'play', label: 'Plug & Play' },
       { icon: 'power', label: 'Low Power' },
@@ -79,7 +79,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     category: 'Factory',
     kicker: 'FACTORY PROTECTION',
     heading: 'PROTECT YOUR FACTORY',
-    paragraph: 'Ratguard SonicArmor X Ultrasonic Industrial Rat Repellent Device',
+    paragraph: 'Protect industrial machinery, automation panels, and cables from costly rodent damage and downtime.',
     features: [
       { icon: 'play', label: 'Plug & Play' },
       { icon: 'power', label: 'Low Power' },
@@ -95,7 +95,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     category: 'Shop',
     kicker: 'SHOP PROTECTION',
     heading: 'PROTECT YOUR SHOP',
-    paragraph: 'Ratguard SonicArmor X Ultrasonic Retail Shop Rat Repellent Device',
+    paragraph: 'Safeguard retail inventory, display racks, and billing electronics from destructive rat attacks.',
     features: [
       { icon: 'play', label: 'Plug & Play' },
       { icon: 'power', label: 'Low Power' },
@@ -111,7 +111,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     category: 'Godown',
     kicker: 'GODOWN PROTECTION',
     heading: 'PROTECT YOUR GODOWN',
-    paragraph: 'Ratguard SonicArmor X Ultrasonic Warehouse Rat Repellent Device',
+    paragraph: 'Defend warehouse storage, raw materials, and stacked cartons without messy traps or toxic chemicals.',
     features: [
       { icon: 'play', label: 'Plug & Play' },
       { icon: 'power', label: 'Low Power' },
@@ -127,7 +127,7 @@ export const HERO_SLIDES: HeroSlide[] = [
     category: 'Home Owners',
     kicker: 'HOME PROTECTION',
     heading: 'PROTECT YOUR HOME',
-    paragraph: 'Ratguard SonicArmor X Ultrasonic Home Rat Repellent Device',
+    paragraph: 'Keep your kitchen, false ceiling, and bedrooms completely rat-free with family-safe ultrasonic waves.',
     features: [
       { icon: 'play', label: 'Plug & Play' },
       { icon: 'power', label: 'Low Power' },
@@ -301,12 +301,7 @@ export const LEFT_FEATURES: FeatureCardItem[] = [
     description: 'Totally non-hazardous and safe for humans and pets',
     iconType: 'shield',
   },
-  {
-    id: 'f5',
-    title: 'Wide Coverage',
-    description: 'Protect up to 2,500 sq. ft.',
-    iconType: 'radar',
-  },
+ 
   {
     id: 'f6',
     title: 'Durable & Reliable',
@@ -346,12 +341,7 @@ export const RIGHT_FEATURES: FeatureCardItem[] = [
     description: 'Ultrasonic rat repellent',
     iconType: 'india',
   },
-  {
-    id: 'f12',
-    title: '1 Year Warranty',
-    description: 'Product is backed by a 1-year warranty to ensure your satisfaction.',
-    iconType: 'warranty',
-  },
+ 
 ];
 
 export const VIDEO_PRODUCTS: VideoProductItem[] = [
@@ -420,46 +410,46 @@ export const VIDEO_PRODUCTS: VideoProductItem[] = [
 export const CUSTOMER_REELS: CustomerReelItem[] = [
   {
     id: 'story-1',
-    name: 'Rahul Sharma',
-    role: 'Warehouse Owner',
-    quote: '"Ratguard reduced our rat issues by 90%!"',
-    thumbnail: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop',
-    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-man-working-in-a-warehouse-operating-machinery-43641-large.mp4',
-    youtubeId: 'O4_c7yvV4f0',
-  },
-  {
-    id: 'story-2',
-    name: 'Vikram Patel',
-    role: 'Shop Owner',
-    quote: '"Easy to use and works 24/7. Highly satisfied!"',
-    thumbnail: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=600&auto=format&fit=crop',
-    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-retail-store-owner-arranging-shelves-41908-large.mp4',
-    youtubeId: 'U96-m_q_pT4',
-  },
-  {
-    id: 'story-3',
-    name: 'Suresh Yadav',
-    role: 'Store Owner',
-    quote: '"Best solution we found for rats. No chemicals!"',
-    thumbnail: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=600&auto=format&fit=crop',
+    name: 'Rahul Sharma (Surat)',
+    role: 'Car Fleet & Garage Owner',
+    quote: '"Zero wire cuts in our luxury fleet after installing RatguardPro!"',
+    thumbnail: 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=600&auto=format&fit=crop',
     videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-mechanic-working-under-a-car-in-a-workshop-43647-large.mp4',
     youtubeId: 'o28Bq_x0fJg',
   },
   {
-    id: 'story-4',
-    name: 'Ajay Mehta',
-    role: 'Retailer',
-    quote: '"Highly recommended for shops & warehouses!"',
-    thumbnail: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=600&auto=format&fit=crop',
+    id: 'story-2',
+    name: 'Vikram Patel (Ahmedabad)',
+    role: 'Warehouse & Godown Owner',
+    quote: '"Protected 5,000 sq ft grain storage without toxic chemicals."',
+    thumbnail: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=600&auto=format&fit=crop',
+    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-man-working-in-a-warehouse-operating-machinery-43641-large.mp4',
+    youtubeId: 'O4_c7yvV4f0',
+  },
+  {
+    id: 'story-3',
+    name: 'Suresh Yadav (Mumbai)',
+    role: 'Restaurant & Kitchen Head',
+    quote: '"100% odorless and safe around food prep areas. Outstanding!"',
+    thumbnail: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=600&auto=format&fit=crop',
     videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-hotel-staff-in-corridor-42478-large.mp4',
     youtubeId: '8l7R-L5Xm3k',
   },
   {
+    id: 'story-4',
+    name: 'Ajay Mehta (Pune)',
+    role: 'Supermarket Store Owner',
+    quote: '"Stopped rat damage on FMCG inventory from Day 3 onwards."',
+    thumbnail: 'https://images.unsplash.com/photo-1578916171728-46686eac8d58?q=80&w=600&auto=format&fit=crop',
+    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-retail-store-owner-arranging-shelves-41908-large.mp4',
+    youtubeId: 'U96-m_q_pT4',
+  },
+  {
     id: 'story-5',
-    name: 'Pradeep Kumar',
-    role: 'Office Incharge',
-    quote: '"Compact, powerful and perfect for our office."',
-    thumbnail: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=600&auto=format&fit=crop',
+    name: 'Pradeep Kumar (Delhi NCR)',
+    role: 'IT Office Administrator',
+    quote: '"Server room cables are completely safe now. Plug and forget!"',
+    thumbnail: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=600&auto=format&fit=crop',
     videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-technician-soldering-wires-in-circuit-board-43759-large.mp4',
     youtubeId: '5v4m8YqZ0wM',
   },
