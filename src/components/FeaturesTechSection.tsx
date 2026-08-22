@@ -93,7 +93,7 @@ export const FeaturesTechSection: React.FC<FeaturesTechSectionProps> = ({ onBuyN
   return (
     <section
       id="features-tech-section"
-      className="w-full bg-white py-10 md:py-14 xl:py-16 border-b border-neutral-100 overflow-hidden"
+      className="w-full bg-white py-10 md:py-14 xl:py-16 overflow-hidden"
     >
       <div className="max-w-[1500px] mx-auto px-4 sm:px-6 xl:px-8">
         {/* 1. Section Header: Features & Specifications */}
@@ -110,22 +110,22 @@ export const FeaturesTechSection: React.FC<FeaturesTechSectionProps> = ({ onBuyN
         </div>
 
         {/* 2. 3-COLUMN COMPOSITION: Left 5 Cards | Center Specs + Product + Buy Now | Right 5 Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-12 gap-6 xl:gap-6 items-start xl:items-start">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-12 gap-4 md:gap-6 xl:gap-6 items-start xl:items-start">
           {/* Left Column: 5 Feature Cards (1 col on mobile, left column of 5 on tablet, left sidebar on desktop) */}
-          <div className="sm:col-span-1 xl:col-span-3 xl:col-span-3 flex flex-col space-y-3.5 order-2 xl:order-1">
+          <div className="mt-10 xl:mt-0 sm:col-span-1 xl:col-span-3 xl:col-span-3 flex flex-col space-y-3.5 order-2 xl:order-1">
             {LEFT_FEATURES.map((item) => (
               <div
                 key={item.id}
-                className="bg-white border border-neutral-200/80 rounded-2xl p-3.5 sm:p-4 shadow-2xs flex items-center gap-3.5 cursor-default"
+                className="bg-white border border-neutral-200/80 rounded-xl sm:rounded-2xl p-3 sm:p-3.5 shadow-2xs flex items-start gap-3 cursor-default"
               >
-                <div className="w-10 h-10 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0">
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0 mt-0.5">
                   {getFeatureIcon(item.iconType)}
                 </div>
-                <div className="flex flex-col">
-                  <h4 className="text-xs sm:text-sm font-extrabold text-[#111111] tracking-tight font-sans">
+                <div className="flex flex-col min-w-0">
+                  <h4 className="text-xs sm:text-sm font-bold text-[#111111] tracking-tight font-sans line-clamp-1 truncate">
                     {item.title}
                   </h4>
-                  <p className="text-[11px] text-neutral-500 font-normal leading-snug mt-0.5 font-sans">
+                  <p className="text-[11px] text-neutral-500 font-normal leading-snug mt-1 font-sans line-clamp-2">
                     {item.description}
                   </p>
                 </div>
@@ -190,7 +190,7 @@ export const FeaturesTechSection: React.FC<FeaturesTechSectionProps> = ({ onBuyN
             {/* Central Product Image */}
             <div className="relative w-full max-w-md sm:max-w-lg aspect-4/2 flex items-center justify-center p-2 mt-6 group">
               <img
-                src="/product/product.png"
+                src="/images/home/product/product.png"
                 alt="RatGuardPro Ultrasonic Device"
                 className="w-full h-auto max-h-[290px] sm:max-h-[250px] object-contain drop-shadow-2xl transform transition-transform duration-300  pointer-events-none"
                 loading="eager"
@@ -216,20 +216,20 @@ export const FeaturesTechSection: React.FC<FeaturesTechSectionProps> = ({ onBuyN
           </div>
 
           {/* Right Column: 5 Feature Cards (1 col on mobile, right column of 5 on tablet, right sidebar on desktop) */}
-          <div className="sm:col-span-1 xl:col-span-3 xl:col-span-3 flex flex-col space-y-3.5 order-3">
+          <div className="md:mt-10 xl:mt-0 sm:col-span-1 xl:col-span-3 xl:col-span-3 flex flex-col space-y-3.5 order-3">
             {RIGHT_FEATURES.map((item) => (
               <div
                 key={item.id}
-                className="bg-white border border-neutral-200/80 rounded-2xl p-3.5 sm:p-4 shadow-2xs flex items-center gap-3.5 cursor-default "
+                className="bg-white border border-neutral-200/80 rounded-xl sm:rounded-2xl p-3 sm:p-3.5 shadow-2xs flex items-start gap-3 cursor-default"
               >
-                <div className="w-10 h-10 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0">
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0 mt-0.5">
                   {getFeatureIcon(item.iconType)}
                 </div>
-                <div className="flex flex-col">
-                  <h4 className="text-xs sm:text-sm font-extrabold text-[#111111] tracking-tight font-sans">
+                <div className="flex flex-col min-w-0">
+                  <h4 className="text-xs sm:text-sm font-bold text-[#111111] tracking-tight font-sans line-clamp-1 truncate">
                     {item.title}
                   </h4>
-                  <p className="text-[11px] text-neutral-500 font-normal leading-snug mt-0.5 font-sans">
+                  <p className="text-[11px] text-neutral-500 font-normal leading-snug mt-1 font-sans line-clamp-2">
                     {item.description}
                   </p>
                 </div>

@@ -66,7 +66,7 @@ export const ProductInfoSection: React.FC<ProductInfoSectionProps> = ({ onBuyNow
         {/* ========================================================= */}
         {/* LEFT INFORMATION PANEL (50% Split, White Background)       */}
         {/* ========================================================= */}
-        <div className="w-full bg-white p-6 md:p-8 lg:p-10 xl:p-12 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-neutral-100">
+        <div className="w-full bg-white p-5 md:p-8 lg:p-10 xl:p-12 flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-neutral-100">
           <div className="max-w-3xl mx-auto lg:mx-0 w-full space-y-6">
             
             {/* Kicker */}
@@ -96,12 +96,12 @@ export const ProductInfoSection: React.FC<ProductInfoSectionProps> = ({ onBuyNow
               </p>
             </div>
 
-            {/* 12-Item Location Checklist with Custom Category Icons */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 pt-2">
+            {/* 12-Item Location Checklist with Custom Category Icons (2-Column Grid on Mobile and Desktop) */}
+            <div className="grid grid-cols-2 gap-3 pt-2">
               {PRODUCT_INFO_CHECKLIST.map((item, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-2.5 text-xs sm:text-sm font-bold text-neutral-800 font-sans group"
+                  className="flex items-center gap-2 sm:gap-2.5 text-xs sm:text-sm font-bold text-neutral-800 font-sans group"
                 >
                   <div className="w-6 h-6 rounded-md bg-blue-50/80 border border-blue-200/70 flex items-center justify-center shrink-0 shadow-2xs group-hover:bg-blue-100/80 group-hover:border-[#0066FF]/40 transition-colors">
                     {renderItemIcon(item)}

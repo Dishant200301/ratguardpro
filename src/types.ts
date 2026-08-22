@@ -49,6 +49,7 @@ export interface CustomerReelItem {
   id: string;
   name: string;
   role: string;
+  hookTitle?: string;
   quote: string;
   thumbnail: string;
   videoUrl: string;

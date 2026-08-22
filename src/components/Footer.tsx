@@ -286,7 +286,7 @@ export const Footer: React.FC = () => {
             <div className="flex flex-col items-center justify-center text-center group cursor-default p-2">
               <div className="mb-3 flex items-center justify-center">
                 <img
-                  src="/icons/factory.png"
+                  src="/images/icons/factory.png"
                   alt="Industrial Grade Performance"
                   className="w-16 h-16 sm:w-20 sm:h-20 object-contain group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]"
                   loading="lazy"
@@ -301,7 +301,7 @@ export const Footer: React.FC = () => {
             <div className="flex flex-col items-center justify-center text-center group cursor-default p-2">
               <div className="mb-3 flex items-center justify-center">
                 <img
-                  src="/icons/user.png"
+                  src="/images/icons/user.png"
                   alt="50,000+ happy customer"
                   className="w-16 h-16 sm:w-20 sm:h-20 object-contain group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]"
                   loading="lazy"
@@ -316,7 +316,7 @@ export const Footer: React.FC = () => {
             <div className="flex flex-col items-center justify-center text-center group cursor-default p-2">
               <div className="mb-3 flex items-center justify-center">
                 <img
-                  src="/icons/money.png"
+                  src="/images/icons/money.png"
                   alt="7-day money-back guarantee"
                   className="w-16 h-16 sm:w-20 sm:h-20 object-contain group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]"
                   loading="lazy"
@@ -331,7 +331,7 @@ export const Footer: React.FC = () => {
             <div className="flex flex-col items-center justify-center text-center group cursor-default p-2">
               <div className="mb-3 flex items-center justify-center">
                 <img
-                  src="/icons/made-in-india.png"
+                  src="/images/icons/made-in-india.png"
                   alt="Made in india"
                   className="w-16 h-16 sm:w-20 sm:h-20 object-contain group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]"
                   loading="lazy"
@@ -358,7 +358,7 @@ export const Footer: React.FC = () => {
                 className="w-11 h-11 object-contain rounded-xl shadow-md transition-transform duration-200 hover:scale-105"
                 loading="lazy"
               />
-              <span className="text-2xl font-bold tracking-tight text-white font-sans">
+              <span className="text-2xl font-semibold tracking-tight text-white font-sans">
                 RatGuard<span className="text-[#0066FF]">Pro</span>
               </span>
             </div>
@@ -366,10 +366,10 @@ export const Footer: React.FC = () => {
             {/* Business Contact Lines */}
             <div className="text-xs text-neutral-300 space-y-1.5 pt-1 leading-relaxed">
               <p>
-                <span className="text-neutral-400">Brand name:</span> <strong className="text-white">RATGUARD</strong>
+                <span className="text-neutral-400">Brand name:</span> <strong className="text-white">RatGuard</strong>
               </p>
               <p>
-                <span className="text-neutral-400">Trade name:</span> <strong className="text-white">JIYA ENTERPRISE</strong>
+                <span className="text-neutral-400">Trade name:</span> <strong className="text-white">Jiya Enterprise</strong>
               </p>
               <p className="text-neutral-300">
                 Monday–Saturday 10am–7pm
