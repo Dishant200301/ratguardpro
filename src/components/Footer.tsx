@@ -286,7 +286,7 @@ export const Footer: React.FC = () => {
             <div className="flex flex-col items-center justify-center text-center group cursor-default p-2">
               <div className="mb-3 flex items-center justify-center">
                 <img
-                  src="/images/icons/factory.png"
+                  src="/images/icons/factory.webp"
                   alt="Industrial Grade Performance"
                   className="w-16 h-16 sm:w-20 sm:h-20 object-contain group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]"
                   loading="lazy"
@@ -301,7 +301,7 @@ export const Footer: React.FC = () => {
             <div className="flex flex-col items-center justify-center text-center group cursor-default p-2">
               <div className="mb-3 flex items-center justify-center">
                 <img
-                  src="/images/icons/user.png"
+                  src="/images/icons/user.webp"
                   alt="50,000+ happy customer"
                   className="w-16 h-16 sm:w-20 sm:h-20 object-contain group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]"
                   loading="lazy"
@@ -316,7 +316,7 @@ export const Footer: React.FC = () => {
             <div className="flex flex-col items-center justify-center text-center group cursor-default p-2">
               <div className="mb-3 flex items-center justify-center">
                 <img
-                  src="/images/icons/money.png"
+                  src="/images/icons/money.webp"
                   alt="7-day money-back guarantee"
                   className="w-16 h-16 sm:w-20 sm:h-20 object-contain group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]"
                   loading="lazy"
@@ -331,7 +331,7 @@ export const Footer: React.FC = () => {
             <div className="flex flex-col items-center justify-center text-center group cursor-default p-2">
               <div className="mb-3 flex items-center justify-center">
                 <img
-                  src="/images/icons/made-in-india.png"
+                  src="/images/icons/made-in-india.webp"
                   alt="Made in india"
                   className="w-16 h-16 sm:w-20 sm:h-20 object-contain group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_8px_rgba(255,255,255,0.2)]"
                   loading="lazy"
@@ -353,7 +353,7 @@ export const Footer: React.FC = () => {
             {/* Original Brand Logo */}
             <div className="flex items-center gap-3 select-none">
               <img
-                src="/apple-touch-icon.png"
+                src="/apple-touch-icon.webp"
                 alt="RatGuardPro Logo"
                 className="w-11 h-11 object-contain rounded-xl shadow-md transition-transform duration-200 hover:scale-105"
                 loading="lazy"

@@ -39,7 +39,7 @@ export const Logo: React.FC<LogoProps> = ({
         className={`inline-flex items-center gap-2 select-none ${className}`}
       >
         <img
-          src="/apple-touch-icon.png"
+          src="/apple-touch-icon.webp"
           alt="RatGuard Pro Logo"
           className={`${iconSizes[size] || iconSizes.md} object-contain shadow-sm shrink-0`}
           loading="eager"
@@ -59,7 +59,7 @@ export const Logo: React.FC<LogoProps> = ({
       className={`inline-flex items-center justify-center select-none ${className}`}
     >
       <img
-        src="/common/logo.png"
+        src="/common/logo.webp"
         alt="RatGuard Pro Logo"
         className={`${sizeClasses[size] || sizeClasses.md} w-auto object-contain transition-transform duration-200${
           variant === 'light' ? 'brightness-0 invert' : ''

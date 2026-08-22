@@ -190,7 +190,7 @@ export const FeaturesTechSection: React.FC<FeaturesTechSectionProps> = ({ onBuyN
             {/* Central Product Image */}
             <div className="relative w-full max-w-md sm:max-w-lg aspect-4/2 flex items-center justify-center p-2 mt-6 group">
               <img
-                src="/images/home/product/product.png"
+                src="/images/home/product/product.webp"
                 alt="RatGuardPro Ultrasonic Device"
                 className="w-full h-auto max-h-[290px] sm:max-h-[250px] object-contain drop-shadow-2xl transform transition-transform duration-300  pointer-events-none"
                 loading="eager"

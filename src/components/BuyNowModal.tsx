@@ -140,7 +140,7 @@ export const BuyNowModal: React.FC<BuyNowModalProps> = ({ isOpen, onClose }) => 
 
               {/* 3. Product Image: Positioned at Bottom-Right with prominent size */}
               <img
-                src="/images/home/product/product.png"
+                src="/images/home/product/product.webp"
                 alt="RatGuard Pro Device"
                 className="absolute -bottom-2 -right-4 w-60 xl:w-72 max-h-[280px] xl:max-h-[320px] object-contain select-none pointer-events-none z-0 transition-transform duration-300 drop-shadow-xl"
                 loading="eager"

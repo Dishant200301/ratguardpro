@@ -175,7 +175,7 @@ export const BentoGridSection: React.FC = () => {
             {/* Product Centerpiece (No shadow, no hover scale) */}
             <div className="relative w-full max-w-[340px] xl:max-w-[380px] h-[260px] xl:h-[290px] flex items-center justify-center z-10 my-auto">
               <img
-                src="/images/home/product/product.png"
+                src="/images/home/product/product.webp"
                 alt="Ultrasonic Rat Repellent Device"
                 className="max-w-full max-h-full object-contain"
                 loading="eager"
@@ -324,7 +324,7 @@ export const BentoGridSection: React.FC = () => {
 
             <div className="relative w-full max-w-[280px] sm:max-w-[320px] h-[200px] sm:h-[240px] flex items-center justify-center z-10 my-4">
               <img
-                src="/images/home/product/product.png"
+                src="/images/home/product/product.webp"
                 alt="Ultrasonic Rat Repellent Device"
                 className="max-w-full max-h-full object-contain"
                 loading="eager"

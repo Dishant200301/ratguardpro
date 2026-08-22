@@ -74,7 +74,7 @@ export const BeforeAfterSlider: React.FC = () => {
             {/* 1. AFTER IMAGE (Rock-solid Base Layer underneath) */}
             <div className="absolute inset-0 w-full h-full bg-neutral-900 overflow-hidden">
               <img
-                src="/images/home/before_after/after.png"
+                src="/images/home/before_after/after.webp"
                 alt="After RatGuardPro Protection - 100% Clean & Rodent Free"
                 className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none"
                 draggable={false}
@@ -100,7 +100,7 @@ export const BeforeAfterSlider: React.FC = () => {
               }}
             >
               <img
-                src="/images/home/before_after/before.png"
+                src="/images/home/before_after/before.webp"
                 alt="Before RatGuardPro Protection - Pest Infestation & Damage"
                 className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none"
                 draggable={false}

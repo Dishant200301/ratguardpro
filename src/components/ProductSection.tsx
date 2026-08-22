@@ -23,37 +23,37 @@ interface ProductSectionProps {
 const PRODUCT_IMAGES = [
   {
     id: 'product-main',
-    src: '/images/home/product/product.png',
+    src: '/images/home/product/product.webp',
     alt: 'RatGuard Ultrasonic Rat Repellent Device',
   },
   {
     id: 'product-g1',
-    src: '/images/home/product/gallery-1.png',
+    src: '/images/home/product/gallery-1.webp',
     alt: 'Technical Specifications & Design',
   },
   {
     id: 'product-g2',
-    src: '/images/home/product/gallery-2.png',
+    src: '/images/home/product/gallery-2.webp',
     alt: 'Features & Controls Overview',
   },
   {
     id: 'product-g3',
-    src: '/images/home/product/gallery-3.png',
+    src: '/images/home/product/gallery-3.webp',
     alt: '360 Degree 1500 Sq Ft Coverage Area',
   },
   {
     id: 'product-g4',
-    src: '/images/home/product/gallery-4.png',
+    src: '/images/home/product/gallery-4.webp',
     alt: 'Multi-Environment Protection',
   },
   {
     id: 'product-g5',
-    src: '/images/home/product/gallery-5.png',
+    src: '/images/home/product/gallery-5.webp',
     alt: '100% Effective Dual Speaker Tech',
   },
   {
     id: 'product-g6',
-    src: '/images/home/product/gallery-6.png',
+    src: '/images/home/product/gallery-6.webp',
     alt: 'Advanced Ultrasonic Repellent Setup',
   },
 ];
