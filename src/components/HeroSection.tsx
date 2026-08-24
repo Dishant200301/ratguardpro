@@ -148,8 +148,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onShopNow }) => {
               <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#0066FF] flex items-center justify-center text-white shrink-0 shadow-md transition-transform">
                 <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               </div>
-              <span className="font-bold text-sm sm:text-base tracking-wider uppercase text-white font-sans whitespace-nowrap">
-                {currentSlide.ctaText || 'SHOP NOW'}
+              <span className="font-bold text-sm sm:text-base tracking-wider text-white font-sans whitespace-nowrap">
+                Shop now
               </span>
               <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white transition-transform duration-200 group-hover:translate-x-1" />
             </button>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Menu,
   X,
@@ -14,21 +14,29 @@ interface NavbarProps {
   cartCount?: number;
   onOpenCart?: () => void;
   onNavigateSection: (sectionId: string) => void;
+  onNavigateSolution?: (slug: string) => void;
+  onNavigateHome?: () => void;
+  onNavigateContact?: () => void;
 }
 
-const SOLUTIONS_LIST = [
-  { label: 'Garage', id: 'garage-sec' },
-  { label: 'Hotels', id: 'hotels-sec' },
-  { label: 'Hospital', id: 'hospital-sec' },
-  { label: 'Factory', id: 'factory-sec' },
-  { label: 'Shop', id: 'shop-sec' },
-  { label: 'Godown', id: 'godown-sec' },
-  { label: 'Car-Truck Owners', id: 'cartruck-sec' },
-  { label: 'Home owners', id: 'home-sec' },
+export const SOLUTIONS_LIST = [
+  { label: 'Garage', slug: 'garage' },
+  { label: 'Hotels', slug: 'hotels' },
+  { label: 'Hospital', slug: 'hospital' },
+  { label: 'Factory', slug: 'factory' },
+  { label: 'Shop', slug: 'shop' },
+  { label: 'Godown', slug: 'godown' },
+  { label: 'Car-Truck Owners', slug: 'car-truck-owners' },
+  { label: 'Home Owners', slug: 'home-owners' },
 ];
 
 export const Navbar: React.FC<NavbarProps> = ({
+  cartCount = 0,
+  onOpenCart,
   onNavigateSection,
+  onNavigateSolution,
+  onNavigateHome,
+  onNavigateContact,
 }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
@@ -46,14 +54,29 @@ export const Navbar: React.FC<NavbarProps> = ({
   }, [isMobileMenuOpen]);
 
   const handleNavClick = (sectionId: string) => {
-    onNavigateSection(sectionId);
+    if (onNavigateHome) {
+      onNavigateHome();
+    }
+    setTimeout(() => {
+      onNavigateSection(sectionId);
+    }, 50);
+    setIsMobileMenuOpen(false);
+    setIsSolutionsOpen(false);
+  };
+
+  const handleSolutionClick = (slug: string) => {
+    if (onNavigateSolution) {
+      onNavigateSolution(slug);
+    } else {
+      onNavigateSection('bento-grid-section');
+    }
     setIsMobileMenuOpen(false);
     setIsSolutionsOpen(false);
   };
 
   return (
-    <header className="w-full bg-white z-50 sticky top-0 shadow-sm">
-      {/* 1. TOP ANNOUNCEMENT BAR (Black #000000 with continuous smooth right-to-left marquee) */}
+    <>
+      {/* 1. TOP ANNOUNCEMENT BAR (Stays at the very top of the page, scrolls away naturally with zero glitch) */}
       <div
         id="top-announcement-bar"
         className="w-full bg-[#000000] text-white py-2 text-xs md:text-sm font-medium overflow-hidden border-b border-neutral-900"
@@ -104,28 +127,34 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
       </div>
 
-      {/* 2. MAIN NAVBAR ROW */}
-      <nav className="w-full bg-white border-b border-neutral-100">
+      {/* 2. STICKY MAIN NAVBAR ROW */}
+      <header className="w-full bg-white z-50 sticky top-0 shadow-sm">
+        <nav className="w-full bg-white border-b border-neutral-100">
         <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 h-16 md:h-18 flex items-center justify-between relative">
           {/* Left Side: Brand Logo (Aligned left on Mobile, Tablet & Desktop) */}
           <div className="flex items-center">
-            <a
-              href="#hero-section"
+            <button
               onClick={(e) => {
                 e.preventDefault();
-                handleNavClick('hero-section');
+                if (onNavigateHome) onNavigateHome();
+                setIsMobileMenuOpen(false);
+                setIsSolutionsOpen(false);
               }}
-              className="flex items-center transition-transform duration-200"
+              className="flex items-center transition-transform duration-200 cursor-pointer"
             >
               <Logo size="md" />
-            </a>
+            </button>
           </div>
 
           {/* Desktop Center: Navigation Links (Centrally aligned) */}
           <div className="hidden lg:flex items-center space-x-8 font-semibold text-sm text-[#111111] absolute left-1/2 -translate-x-1/2">
             <button
               id="nav-link-home"
-              onClick={() => handleNavClick('hero-section')}
+              onClick={() => {
+                if (onNavigateHome) onNavigateHome();
+                setIsMobileMenuOpen(false);
+                setIsSolutionsOpen(false);
+              }}
               className="hover:text-[#0066FF] transition-colors py-2 cursor-pointer"
             >
               Home
@@ -170,7 +199,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 {SOLUTIONS_LIST.map((item) => (
                   <button
                     key={item.label}
-                    onClick={() => handleNavClick('bento-grid-section')}
+                    onClick={() => handleSolutionClick(item.slug)}
                     className="w-full text-left px-4 py-2 text-xs font-medium text-neutral-700 hover:bg-neutral-50 hover:text-[#0066FF] transition-colors cursor-pointer"
                   >
                     {item.label}
@@ -186,13 +215,22 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               FAQ
             </button>
+          </div>
 
+          {/* Desktop / Laptop Right Side: Contact Us Button */}
+          <div className="hidden lg:flex items-center space-x-4">
             <button
-              id="nav-link-contact"
-              onClick={() => handleNavClick('footer-section')}
-              className="hover:text-[#0066FF] transition-colors py-2 cursor-pointer"
+              id="desktop-contact-btn"
+              onClick={() => {
+                if (onNavigateContact) {
+                  onNavigateContact();
+                } else {
+                  handleNavClick('footer-section');
+                }
+              }}
+              className="bg-[#0066FF] hover:bg-[#0052cc] active:scale-95 text-white font-bold text-xs sm:text-sm px-5 py-2.5 rounded-full shadow-md shadow-blue-600/20 transition-all duration-200 cursor-pointer flex items-center gap-1.5 font-sans"
             >
-              Contact
+              <span>Contact Us</span>
             </button>
           </div>
 
@@ -236,11 +274,15 @@ export const Navbar: React.FC<NavbarProps> = ({
           height: isMobileMenuOpen ? 'calc(100dvh - 100%)' : '0px',
         }}
       >
-        <div className="max-w-[1500px] w-full mx-auto px-5 sm:px-8 py-5 flex flex-col justify-between flex-1 h-full min-h-[calc(100dvh-100%)]">
+        <div className="max-w-[1500px] w-full mx-auto px-2 sm:px-8 py-2 flex flex-col justify-between flex-1 h-full min-h-[calc(100dvh-100%)]">
           {/* Navigation Links */}
           <div className="flex flex-col space-y-1.5 text-base sm:text-lg font-bold text-[#111111] pt-1">
             <button
-              onClick={() => handleNavClick('hero-section')}
+              onClick={() => {
+                if (onNavigateHome) onNavigateHome();
+                setIsMobileMenuOpen(false);
+                setIsSolutionsOpen(false);
+              }}
               className="text-left py-3 px-4 rounded-xl hover:bg-blue-50 hover:text-[#0066FF] transition-colors cursor-pointer"
             >
               Home
@@ -288,7 +330,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                     {SOLUTIONS_LIST.map((sol) => (
                       <button
                         key={sol.label}
-                        onClick={() => handleNavClick('bento-grid-section')}
+                        onClick={() => handleSolutionClick(sol.slug)}
                         className="text-left py-2 px-3 rounded-lg hover:bg-blue-50 hover:text-[#0066FF] transition-colors cursor-pointer"
                       >
                         {sol.label}
@@ -300,13 +342,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
 
             <button
-              onClick={() => handleNavClick('faq-section')}
-              className="text-left py-3 px-4 rounded-xl hover:bg-blue-50 hover:text-[#0066FF] transition-colors cursor-pointer"
-            >
-              FAQ
-            </button>
-            <button
-              onClick={() => handleNavClick('footer-section')}
+              onClick={() => {
+                if (onNavigateContact) {
+                  onNavigateContact();
+                  setIsMobileMenuOpen(false);
+                } else {
+                  handleNavClick('footer-section');
+                }
+              }}
               className="text-left py-3 px-4 rounded-xl hover:bg-blue-50 hover:text-[#0066FF] transition-colors cursor-pointer"
             >
               Contact
@@ -314,7 +357,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Bottom Support Info pinned to screen bottom */}
-          <div className="pt-5 pb-2 mt-auto border-t border-neutral-100 text-xs text-neutral-500 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 px-4">
+          {/* <div className="pt-5 pb-2 mt-auto border-t border-neutral-100 text-xs text-neutral-500 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 px-4">
             <div>
               <p className="font-bold text-sm text-black mb-0.5">RatGuardPro Customer Care</p>
               <p className="text-xs text-neutral-500">Mon - Sat: 10:00 AM - 7:00 PM</p>
@@ -325,9 +368,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               +91 9409445443
             </a>
-          </div>
+          </div> */}
         </div>
       </div>
     </header>
+    </>
   );
 };

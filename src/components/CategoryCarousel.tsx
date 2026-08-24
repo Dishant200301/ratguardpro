@@ -1,12 +1,30 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import { CATEGORY_CAROUSEL_ITEMS } from '../data/mockData';
 
-export const CategoryCarousel: React.FC = () => {
+interface CategoryCarouselProps {
+  onNavigateSolution?: (slug: string) => void;
+}
+
+export const CategoryCarousel: React.FC<CategoryCarouselProps> = ({
+  onNavigateSolution,
+}) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const carouselRef = useRef<HTMLDivElement>(null);
+
+  const getSlugFromId = (id: string) => {
+    if (id === 'home') return 'home-owners';
+    if (id === 'car-truck') return 'car-truck-owners';
+    return id;
+  };
+
+  const handleCardClick = (id: string) => {
+    if (onNavigateSolution) {
+      onNavigateSolution(getSlugFromId(id));
+    }
+  };
 
   // Check scroll position to dynamically show/hide Left and Right arrows
   const checkScrollButtons = () => {
@@ -126,13 +144,17 @@ export const CategoryCarousel: React.FC = () => {
           {CATEGORY_CAROUSEL_ITEMS.map((item) => (
             <div
               key={item.id}
+              onClick={() => handleCardClick(item.id)}
               className="shrink-0 w-[84vw] xs:w-[360px] sm:w-[420px] md:w-[400px] lg:w-[380px] h-[480px] sm:h-[500px] lg:h-[525px] rounded-xl sm:rounded-3xl overflow-hidden shadow-md transition-all duration-500 relative flex flex-col justify-between p-5 sm:p-6 lg:p-7 group cursor-pointer border border-neutral-200/60 select-none snap-start bg-neutral-100"
             >
-              {/* Top: Category Heading Only (Z-20 with high contrast) */}
-              <div className="relative z-20">
+              {/* Top: Category Heading & Hover Arrow Icon */}
+              <div className="relative z-20 flex items-start justify-between">
                 <h3 className="text-xl sm:text-2xl lg:text-[24px] font-semibold tracking-tight leading-tight text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]">
                   {item.name}
                 </h3>
+                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-white/70 bg-black/20 backdrop-blur-xs text-white flex items-center justify-center group-hover:bg-[#0066FF] group-hover:border-[#0066FF] group-hover:shadow-lg group-hover:shadow-blue-500/30 transition-all duration-300 shrink-0 ml-2">
+                  <ArrowRight className="w-5 h-5 text-white transition-transform duration-300" />
+                </div>
               </div>
 
               {/* Top Dark Gradient for Text Legibility & Visual Contrast */}

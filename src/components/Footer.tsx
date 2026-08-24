@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Facebook,
   Instagram,
@@ -72,10 +72,36 @@ const CodBadge = () => (
   </span>
 );
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onNavigateSolution?: (slug: string) => void;
+  onNavigateHome?: () => void;
+  onNavigateContact?: () => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({
+  onNavigateSolution,
+  onNavigateHome,
+  onNavigateContact,
+}) => {
   const [emailInput, setEmailInput] = useState('');
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [activeModal, setActiveModal] = useState<PolicyModalData | null>(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' || e.key === 'Esc') {
+        setActiveModal(null);
+      }
+    };
+
+    if (activeModal) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [activeModal]);
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -87,10 +113,22 @@ export const Footer: React.FC = () => {
   };
 
   const handleSmoothScroll = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+    if (id === 'hero-section' || id === 'top') {
+      if (onNavigateHome) {
+        onNavigateHome();
+      }
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      return;
     }
+    if (onNavigateHome) {
+      onNavigateHome();
+    }
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 50);
   };
 
   const openPolicy = (policyKey: string) => {
@@ -102,7 +140,7 @@ export const Footer: React.FC = () => {
           content: (
             <div className="space-y-4 text-neutral-300 text-sm leading-relaxed">
               <p>
-                At <strong>RatGuardPro</strong> (operated by Shyam Innovations & Jiya Enterprise), we prioritize your privacy. We strictly collect only the essential shipping information required to deliver your ultrasonic repellent and fulfill your order.
+                At <strong>Pro</strong> (operated by Shyam Innovations & VAMASHAY), we prioritize your privacy. We strictly collect only the essential shipping information required to deliver your ultrasonic repellent and fulfill your order.
               </p>
               <h4 className="text-white font-bold text-base pt-2">Information We Collect</h4>
               <p>
@@ -144,7 +182,7 @@ export const Footer: React.FC = () => {
           content: (
             <div className="space-y-4 text-neutral-300 text-sm leading-relaxed">
               <p>
-                We stand firmly behind the ultrasonic efficacy of RatGuardPro. If you are not completely satisfied with the product performance, you are entitled to our 7-day risk-free money-back guarantee.
+                We stand firmly behind the ultrasonic efficacy of Pro. If you are not completely satisfied with the product performance, you are entitled to our 7-day risk-free money-back guarantee.
               </p>
               <h4 className="text-white font-bold text-base pt-2">How Returns Work</h4>
               <p>
@@ -164,10 +202,10 @@ export const Footer: React.FC = () => {
           content: (
             <div className="space-y-4 text-neutral-300 text-sm leading-relaxed">
               <p>
-                By accessing or purchasing from RatGuardPro, you agree to comply with Indian e-commerce consumer guidelines and our fair usage standards.
+                By accessing or purchasing from Pro, you agree to comply with Indian e-commerce consumer guidelines and our fair usage standards.
               </p>
               <p>
-                RatGuardPro is engineered for pest deterrent purposes using non-lethal, high-frequency ultrasonic waves. The device must be connected to standard 220V AC household/commercial outlets as per the included instruction card.
+                Pro is engineered for pest deterrent purposes using non-lethal, high-frequency ultrasonic waves. The device must be connected to standard 220V AC household/commercial outlets as per the included instruction card.
               </p>
             </div>
           ),
@@ -181,8 +219,8 @@ export const Footer: React.FC = () => {
           content: (
             <div className="space-y-4 text-neutral-300 text-sm leading-relaxed">
               <p>
-                <strong>Brand Name:</strong> RATGUARD / RatGuardPro<br />
-                <strong>Trade Name:</strong> JIYA ENTERPRISE & SHYAM INNOVATIONS (Est. 2017)<br />
+                <strong>Brand Name:</strong>  / Pro<br />
+                <strong>Trade Name:</strong> VAMASHAY & SHYAM INNOVATIONS (Est. 2017)<br />
                 <strong>Registered Office:</strong> Plot No C/25, 1st Floor, Shyamdham Society, Vijayraj Circle, Singanpore Road, Surat, Gujarat - 395004, India.
               </p>
               <p>
@@ -200,7 +238,7 @@ export const Footer: React.FC = () => {
           content: (
             <div className="space-y-4 text-neutral-300 text-sm leading-relaxed">
               <p>
-                RatGuardPro emits specialized ultrasonic frequency sound waves (20 kHz to 65 kHz) which disrupt the auditory and nervous systems of rodents (rats, mice).
+                Pro emits specialized ultrasonic frequency sound waves (20 kHz to 65 kHz) which disrupt the auditory and nervous systems of rodents (rats, mice).
               </p>
               <p>
                 The frequency is completely inaudible and 100% safe for humans, children, cats, dogs, and birds. It does not penetrate solid brick/concrete walls, so we recommend 1 unit per room or vehicle bonnet space for maximum coverage.
@@ -217,7 +255,7 @@ export const Footer: React.FC = () => {
           content: (
             <div className="space-y-4 text-neutral-300 text-sm leading-relaxed">
               <p>
-                Every RatGuardPro unit comes with an official <strong>1-Year Hassle-Free Instant Replacement Warranty</strong> covering any manufacturing defects or electronic component failures.
+                Every Pro unit comes with an official <strong>1-Year Hassle-Free Instant Replacement Warranty</strong> covering any manufacturing defects or electronic component failures.
               </p>
               <p>
                 In the rare case of any malfunction, simply WhatsApp our support helpline with your order number, and a replacement unit will be dispatched immediately.
@@ -354,22 +392,22 @@ export const Footer: React.FC = () => {
             <div className="flex items-center gap-3 select-none">
               <img
                 src="/apple-touch-icon.webp"
-                alt="RatGuardPro Logo"
+                alt="Pro Logo"
                 className="w-11 h-11 object-contain rounded-xl shadow-md transition-transform duration-200 hover:scale-105"
                 loading="lazy"
               />
               <span className="text-2xl font-semibold tracking-tight text-white font-sans">
-                RatGuard<span className="text-[#0066FF]">Pro</span>
+                <span className="text-[#0066FF]">Pro</span>
               </span>
             </div>
 
             {/* Business Contact Lines */}
             <div className="text-xs text-neutral-300 space-y-1.5 pt-1 leading-relaxed">
               <p>
-                <span className="text-neutral-400">Brand name:</span> <strong className="text-white">RatGuard</strong>
+                <span className="text-neutral-400">Brand name:</span> <strong className="text-white">Pro</strong>
               </p>
               <p>
-                <span className="text-neutral-400">Trade name:</span> <strong className="text-white">Jiya Enterprise</strong>
+                <span className="text-neutral-400">Trade name:</span> <strong className="text-white">VAMASHAY</strong>
               </p>
               <p className="text-neutral-300">
                 Monday–Saturday 10am–7pm
@@ -470,7 +508,13 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <button
-                  onClick={() => handleSmoothScroll('footer-section')}
+                  onClick={() => {
+                    if (onNavigateContact) {
+                      onNavigateContact();
+                    } else {
+                      handleSmoothScroll('footer-section');
+                    }
+                  }}
                   className="footer-link-animated hover:text-[#0066FF] transition-colors cursor-pointer text-left"
                 >
                   Contact Us
@@ -540,7 +584,7 @@ export const Footer: React.FC = () => {
         {/* 3. BOTTOM ROW: COPYRIGHT & SHOPIFY-STYLE PAYMENT BADGES */}
         <div className="pt-8 flex flex-col lg:flex-row items-center lg:justify-between gap-4 text-xs text-neutral-500">
           <div className="order-1 text-center lg:text-left">
-            © {new Date().getFullYear()} RatGuardPro™ by Shyam Innovations & Jiya Enterprise. All rights reserved.
+            © {new Date().getFullYear()} Pro™ by Shyam Innovations & VAMASHAY. All rights reserved.
           </div>
           {/* Shopify-Style Realistic Payment Cards (Below copyright on mobile/tablet, right-aligned on desktop) */}
           <div className="order-2 flex flex-wrap items-center justify-center lg:justify-end gap-2.5">

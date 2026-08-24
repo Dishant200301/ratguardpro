@@ -2,18 +2,6 @@ import React, { useState } from 'react';
 import { Plus, Minus } from 'lucide-react';
 import { FAQS } from '../data/mockData';
 
-const getNumberEmoji = (num: number) => {
-  const emojis = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣', '🔟'];
-  if (num >= 1 && num <= 10) {
-    return emojis[num - 1];
-  }
-  return num
-    .toString()
-    .split('')
-    .map((d) => (parseInt(d, 10) > 0 ? emojis[parseInt(d, 10) - 1] : '0️⃣'))
-    .join('');
-};
-
 export const FaqSection: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
@@ -24,11 +12,11 @@ export const FaqSection: React.FC = () => {
   return (
     <section
       id="faq-section"
-      className="w-full bg-neutral-50/50 py-12 sm:py-16 lg:py-24 border-b border-neutral-200/60 overflow-hidden"
+      className="w-full py-12 sm:py-16 lg:py-24 border-b border-neutral-200/60 overflow-hidden"
     >
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top FAQs Heading */}
-        <div className="mb-6 sm:mb-8 text-left">
+        <div className="mb-6 sm:mb-8 text-center">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-[#111111] tracking-tight">
             FAQs
           </h2>
@@ -37,12 +25,11 @@ export const FaqSection: React.FC = () => {
         {/* FAQ Accordion Card */}
         <div className="bg-white border border-neutral-200/80 rounded-2xl p-5 sm:p-8 shadow-sm">
           {/* Inner Card Header */}
-          <div className="flex items-center gap-2 mb-4 sm:mb-6 pb-4 border-b border-neutral-100">
-            <span className="text-xl sm:text-2xl">🛠️</span>
+          {/* <div className="mb-4 sm:mb-6 pb-4 border-b border-neutral-100">
             <h3 className="font-extrabold text-base sm:text-lg text-[#111111]">
               Frequently Asked Questions
             </h3>
-          </div>
+          </div> */}
 
           {/* Accordion Item List */}
           <div className="divide-y divide-neutral-100">
@@ -55,19 +42,14 @@ export const FaqSection: React.FC = () => {
                     className="w-full text-left flex items-start justify-between gap-4 group cursor-pointer"
                     aria-expanded={isOpen}
                   >
-                    <div className="flex items-start gap-3 sm:gap-3.5 pr-2">
-                      <span className="text-base sm:text-lg shrink-0 select-none pt-0.5 w-6 sm:w-7 flex items-center justify-center">
-                        {getNumberEmoji(faq.id)}
-                      </span>
-                      <span className="font-bold text-sm sm:text-base text-[#111111] leading-snug group-hover:text-[#0066FF] transition-colors pt-0.5">
-                        {faq.question}
-                      </span>
-                    </div>
-                    <div className="text-neutral-700 text-lg sm:text-xl font-bold shrink-0 select-none pt-0.5 transition-transform duration-200">
+                    <span className="font-bold text-sm sm:text-base text-[#111111] leading-snug group-hover:text-[#0066FF] transition-colors pr-2">
+                      {faq.question}
+                    </span>
+                    <div className="text-neutral-700 text-lg sm:text-xl font-bold shrink-0 select-none transition-transform duration-200">
                       {isOpen ? (
-                        <Minus className="w-5 h-5 stroke-1.5  text-neutral-700" />
+                        <Minus className="w-5 h-5 stroke-1 text-neutral-700" />
                       ) : (
-                        <Plus className="w-6 h-6 stroke-1.5 text-neutral-600 group-hover:text-neutral-900" />
+                        <Plus className="w-6 h-6 stroke-1 text-neutral-600 group-hover:text-neutral-900" />
                       )}
                     </div>
                   </button>
@@ -82,12 +64,9 @@ export const FaqSection: React.FC = () => {
                     }}
                   >
                     <div className="overflow-hidden">
-                      <div className="flex items-start gap-3 sm:gap-3.5 text-xs sm:text-sm text-neutral-600 leading-relaxed pr-2">
-                        <span className="text-base sm:text-lg shrink-0 select-none pt-0.5 w-6 sm:w-7 flex items-center justify-center">
-                          💡
-                        </span>
-                        <p className="pt-0.5">{faq.answer}</p>
-                      </div>
+                      <p className="text-xs sm:text-sm text-neutral-600 leading-relaxed">
+                        {faq.answer}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -99,4 +78,5 @@ export const FaqSection: React.FC = () => {
     </section>
   );
 };
+
 

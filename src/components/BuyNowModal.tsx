@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   X,
   MapPin,
@@ -26,6 +26,22 @@ export const BuyNowModal: React.FC<BuyNowModalProps> = ({ isOpen, onClose }) => 
     message: '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' || e.key === 'Esc') {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
@@ -74,7 +90,7 @@ export const BuyNowModal: React.FC<BuyNowModalProps> = ({ isOpen, onClose }) => 
             {/* ================================================================= */}
             {/* LEFT COLUMN: 50% WIDTH ON LAPTOP/DESKTOP (Hidden on Mobile/Tablet) */}
             {/* ================================================================= */}
-            <div className="hidden lg:flex flex-col justify-between relative h-full min-h-[480px] p-7 xl:p-0 rounded-2xl sm:rounded-3xl bg-[#f4f7f2]  overflow-hidden select-none">
+            <div className="hidden lg:flex flex-col justify-between relative h-full min-h-[480px] p-7 xl:p-0 bg-[#f4f7f2]  overflow-hidden select-none">
               {/* 1. Header Info (Top Left with proper margins) */}
               <div className="space-y-3 z-10 max-w-xs xl:max-w-lg">
                 <span className="text-[#0066FF] bg-blue-50 px-3 py-1 rounded-full text-xs xl:text-sm font-bold tracking-wide font-sans inline-block">

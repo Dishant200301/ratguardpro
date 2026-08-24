@@ -8,6 +8,17 @@
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
+/* Global Selection Color across entire site */
+::selection {
+  background-color: #0066FF !important;
+  color: #FFFFFF !important;
+}
+
+::-moz-selection {
+  background-color: #0066FF !important;
+  color: #FFFFFF !important;
+}
+
 body {
   font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   overflow-x: hidden;

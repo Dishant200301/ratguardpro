@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { MarqueeSection } from './components/MarqueeSection';
 import { ProductSection } from './components/ProductSection';
 import { BentoGridSection } from './components/BentoGridSection';
 import { ProductInfoSection } from './components/ProductInfoSection';
-import { AboutSection } from './components/AboutSection';
 import { CategoryCarousel } from './components/CategoryCarousel';
 import { FeaturesTechSection } from './components/FeaturesTechSection';
 import { BeforeAfterSlider } from './components/BeforeAfterSlider';
@@ -13,10 +12,18 @@ import { ShopThroughVideo } from './components/ShopThroughVideo';
 import { ComparisonsChart } from './components/ComparisonsChart';
 import { FaqSection } from './components/FaqSection';
 import { ValuePropositionSection } from './components/ValuePropositionSection';
+import { HomeCtaSection } from './components/HomeCtaSection';
 import { Footer } from './components/Footer';
 import { CartDrawer } from './components/CartDrawer';
 import { BuyNowModal } from './components/BuyNowModal';
-import { PhoneCall, MessageSquare } from 'lucide-react';
+import { CategorySolutionPage } from './components/CategorySolutionPage';
+import { ContactPage } from './components/ContactPage';
+import { CATEGORY_SOLUTIONS_DATA } from './data/categorySolutionsData';
+
+type AppRoute =
+  | { type: 'home' }
+  | { type: 'solution'; slug: string }
+  | { type: 'contact' };
 
 export default function App() {
   const [productQuantity, setProductQuantity] = useState(1);
@@ -24,12 +31,96 @@ export default function App() {
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   const [isBuyModalOpen, setIsBuyModalOpen] = useState(false);
 
+  // Initialize Route from window.location
+  const getInitialRoute = (): AppRoute => {
+    if (typeof window === 'undefined') return { type: 'home' };
+
+    const pathname = window.location.pathname.toLowerCase();
+    const hash = window.location.hash.toLowerCase();
+
+    // Check contact page
+    if (pathname === '/contact' || pathname.startsWith('/contact') || hash.includes('contact')) {
+      return { type: 'contact' };
+    }
+
+    // Check pathname e.g. /solutions/garage
+    if (pathname.includes('/solutions/')) {
+      const slug = pathname.split('/solutions/')[1]?.replace(/\/+$/, '');
+      if (slug && CATEGORY_SOLUTIONS_DATA[slug]) {
+        return { type: 'solution', slug };
+      }
+    }
+
+    // Check hash fallback e.g. #/solutions/garage or #solutions-garage
+    if (hash.includes('solution')) {
+      for (const slug of Object.keys(CATEGORY_SOLUTIONS_DATA)) {
+        if (hash.includes(slug)) {
+          return { type: 'solution', slug };
+        }
+      }
+    }
+
+    return { type: 'home' };
+  };
+
+  const [currentRoute, setCurrentRoute] = useState<AppRoute>(getInitialRoute);
+
+  // Handle browser back/forward buttons
+  useEffect(() => {
+    const handlePopState = () => {
+      const route = getInitialRoute();
+      setCurrentRoute(route);
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // Update SEO Document Title dynamically based on current route
+  useEffect(() => {
+    if (currentRoute.type === 'solution' && CATEGORY_SOLUTIONS_DATA[currentRoute.slug]) {
+      const cat = CATEGORY_SOLUTIONS_DATA[currentRoute.slug];
+      document.title = `Protect Your ${cat.categoryName} From Rats | Ratguard Ultrasonic Repellent`;
+    } else if (currentRoute.type === 'contact') {
+      document.title = "Contact Us | RatGuardPro - Get in Touch & Support";
+    } else {
+      document.title = "RatGuardPro - India's No.1 Ultrasonic Rat Repellent";
+    }
+  }, [currentRoute]);
+
+  // Instantly scroll to top whenever route changes (no animation)
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [currentRoute]);
+
+  const handleNavigateSolution = (slug: string) => {
+    if (CATEGORY_SOLUTIONS_DATA[slug]) {
+      window.history.pushState(null, '', `/solutions/${slug}`);
+      setCurrentRoute({ type: 'solution', slug });
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    }
+  };
+
+  const handleNavigateContact = () => {
+    window.history.pushState(null, '', '/contact');
+    setCurrentRoute({ type: 'contact' });
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  };
+
+  const handleNavigateHome = () => {
+    window.history.pushState(null, '', '/');
+    setCurrentRoute({ type: 'home' });
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  };
+
   const handleOpenBuyModal = () => {
     setIsBuyModalOpen(true);
   };
 
   const handleAddToCart = () => {
-    setIsBuyModalOpen(true);
+    setIsAddedToCart(true);
+    setProductQuantity((prev) => (prev > 0 ? prev : 1));
+    setCartDrawerOpen(true);
   };
 
   const handleIncreaseQty = () => {
@@ -51,6 +142,27 @@ export default function App() {
   };
 
   const handleNavigateSection = (sectionId: string) => {
+    if (sectionId === 'hero-section' || sectionId === 'top') {
+      if (currentRoute.type !== 'home') {
+        handleNavigateHome();
+      } else {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      }
+      return;
+    }
+
+    if (currentRoute.type !== 'home') {
+      window.history.pushState(null, '', '/');
+      setCurrentRoute({ type: 'home' });
+      setTimeout(() => {
+        const el = document.getElementById(sectionId);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+      return;
+    }
+
     const el = document.getElementById(sectionId);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
@@ -61,71 +173,102 @@ export default function App() {
     setIsBuyModalOpen(true);
   };
 
+  const activeCategoryData =
+    currentRoute.type === 'solution'
+      ? (CATEGORY_SOLUTIONS_DATA[currentRoute.slug] || CATEGORY_SOLUTIONS_DATA.garage)
+      : null;
+
   return (
     <div className="min-h-screen bg-white text-[#111111] font-sans antialiased flex flex-col selection:bg-[#0066FF] selection:text-white">
-      {/* 1. STICKY NAVBAR with Top Announcement Marquee */}
+      {/* 1. STICKY NAVBAR with Announcement Bar & Solutions Dropdown */}
       <Navbar
         cartCount={isAddedToCart ? productQuantity : 0}
         onOpenCart={() => setCartDrawerOpen(true)}
         onNavigateSection={handleNavigateSection}
+        onNavigateSolution={handleNavigateSolution}
+        onNavigateHome={handleNavigateHome}
+        onNavigateContact={handleNavigateContact}
       />
 
-      {/* MAIN CONTENT SECTIONS IN REQUESTED STRUCTURE */}
+      {/* 2. MAIN CONTENT VIEW: Category Solution Page OR Contact Page OR Homepage */}
       <main className="flex-1 w-full">
-        {/* 2. HERO SECTION (8 slides, 5s auto-slide, pause on hover, dots pagination) */}
-        <HeroSection onShopNow={handleOpenBuyModal} />
+        {currentRoute.type === 'solution' && activeCategoryData ? (
+          /* ========================================================= */
+          /* CATEGORY LANDING PAGE (Garage, Hotels, Hospital, etc.)   */
+          /* ========================================================= */
+          <CategorySolutionPage
+            categoryData={activeCategoryData}
+            onBackToHome={handleNavigateHome}
+            onNavigateCategory={handleNavigateSolution}
+            onOpenBuyModal={handleOpenBuyModal}
+            onAddToCart={handleAddToCart}
+          />
+        ) : currentRoute.type === 'contact' ? (
+          /* ========================================================= */
+          /* DEDICATED CONTACT US PAGE (Form, Info, Map)               */
+          /* ========================================================= */
+          <ContactPage onBackToHome={handleNavigateHome} />
+        ) : (
+          /* ========================================================= */
+          /* HOMEPAGE VIEW WITH COMPLETE PRODUCT & CATEGORY SECTIONS   */
+          /* ========================================================= */
+          <>
+            {/* Hero Section */}
+            <HeroSection onShopNow={handleOpenBuyModal} />
 
-       
+            {/* Dual Logo Marquee */}
+            <MarqueeSection />
 
-        {/* 3. DUAL LOGO MARQUEE SECTION (Left track + Right track with vertical divider) */}
-        <MarqueeSection />
+            {/* Product Showcase */}
+            <ProductSection onBuyNow={handleOpenBuyModal} />
 
-        {/* 4. PRODUCT SHOWCASE SECTION (Interactive Add to Cart / - 1 + Quantity control) */}
-        <ProductSection
-          onBuyNow={handleOpenBuyModal}
-        />
+            {/* Bento Grid (Clickable Category Cards) */}
+            <BentoGridSection onNavigateSolution={handleNavigateSolution} />
 
-        {/* 5. BENTO GRID SECTION (9-area layout, center large product, 8 space categories) */}
-        <BentoGridSection />
+            {/* How It Works Info */}
+            <ProductInfoSection onBuyNow={handleOpenBuyModal} />
 
-        {/* 6. PLUG IT IN / HOW IT WORKS SECTION (White info left + Dark visual right) */}
-        <ProductInfoSection onBuyNow={handleOpenBuyModal} />
+            {/* Category Carousel (Clickable Category Reels) */}
+            <CategoryCarousel onNavigateSolution={handleNavigateSolution} />
 
-        {/* 7. ABOUT / FOUNDER STORY SECTION (Bharat Parmar & Shyam Innovations) */}
-        {/* <AboutSection /> */}
+            {/* 12-Point Features / Technology */}
+            <FeaturesTechSection onBuyNow={handleOpenBuyModal} />
 
-        {/* 8. CATEGORY CAROUSEL (8 spaces, horizontal scroll, tablet/mobile responsive) */}
-        <CategoryCarousel />
+            {/* Interactive Before & After Slider */}
+            <BeforeAfterSlider />
 
-        {/* 9. FEATURES / TECHNOLOGY 12-POINT SECTION (Left 6, Center Product, Right 6) */}
-        <FeaturesTechSection onBuyNow={handleOpenBuyModal} />
+            {/* Shop Through Video Section */}
+            <ShopThroughVideo onAddToCart={handleQuickAddVideoItem} />
 
-        {/* 10. INTERACTIVE BEFORE & AFTER SLIDER (Kitchen pest comparison) */}
-        <BeforeAfterSlider />
+            {/* Comparisons Chart */}
+            <ComparisonsChart />
 
-        {/* 11. SHOP THROUGH VIDEO SECTION (Reels carousel with hover-to-play) */}
-        <ShopThroughVideo onAddToCart={handleQuickAddVideoItem} />
+            {/* Value Proposition Highlights */}
+            <ValuePropositionSection />
 
-        {/* 12. COMPARISONS CHART (7-row feature matrix vs traps & poisons) */}
-        <ComparisonsChart />
+            {/* FAQ Section */}
+            <FaqSection />
 
-        {/* 14. VALUE PROPOSITION 3-PILLAR HIGHLIGHTS (Effective Protection, Eco-Friendly, Long-Lasting) */}
-        <ValuePropositionSection />
-
-        {/* 13. FAQ & INSTALLATION GUIDE SECTION (Accordion tabs) */}
-        <FaqSection />
+            {/* Final CTA Card Section */}
+            <HomeCtaSection onShopNow={handleOpenBuyModal} />
+          </>
+        )}
       </main>
- 
-      {/* 14. FOOTER SECTION (Trust badges, links, support info, copyright) */}
-      <Footer />
 
-      {/* 15. BUY NOW / CONTACT POPUP MODAL (Matching Reference Design) */}
+      {/* 3. FOOTER SECTION */}
+      <Footer
+        onNavigateSolution={handleNavigateSolution}
+        onNavigateHome={handleNavigateHome}
+        onNavigateContact={handleNavigateContact}
+      />
+
+      {/* 4. BUY NOW / INQUIRY MODAL */}
       <BuyNowModal
         isOpen={isBuyModalOpen}
         onClose={() => setIsBuyModalOpen(false)}
       />
 
-      {/* 16. CART & QUICK CHECKOUT DRAWER */}
+      {/* 5. CART & QUICK CHECKOUT DRAWER */}
       <CartDrawer
         isOpen={cartDrawerOpen}
         onClose={() => setCartDrawerOpen(false)}
@@ -134,33 +277,6 @@ export default function App() {
         onDecrease={handleDecreaseQty}
         onReset={handleResetCart}
       />
-
-      {/* Floating Quick Action Button (Direct Chat / Phone Support) */}
-      {/* <div className="fixed bottom-6 right-6 z-40 flex flex-col gap-2.5 items-end">
-        <a
-          href="https://api.whatsapp.com/send?phone=919409445443&text=Hi%20RatGuardPro,%20I%20want%20to%20order%20the%20Ultrasonic%20Rat%20Repellent"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Chat with Support"
-          className="bg-[#0066FF] hover:bg-[#0052cc] active:scale-95 text-white p-3.5 rounded-full shadow-2xl flex items-center gap-2 group transition-all duration-300 hover:pr-4 shadow-blue-500/30"
-        >
-          <MessageSquare className="w-5 h-5 fill-current" />
-          <span className="hidden group-hover:inline text-xs font-bold whitespace-nowrap">
-            Chat with Support
-          </span>
-        </a>
-
-        <a
-          href="tel:+919409445443"
-          aria-label="Call Customer Support"
-          className="bg-[#111111] hover:bg-black active:scale-95 text-white p-3.5 rounded-full shadow-2xl flex items-center gap-2 group transition-all duration-300 hover:pr-4 border border-neutral-800"
-        >
-          <PhoneCall className="w-5 h-5 text-white" />
-          <span className="hidden group-hover:inline text-xs font-bold whitespace-nowrap">
-            Call +91 9409445443
-          </span>
-        </a>
-      </div> */}
     </div>
   );
 }

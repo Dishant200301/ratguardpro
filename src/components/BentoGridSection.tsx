@@ -2,9 +2,27 @@ import React, { useState, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { BENTO_CATEGORIES } from '../data/mockData';
 
-export const BentoGridSection: React.FC = () => {
+interface BentoGridSectionProps {
+  onNavigateSolution?: (slug: string) => void;
+}
+
+export const BentoGridSection: React.FC<BentoGridSectionProps> = ({
+  onNavigateSolution,
+}) => {
   const getCategory = (id: string) =>
     BENTO_CATEGORIES.find((c) => c.id === id) || BENTO_CATEGORIES[0];
+
+  const getSlugFromId = (id: string) => {
+    if (id === 'home') return 'home-owners';
+    if (id === 'car-truck') return 'car-truck-owners';
+    return id;
+  };
+
+  const handleCategoryClick = (id: string) => {
+    if (onNavigateSolution) {
+      onNavigateSolution(getSlugFromId(id));
+    }
+  };
 
   const categories = {
     home: getCategory('home'),
@@ -144,16 +162,22 @@ export const BentoGridSection: React.FC = () => {
         <div className="hidden lg:grid lg:grid-cols-4 gap-4 xl:gap-5 items-stretch">
           
           {/* Row 1, Col 1: Home Owners */}
-          <div className="group relative h-[254px] rounded-[11px] overflow-hidden bg-neutral-100 border border-neutral-200/50 shadow-xs hover:shadow-md transition-all duration-300">
+          <div
+            onClick={() => handleCategoryClick('home')}
+            className="group relative h-[254px] rounded-[11px] overflow-hidden bg-neutral-100 border border-neutral-200/50 shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer"
+          >
             <img
               src={categories.home.image}
               alt="Home Owners"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               loading="lazy"
             />
-            <div className="absolute inset-0 flex items-end p-5 pointer-events-none">
-              <span className="text-[#111111] font-bold text-lg xl:text-xl tracking-tight bg-white/40 backdrop-blur-[2px] px-2.5 py-0.5 rounded-md">
+            <div className="absolute inset-0 flex items-end justify-between p-5">
+              <span className="text-[#111111] font-bold text-lg xl:text-xl tracking-tight bg-white/70 backdrop-blur-[2px] px-2.5 py-0.5 rounded-md">
                 Home Owners
+              </span>
+              <span className="text-xs font-semibold text-white bg-black/60 backdrop-blur-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                View Solution →
               </span>
             </div>
           </div>
@@ -193,106 +217,148 @@ export const BentoGridSection: React.FC = () => {
           </div>
 
           {/* Row 1, Col 4: Garage */}
-          <div className="group relative h-[254px] rounded-[11px] overflow-hidden bg-neutral-100 border border-neutral-200/50 shadow-xs hover:shadow-md transition-all duration-300">
+          <div
+            onClick={() => handleCategoryClick('garage')}
+            className="group relative h-[254px] rounded-[11px] overflow-hidden bg-neutral-100 border border-neutral-200/50 shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer"
+          >
             <img
               src={categories.garage.image}
               alt="Garage"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               loading="lazy"
             />
-            <div className="absolute inset-0 flex items-end p-5 pointer-events-none">
-              <span className="text-[#111111] font-bold text-lg xl:text-xl tracking-tight bg-white/40 backdrop-blur-[2px] px-2.5 py-0.5 rounded-md">
+            <div className="absolute inset-0 flex items-end justify-between p-5">
+              <span className="text-[#111111] font-bold text-lg xl:text-xl tracking-tight bg-white/70 backdrop-blur-[2px] px-2.5 py-0.5 rounded-md">
                 Garage
+              </span>
+              <span className="text-xs font-semibold text-white bg-black/60 backdrop-blur-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                View Solution →
               </span>
             </div>
           </div>
 
           {/* Row 2, Col 1: Car-Truck Owners */}
-          <div className="group relative h-[254px] rounded-[11px] overflow-hidden bg-neutral-100 border border-neutral-200/50 shadow-xs hover:shadow-md transition-all duration-300">
+          <div
+            onClick={() => handleCategoryClick('car-truck')}
+            className="group relative h-[254px] rounded-[11px] overflow-hidden bg-neutral-100 border border-neutral-200/50 shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer"
+          >
             <img
               src={categories.carTruck.image}
               alt="Car-Truck Owners"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               loading="lazy"
             />
-            <div className="absolute inset-0 flex items-end p-5 pointer-events-none">
-              <span className="text-[#111111] font-bold text-lg xl:text-xl tracking-tight bg-white/40 backdrop-blur-[2px] px-2.5 py-0.5 rounded-md">
+            <div className="absolute inset-0 flex items-end justify-between p-5">
+              <span className="text-[#111111] font-bold text-lg xl:text-xl tracking-tight bg-white/70 backdrop-blur-[2px] px-2.5 py-0.5 rounded-md">
                 Car-Truck Owners
+              </span>
+              <span className="text-xs font-semibold text-white bg-black/60 backdrop-blur-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                View Solution →
               </span>
             </div>
           </div>
 
           {/* Row 2, Col 4: Shop */}
-          <div className="group relative h-[254px] rounded-[11px] overflow-hidden bg-neutral-100 border border-neutral-200/50 shadow-xs hover:shadow-md transition-all duration-300">
+          <div
+            onClick={() => handleCategoryClick('shop')}
+            className="group relative h-[254px] rounded-[11px] overflow-hidden bg-neutral-100 border border-neutral-200/50 shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer"
+          >
             <img
               src={categories.shop.image}
               alt="Shop"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               loading="lazy"
             />
-            <div className="absolute inset-0 flex items-end p-5 pointer-events-none">
-              <span className="text-[#111111] font-bold text-lg xl:text-xl tracking-tight bg-white/40 backdrop-blur-[2px] px-2.5 py-0.5 rounded-md">
+            <div className="absolute inset-0 flex items-end justify-between p-5">
+              <span className="text-[#111111] font-bold text-lg xl:text-xl tracking-tight bg-white/70 backdrop-blur-[2px] px-2.5 py-0.5 rounded-md">
                 Shop
+              </span>
+              <span className="text-xs font-semibold text-white bg-black/60 backdrop-blur-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                View Solution →
               </span>
             </div>
           </div>
 
           {/* Row 3, Col 1: Godown */}
-          <div className="group relative h-[258px] rounded-[11px] overflow-hidden bg-neutral-100 border border-neutral-200/50 shadow-xs hover:shadow-md transition-all duration-300">
+          <div
+            onClick={() => handleCategoryClick('godown')}
+            className="group relative h-[258px] rounded-[11px] overflow-hidden bg-neutral-100 border border-neutral-200/50 shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer"
+          >
             <img
               src={categories.godown.image}
               alt="Godown"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               loading="lazy"
             />
-            <div className="absolute inset-0 flex items-end p-5 pointer-events-none">
-              <span className="text-[#111111] font-bold text-lg xl:text-xl tracking-tight bg-white/40 backdrop-blur-[2px] px-2.5 py-0.5 rounded-md">
+            <div className="absolute inset-0 flex items-end justify-between p-5">
+              <span className="text-[#111111] font-bold text-lg xl:text-xl tracking-tight bg-white/70 backdrop-blur-[2px] px-2.5 py-0.5 rounded-md">
                 Godown
+              </span>
+              <span className="text-xs font-semibold text-white bg-black/60 backdrop-blur-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                View Solution →
               </span>
             </div>
           </div>
 
           {/* Row 3, Col 2: Hotels */}
-          <div className="group relative h-[258px] rounded-[11px] overflow-hidden bg-neutral-100 border border-neutral-200/50 shadow-xs hover:shadow-md transition-all duration-300">
+          <div
+            onClick={() => handleCategoryClick('hotels')}
+            className="group relative h-[258px] rounded-[11px] overflow-hidden bg-neutral-100 border border-neutral-200/50 shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer"
+          >
             <img
               src={categories.hotels.image}
               alt="Hotels"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               loading="lazy"
             />
-            <div className="absolute inset-0 flex items-end p-5 pointer-events-none">
-              <span className="text-[#111111] font-bold text-lg xl:text-xl tracking-tight bg-white/40 backdrop-blur-[2px] px-2.5 py-0.5 rounded-md">
+            <div className="absolute inset-0 flex items-end justify-between p-5">
+              <span className="text-[#111111] font-bold text-lg xl:text-xl tracking-tight bg-white/70 backdrop-blur-[2px] px-2.5 py-0.5 rounded-md">
                 Hotels
+              </span>
+              <span className="text-xs font-semibold text-white bg-black/60 backdrop-blur-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                View Solution →
               </span>
             </div>
           </div>
 
           {/* Row 3, Col 3: Factory */}
-          <div className="group relative h-[258px] rounded-[11px] overflow-hidden bg-neutral-100 border border-neutral-200/50 shadow-xs hover:shadow-md transition-all duration-300">
+          <div
+            onClick={() => handleCategoryClick('factory')}
+            className="group relative h-[258px] rounded-[11px] overflow-hidden bg-neutral-100 border border-neutral-200/50 shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer"
+          >
             <img
               src={categories.factory.image}
               alt="Factory"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               loading="lazy"
             />
-            <div className="absolute inset-0 flex items-end p-5 pointer-events-none">
-              <span className="text-[#111111] font-bold text-lg xl:text-xl tracking-tight bg-white/40 backdrop-blur-[2px] px-2.5 py-0.5 rounded-md">
+            <div className="absolute inset-0 flex items-end justify-between p-5">
+              <span className="text-[#111111] font-bold text-lg xl:text-xl tracking-tight bg-white/70 backdrop-blur-[2px] px-2.5 py-0.5 rounded-md">
                 Factory
+              </span>
+              <span className="text-xs font-semibold text-white bg-black/60 backdrop-blur-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                View Solution →
               </span>
             </div>
           </div>
 
           {/* Row 3, Col 4: Hospital */}
-          <div className="group relative h-[258px] rounded-[11px] overflow-hidden bg-neutral-100 border border-neutral-200/50 shadow-xs hover:shadow-md transition-all duration-300">
+          <div
+            onClick={() => handleCategoryClick('hospital')}
+            className="group relative h-[258px] rounded-[11px] overflow-hidden bg-neutral-100 border border-neutral-200/50 shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer"
+          >
             <img
               src={categories.hospital.image}
               alt="Hospital"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               loading="lazy"
             />
-            <div className="absolute inset-0 flex items-end p-5 pointer-events-none">
-              <span className="text-[#111111] font-bold text-lg xl:text-xl tracking-tight bg-white/40 backdrop-blur-[2px] px-2.5 py-0.5 rounded-md">
+            <div className="absolute inset-0 flex items-end justify-between p-5">
+              <span className="text-[#111111] font-bold text-lg xl:text-xl tracking-tight bg-white/70 backdrop-blur-[2px] px-2.5 py-0.5 rounded-md">
                 Hospital
+              </span>
+              <span className="text-xs font-semibold text-white bg-black/60 backdrop-blur-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                View Solution →
               </span>
             </div>
           </div>
@@ -365,7 +431,10 @@ export const BentoGridSection: React.FC = () => {
                       key={`${item.cat.id}-${idx}`}
                       className="w-full flex-shrink-0 px-1"
                     >
-                      <div className="relative h-60 rounded-xl overflow-hidden bg-neutral-100 border border-neutral-200/60 shadow-xs">
+                      <div
+                        onClick={() => handleCategoryClick(item.cat.id)}
+                        className="relative h-60 rounded-xl overflow-hidden bg-neutral-100 border border-neutral-200/60 shadow-xs cursor-pointer active:scale-98 transition-transform"
+                      >
                         <img
                           src={item.cat.image}
                           alt={item.label}
@@ -447,7 +516,10 @@ export const BentoGridSection: React.FC = () => {
                       key={`${item.cat.id}-${idx}`}
                       className="w-1/2 flex-shrink-0 px-2.5"
                     >
-                      <div className="group relative h-56 md:h-64 rounded-xl overflow-hidden bg-neutral-100 border border-neutral-200/60 shadow-xs">
+                      <div
+                        onClick={() => handleCategoryClick(item.cat.id)}
+                        className="group relative h-56 md:h-64 rounded-xl overflow-hidden bg-neutral-100 border border-neutral-200/60 shadow-xs cursor-pointer active:scale-98 transition-transform"
+                      >
                         <img
                           src={item.cat.image}
                           alt={item.label}
