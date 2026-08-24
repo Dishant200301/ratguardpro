@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Check, ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Check } from 'lucide-react';
 
 interface OurSolutionSectionProps {
   categorySubtitle?: string;
@@ -22,15 +22,16 @@ export const OurSolutionSection: React.FC<OurSolutionSectionProps> = ({
 }) => {
   const [slideIndex, setSlideIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState(6);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  // Responsive items per view: Mobile: 1, Tablet: 3, Laptop: 3, Desktop: 6
+  // Responsive items per view: Mobile: 1, Tablet: 2, Laptop: 3, Desktop: 6
   useEffect(() => {
     const updateVisibleCount = () => {
       const width = window.innerWidth;
       if (width < 640) {
         setVisibleCount(1); // Mobile: 1 card
       } else if (width < 1024) {
-        setVisibleCount(3); // Tablet: 3 cards
+        setVisibleCount(2); // Tablet: 2 cards
       } else if (width < 1280) {
         setVisibleCount(3); // Laptop: 3 cards
       } else {
@@ -42,6 +43,28 @@ export const OurSolutionSection: React.FC<OurSolutionSectionProps> = ({
     window.addEventListener('resize', updateVisibleCount);
     return () => window.removeEventListener('resize', updateVisibleCount);
   }, []);
+
+  const handleScroll = () => {
+    const el = scrollContainerRef.current;
+    if (!el) return;
+    const scrollLeft = el.scrollLeft;
+    const cardWidth = el.clientWidth / (visibleCount || 1);
+    if (cardWidth <= 0) return;
+    const maxIdx = Math.max(0, bottomFeatures.length - visibleCount);
+    const newIndex = Math.min(maxIdx, Math.max(0, Math.round(scrollLeft / cardWidth)));
+    setSlideIndex(newIndex);
+  };
+
+  const scrollToIndex = (index: number) => {
+    const el = scrollContainerRef.current;
+    if (!el) return;
+    const cardWidth = el.clientWidth / (visibleCount || 1);
+    el.scrollTo({
+      left: index * cardWidth,
+      behavior: 'smooth',
+    });
+    setSlideIndex(index);
+  };
 
   // Bottom 6 Features matching the reference image with brand blue icons
   const bottomFeatures = [
@@ -164,10 +187,10 @@ export const OurSolutionSection: React.FC<OurSolutionSectionProps> = ({
               </p>
             </div>
 
-            {/* Checklist with Brand Blue Circular Checkmarks & subtle dividers */}
-            <div className="pt-2 divide-y divide-neutral-100">
+            {/* Checklist with Brand Blue Circular Checkmarks: 1 col on mobile, 2 cols on tablet, 1 col on laptop/desktop */}
+            <div className="pt-2 divide-y divide-neutral-100 sm:divide-y-0 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-3.5 lg:block lg:divide-y lg:divide-neutral-100 lg:space-y-0">
               {solutionPoints.map((point, idx) => (
-                <div key={idx} className="flex items-center gap-3.5 py-2.5 sm:py-3">
+                <div key={idx} className="flex items-center gap-3.5 py-2.5 sm:py-2.5 lg:py-3">
                   <div className="w-5 h-5 rounded-full bg-[#0066FF] flex items-center justify-center text-white shrink-0 shadow-xs shadow-blue-500/20">
                     <Check className="w-3.5 h-3.5 stroke-[3]" />
                   </div>
@@ -244,45 +267,42 @@ export const OurSolutionSection: React.FC<OurSolutionSectionProps> = ({
         </div>
 
         {/* ========================================================= */}
-        {/* BOTTOM FEATURE STRIP / SLIDER (Desktop 6, Mobile 1, Tab 3) */}
+        {/* BOTTOM FEATURE STRIP / SLIDER (Desktop 6, Mobile 1, Tab/Lap 4) */}
         {/* ========================================================= */}
         <div className="mt-6 sm:mt-10 lg:mt-10 relative group/slider">
 
-         
-          {/* Track Slider for Mobile/Tablet/Laptop, Grid of 6 on Desktop */}
-          <div className="overflow-hidden w-full py-1">
-            <div
-              className="flex lg:grid lg:grid-cols-6 lg:gap-0 transition-transform duration-500 ease-out"
-              style={{
-                transform: visibleCount < 6 ? `translateX(-${slideIndex * (100 / visibleCount)}%)` : 'none',
-              }}
-            >
+          {/* Track with native manual scroll & snap for Mobile/Tablet/Laptop, Grid of 6 on Desktop */}
+          <div
+            ref={scrollContainerRef}
+            onScroll={handleScroll}
+            className="overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory xl:overflow-visible w-full py-1"
+          >
+            <div className="flex xl:grid xl:grid-cols-5 xl:gap-0 xl:justify-between w-full">
               {bottomFeatures.map((feat, index) => (
                 <div
                   key={feat.id}
-                  className="shrink-0 px-2 sm:px-3 lg:px-4 xl:px-5"
-                  style={{
-                    width: visibleCount < 6 ? `${100 / visibleCount}%` : 'auto',
-                  }}
+                  className="w-full min-w-full sm:min-w-[50%] sm:w-1/2 lg:min-w-[33.333%] lg:w-1/3 xl:w-auto xl:min-w-0 shrink-0 px-2 sm:px-4 xl:px-4 flex justify-center sm:block snap-center sm:snap-start xl:snap-none"
                 >
                   <div
-                    className={`flex items-center sm:items-start gap-3 h-full ${
-                      index !== bottomFeatures.length - 1 ? 'lg:border-r lg:border-neutral-200' : ''
+                    className={`flex items-center justify-center sm:justify-start xl:justify-between sm:items-start gap-3 h-full ${
+                      index !== bottomFeatures.length - 1 ? 'sm:border-r sm:border-neutral-200 sm:pr-3 xl:pr-4' : ''
                     }`}
                   >
-                    {/* Icon */}
-                    <div className="shrink-0">
-                      {feat.icon}
-                    </div>
+                    <div className="flex items-center sm:items-start gap-3 min-w-0">
+                      {/* Icon */}
+                      <div className="shrink-0">
+                        {feat.icon}
+                      </div>
 
-                    {/* Text: Heading 1 line & Subtitle 1 line */}
-                    <div className="flex flex-col justify-center min-w-0">
-                      <h4 className="text-xs sm:text-[13px] font-bold uppercase text-[#111111] tracking-tight leading-tight font-sans whitespace-nowrap truncate">
-                        {feat.title}
-                      </h4>
-                      <p className="text-[11px] sm:text-xs text-neutral-500 font-medium leading-tight mt-0.5 font-sans whitespace-nowrap truncate">
-                        {feat.subtitle}
-                      </p>
+                      {/* Text: Heading 1 line & Subtitle 1 line */}
+                      <div className="flex flex-col justify-center min-w-0">
+                        <h4 className="text-xs sm:text-[13px] font-bold uppercase text-[#111111] tracking-tight leading-tight font-sans whitespace-nowrap truncate">
+                          {feat.title}
+                        </h4>
+                        <p className="text-[11px] sm:text-xs text-neutral-500 font-medium leading-tight mt-0.5 font-sans whitespace-nowrap truncate">
+                          {feat.subtitle}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -290,17 +310,15 @@ export const OurSolutionSection: React.FC<OurSolutionSectionProps> = ({
             </div>
           </div>
 
-          
-
           {/* Bottom Pagination Dots on Mobile/Tablet/Laptop */}
           {maxSlideIndex > 0 && (
-            <div className="flex lg:hidden items-center justify-center gap-1.5 mt-5 sm:mt-6">
+            <div className="flex xl:hidden items-center justify-center gap-1.5 mt-5 sm:mt-6">
               {Array.from({ length: maxSlideIndex + 1 }).map((_, dotIdx) => {
                 const isActive = dotIdx === slideIndex;
                 return (
                   <button
                     key={dotIdx}
-                    onClick={() => setSlideIndex(dotIdx)}
+                    onClick={() => scrollToIndex(dotIdx)}
                     aria-label={`Go to slide ${dotIdx + 1}`}
                     className={`transition-all duration-300 rounded-full cursor-pointer ${
                       isActive

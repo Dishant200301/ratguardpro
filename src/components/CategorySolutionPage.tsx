@@ -9,6 +9,7 @@ import { CategoryProductShowcase } from './category/CategoryProductShowcase';
 import { CategoryComparisonSection } from './category/CategoryComparisonSection';
 import { CategoryFaqSection } from './category/CategoryFaqSection';
 import { CategoryFinalCtaSection } from './category/CategoryFinalCtaSection';
+import { ProductSection } from './ProductSection';
 
 interface CategorySolutionPageProps {
   categoryData: SolutionCategoryData;
@@ -60,10 +61,11 @@ export const CategorySolutionPage: React.FC<CategorySolutionPageProps> = ({
       />
 
       {/* 7. PRODUCT SHOWCASE */}
-      <CategoryProductShowcase
+      {/* <CategoryProductShowcase
         categoryData={categoryData}
         onOpenBuyModal={onOpenBuyModal}
-      />
+      /> */}
+      <ProductSection/>
 
       {/* 8. PROBLEM VS SOLUTION */}
       <CategoryComparisonSection
