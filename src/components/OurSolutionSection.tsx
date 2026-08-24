@@ -1,5 +1,5 @@
-import React from 'react';
-import { Check } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Check, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface OurSolutionSectionProps {
   categorySubtitle?: string;
@@ -20,14 +20,37 @@ export const OurSolutionSection: React.FC<OurSolutionSectionProps> = ({
   ],
   productImage = "/images/home/product/product.webp",
 }) => {
-  // Bottom 6 Feature Strip with brand blue line-style icons
+  const [slideIndex, setSlideIndex] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(6);
+
+  // Responsive items per view: Mobile: 1, Tablet: 3, Laptop: 3, Desktop: 6
+  useEffect(() => {
+    const updateVisibleCount = () => {
+      const width = window.innerWidth;
+      if (width < 640) {
+        setVisibleCount(1); // Mobile: 1 card
+      } else if (width < 1024) {
+        setVisibleCount(3); // Tablet: 3 cards
+      } else if (width < 1280) {
+        setVisibleCount(3); // Laptop: 3 cards
+      } else {
+        setVisibleCount(6); // Desktop: 6 cards in 1 row
+      }
+    };
+
+    updateVisibleCount();
+    window.addEventListener('resize', updateVisibleCount);
+    return () => window.removeEventListener('resize', updateVisibleCount);
+  }, []);
+
+  // Bottom 6 Features matching the reference image with brand blue icons
   const bottomFeatures = [
     {
       id: 'f1',
       title: 'DUAL ULTRASONIC SPEAKERS',
       subtitle: 'Powerful & Effective',
       icon: (
-        <svg viewBox="0 0 36 36" fill="none" className="w-8 h-8 sm:w-9 sm:h-9 text-[#0066FF]" stroke="currentColor">
+        <svg viewBox="0 0 36 36" fill="none" className="w-7 h-7 sm:w-8 sm:h-8 text-[#0066FF] shrink-0" stroke="currentColor">
           <circle cx="18" cy="18" r="2.5" fill="currentColor" stroke="none" />
           <path d="M13 12 A 8 8 0 0 0 13 24" strokeWidth="2.2" strokeLinecap="round" />
           <path d="M23 12 A 8 8 0 0 1 23 24" strokeWidth="2.2" strokeLinecap="round" />
@@ -41,7 +64,7 @@ export const OurSolutionSection: React.FC<OurSolutionSectionProps> = ({
       title: 'WIDE COVERAGE AREA',
       subtitle: 'Up to 1200 sq.ft Coverage',
       icon: (
-        <svg viewBox="0 0 36 36" fill="none" className="w-8 h-8 sm:w-9 sm:h-9 text-[#0066FF]" stroke="currentColor">
+        <svg viewBox="0 0 36 36" fill="none" className="w-7 h-7 sm:w-8 sm:h-8 text-[#0066FF] shrink-0" stroke="currentColor">
           <circle cx="18" cy="18" r="14" strokeWidth="2" strokeLinecap="round" />
           <circle cx="18" cy="18" r="9" strokeWidth="1.8" strokeLinecap="round" />
           <circle cx="18" cy="18" r="4" strokeWidth="1.8" />
@@ -57,7 +80,7 @@ export const OurSolutionSection: React.FC<OurSolutionSectionProps> = ({
       title: 'CHEMICAL-FREE & SAFE',
       subtitle: 'Safe for Family & Pets',
       icon: (
-        <svg viewBox="0 0 36 36" fill="none" className="w-8 h-8 sm:w-9 sm:h-9 text-[#0066FF]" stroke="currentColor">
+        <svg viewBox="0 0 36 36" fill="none" className="w-7 h-7 sm:w-8 sm:h-8 text-[#0066FF] shrink-0" stroke="currentColor">
           <path
             d="M8 28 C 14 26, 26 22, 28 6 C 12 8, 8 20, 8 28 Z"
             strokeWidth="2.2"
@@ -75,7 +98,7 @@ export const OurSolutionSection: React.FC<OurSolutionSectionProps> = ({
       title: 'NO TRAPS NO POISONS',
       subtitle: '100% Humane Solution',
       icon: (
-        <svg viewBox="0 0 36 36" fill="none" className="w-8 h-8 sm:w-9 sm:h-9 text-[#0066FF]" stroke="currentColor">
+        <svg viewBox="0 0 36 36" fill="none" className="w-7 h-7 sm:w-8 sm:h-8 text-[#0066FF] shrink-0" stroke="currentColor">
           <path
             d="M18 4 L 30 9 C 30 20, 24 28, 18 32 C 12 28, 6 20, 6 9 Z"
             strokeWidth="2.2"
@@ -91,7 +114,7 @@ export const OurSolutionSection: React.FC<OurSolutionSectionProps> = ({
       title: 'EASY TO INSTALL & USE',
       subtitle: 'Just Plug In & Stay Protected',
       icon: (
-        <svg viewBox="0 0 36 36" fill="none" className="w-8 h-8 sm:w-9 sm:h-9 text-[#0066FF]" stroke="currentColor">
+        <svg viewBox="0 0 36 36" fill="none" className="w-7 h-7 sm:w-8 sm:h-8 text-[#0066FF] shrink-0" stroke="currentColor">
           <path
             d="M7 29 L 16 20 M 11 25 L 8 22 C 6 20, 6 17, 8 15 L 10 13 C 12 11, 15 11, 17 13 L 20 16 M 29 7 L 20 16 M 25 11 L 28 14 C 30 16, 30 19, 28 21 L 26 23 C 24 25, 21 25, 19 23 L 16 20"
             strokeWidth="2.2"
@@ -101,22 +124,18 @@ export const OurSolutionSection: React.FC<OurSolutionSectionProps> = ({
         </svg>
       ),
     },
-    {
-      id: 'f6',
-      title: 'LOW POWER CONSUMPTION',
-      subtitle: 'Energy Efficient Technology',
-      icon: (
-        <svg viewBox="0 0 36 36" fill="none" className="w-8 h-8 sm:w-9 sm:h-9 text-[#0066FF]" stroke="currentColor">
-          <circle cx="18" cy="18" r="14" strokeWidth="2.2" />
-          <path
-            d="M19 8 L 12 19 L 17.5 19 L 16 28 L 24 17 L 18.5 17 Z"
-            fill="currentColor"
-            stroke="none"
-          />
-        </svg>
-      ),
-    },
+    
   ];
+
+  const maxSlideIndex = Math.max(0, bottomFeatures.length - visibleCount);
+
+  const handlePrev = () => {
+    setSlideIndex((prev) => (prev <= 0 ? maxSlideIndex : prev - 1));
+  };
+
+  const handleNext = () => {
+    setSlideIndex((prev) => (prev >= maxSlideIndex ? 0 : prev + 1));
+  };
 
   return (
     <section
@@ -133,12 +152,12 @@ export const OurSolutionSection: React.FC<OurSolutionSectionProps> = ({
           {/* 1. LEFT CONTENT: Intro & 6 Feature Rows */}
           <div className="lg:col-span-5 xl:col-span-4 space-y-4">
             <div>
-              <span className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-[#111111] font-sans">
-                OUR SOLUTION
+              <span className="text-xs sm:text-sm font-semibold tracking-wider text-[#111111] font-sans">
+                Our Solution
               </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[#111111] mt-2 mb-3 leading-tight font-sans">
-                <span>RATGUARD </span>
-                <span className="text-[#0066FF]">SONICARMOR X</span>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-[#111111] mt-2 mb-3 leading-tight font-sans whitespace-nowrap">
+                <span>Ultrasonic </span>
+                <span className="text-[#0066FF]">Rat Repellent</span>
               </h2>
               <p className="text-neutral-600 text-xs sm:text-sm md:text-base leading-relaxed font-sans max-w-md">
                 {categorySubtitle}
@@ -152,7 +171,7 @@ export const OurSolutionSection: React.FC<OurSolutionSectionProps> = ({
                   <div className="w-5 h-5 rounded-full bg-[#0066FF] flex items-center justify-center text-white shrink-0 shadow-xs shadow-blue-500/20">
                     <Check className="w-3.5 h-3.5 stroke-[3]" />
                   </div>
-                  <span className="text-sm sm:text-[15px] font-bold text-[#111111] font-sans">
+                  <span className="text-sm sm:text-[15px] font-semibold text-[#111111] font-sans">
                     {point}
                   </span>
                 </div>
@@ -160,104 +179,140 @@ export const OurSolutionSection: React.FC<OurSolutionSectionProps> = ({
             </div>
           </div>
 
-          {/* 2. CENTER & RIGHT: Complete Product in Center + Blue Ultrasonic Waves + Prohibited Mouse */}
-          <div className="lg:col-span-7 xl:col-span-8 flex flex-col md:flex-row items-center justify-center lg:justify-end gap-3 sm:gap-6 relative">
-            
-            {/* Center Complete Device Display */}
-            <div className="relative w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[440px] xl:max-w-[480px] shrink-0 flex items-center justify-center">
-              <img
-                src={productImage}
-                alt="Ratguard SonicArmor X Ultrasonic Device"
-                className="w-full h-auto object-contain drop-shadow-[0_15px_25px_rgba(0,0,0,0.15)] select-none transition-transform duration-500 hover:scale-102"
-                loading="eager"
-              />
-            </div>
-
-            {/* Right Side: Blue Ultrasonic Waves + Prohibited Mouse Container */}
-            <div className="flex items-center justify-center gap-1 sm:gap-2 shrink-0">
+          {/* 2. CENTER & RIGHT: Complete Product in Center + Blue Ultrasonic Waves + Prohibited Mouse (Unified Horizontal Row) */}
+          <div className="lg:col-span-7 xl:col-span-8 flex items-center justify-center lg:justify-end w-full py-4 lg:py-0 overflow-visible">
+            <div className="flex flex-row items-center justify-center gap-1.5 sm:gap-3 md:gap-4 lg:gap-5 w-full max-w-[820px]">
               
-              {/* Concentric Ultrasonic Waves in Brand Blue */}
-              <div className="shrink-0 flex items-center">
+              {/* Product Device */}
+              <div className="flex-1 min-w-[120px] max-w-[340px] sm:max-w-[380px] lg:max-w-[440px] shrink flex items-center justify-center">
+                <img
+                  src={productImage}
+                  alt="Ratguard SonicArmor X Ultrasonic Device"
+                  className="w-full h-auto object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.16)] select-none transition-transform duration-500 hover:scale-102"
+                  loading="eager"
+                />
+              </div>
+
+              {/* Concentric Ultrasonic Sound Waves (Increased Size, Tall Smooth Radiating Arcs) */}
+              <div className="shrink-0 flex items-center justify-center">
                 <svg
-                  className="w-14 sm:w-18 md:w-22 h-28 sm:h-36 md:h-44 text-[#0066FF] shrink-0"
-                  viewBox="0 0 75 140"
+                  className="w-10 sm:w-16 md:w-20 lg:w-24 h-28 sm:h-38 md:h-48 lg:h-56 text-[#0066FF] overflow-visible"
+                  viewBox="0 0 120 200"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    d="M12 45 A 45 45 0 0 1 12 95"
+                    d="M12 68 A 48 48 0 0 1 12 132"
+                    stroke="currentColor"
+                    strokeWidth="2.8"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M36 46 A 78 78 0 0 1 36 154"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M62 24 A 110 110 0 0 1 62 176"
+                    stroke="currentColor"
+                    strokeWidth="3.2"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M90 4 A 145 145 0 0 1 90 196"
                     stroke="currentColor"
                     strokeWidth="3.5"
-                    strokeLinecap="round"
-                  />
-                  <path
-                    d="M28 32 A 65 65 0 0 1 28 108"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                    strokeLinecap="round"
-                  />
-                  <path
-                    d="M46 18 A 85 85 0 0 1 46 122"
-                    stroke="currentColor"
-                    strokeWidth="4.5"
-                    strokeLinecap="round"
-                  />
-                  <path
-                    d="M64 4 A 105 105 0 0 1 64 136"
-                    stroke="currentColor"
-                    strokeWidth="5"
                     strokeLinecap="round"
                   />
                 </svg>
               </div>
 
-              {/* Clean Mouse with Red Prohibition Sign (Zero Cut Product) */}
-              <div className="relative w-24 sm:w-32 md:w-40 shrink-0 flex items-center justify-center select-none">
+              {/* Escaping Mouse with Red Prohibition Sign */}
+              <div className="w-18 sm:w-26 md:w-34 lg:w-42 shrink-0 flex items-center justify-center select-none">
                 <img
                   src="/images/home/product/rat-no-entry.png"
                   alt="Rodents Prohibited"
-                  className="w-full h-auto object-contain select-none"
+                  className="w-full h-auto object-contain select-none drop-shadow-xs"
                   loading="eager"
                 />
               </div>
 
             </div>
-
           </div>
 
         </div>
 
         {/* ========================================================= */}
-        {/* BOTTOM HORIZONTAL FEATURE STRIP (6 Equal Blocks)          */}
+        {/* BOTTOM FEATURE STRIP / SLIDER (Desktop 6, Mobile 1, Tab 3) */}
         {/* ========================================================= */}
-        <div className="mt-12 sm:mt-16 lg:mt-20 pt-8 sm:pt-10 border-t border-neutral-200">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 lg:gap-0">
-            {bottomFeatures.map((feat, index) => (
-              <div
-                key={feat.id}
-                className={`flex items-start gap-3.5 lg:px-4 xl:px-5 ${
-                  index !== bottomFeatures.length - 1
-                    ? 'lg:border-r lg:border-neutral-200'
-                    : ''
-                }`}
-              >
-                {/* Icon */}
-                <div className="shrink-0 mt-0.5">
-                  {feat.icon}
-                </div>
+        <div className="mt-6 sm:mt-10 lg:mt-10 relative group/slider">
 
-                {/* Text */}
-                <div className="flex flex-col justify-start">
-                  <h4 className="text-xs sm:text-[13px] font-extrabold uppercase text-[#111111] tracking-tight leading-snug font-sans">
-                    {feat.title}
-                  </h4>
-                  <p className="text-[11px] sm:text-xs text-neutral-500 font-medium leading-tight mt-1 font-sans">
-                    {feat.subtitle}
-                  </p>
+         
+          {/* Track Slider for Mobile/Tablet/Laptop, Grid of 6 on Desktop */}
+          <div className="overflow-hidden w-full py-1">
+            <div
+              className="flex lg:grid lg:grid-cols-6 lg:gap-0 transition-transform duration-500 ease-out"
+              style={{
+                transform: visibleCount < 6 ? `translateX(-${slideIndex * (100 / visibleCount)}%)` : 'none',
+              }}
+            >
+              {bottomFeatures.map((feat, index) => (
+                <div
+                  key={feat.id}
+                  className="shrink-0 px-2 sm:px-3 lg:px-4 xl:px-5"
+                  style={{
+                    width: visibleCount < 6 ? `${100 / visibleCount}%` : 'auto',
+                  }}
+                >
+                  <div
+                    className={`flex items-center sm:items-start gap-3 h-full ${
+                      index !== bottomFeatures.length - 1 ? 'lg:border-r lg:border-neutral-200' : ''
+                    }`}
+                  >
+                    {/* Icon */}
+                    <div className="shrink-0">
+                      {feat.icon}
+                    </div>
+
+                    {/* Text: Heading 1 line & Subtitle 1 line */}
+                    <div className="flex flex-col justify-center min-w-0">
+                      <h4 className="text-xs sm:text-[13px] font-bold uppercase text-[#111111] tracking-tight leading-tight font-sans whitespace-nowrap truncate">
+                        {feat.title}
+                      </h4>
+                      <p className="text-[11px] sm:text-xs text-neutral-500 font-medium leading-tight mt-0.5 font-sans whitespace-nowrap truncate">
+                        {feat.subtitle}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
+
+          
+
+          {/* Bottom Pagination Dots on Mobile/Tablet/Laptop */}
+          {maxSlideIndex > 0 && (
+            <div className="flex lg:hidden items-center justify-center gap-1.5 mt-5 sm:mt-6">
+              {Array.from({ length: maxSlideIndex + 1 }).map((_, dotIdx) => {
+                const isActive = dotIdx === slideIndex;
+                return (
+                  <button
+                    key={dotIdx}
+                    onClick={() => setSlideIndex(dotIdx)}
+                    aria-label={`Go to slide ${dotIdx + 1}`}
+                    className={`transition-all duration-300 rounded-full cursor-pointer ${
+                      isActive
+                        ? 'w-6 sm:w-7 h-1.5 sm:h-2 bg-[#0066FF] shadow-xs shadow-blue-500/30'
+                        : 'w-1.5 sm:w-2 h-1.5 sm:h-2 bg-neutral-300 hover:bg-neutral-400'
+                    }`}
+                  />
+                );
+              })}
+            </div>
+          )}
+
         </div>
 
       </div>

@@ -36,17 +36,46 @@ export const ShopThroughVideo: React.FC<ShopThroughVideoProps> = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const unlockAudio = () => {
+      if (playingVideoId && videoRefs.current[playingVideoId]) {
+        const v = videoRefs.current[playingVideoId];
+        if (v) {
+          v.muted = false;
+          v.volume = 1.0;
+          v.play().catch(() => {});
+        }
+      }
+    };
+
+    window.addEventListener('pointerdown', unlockAudio);
+    window.addEventListener('keydown', unlockAudio);
+    return () => {
+      window.removeEventListener('pointerdown', unlockAudio);
+      window.removeEventListener('keydown', unlockAudio);
+    };
+  }, [playingVideoId]);
+
   const handleCardMouseEnter = (id: string) => {
+    // Pause and mute any other videos that might be playing
+    Object.entries(videoRefs.current).forEach(([otherId, otherVideo]) => {
+      if (otherId !== id && otherVideo) {
+        otherVideo.pause();
+        otherVideo.muted = true;
+      }
+    });
+
     setPlayingVideoId(id);
     const video = videoRefs.current[id];
     if (video) {
       video.muted = false;
+      video.volume = 1.0;
       const playPromise = video.play();
       if (playPromise !== undefined) {
         playPromise.catch(() => {
-          // If unmuted autoplay is restricted by browser policy before first user interaction, fallback to muted
-          video.muted = true;
-          video.play().catch(() => {});
+          // Retry unmuting and playing
+          video.muted = false;
+          video.volume = 1.0;
         });
       }
     }
@@ -67,7 +96,9 @@ export const ShopThroughVideo: React.FC<ShopThroughVideoProps> = () => {
     e.stopPropagation();
     const video = videoRefs.current[id];
     if (playingVideoId === id) {
-      if (video) video.pause();
+      if (video) {
+        video.pause();
+      }
       setPlayingVideoId(null);
     } else {
       if (playingVideoId && videoRefs.current[playingVideoId]) {
@@ -76,10 +107,8 @@ export const ShopThroughVideo: React.FC<ShopThroughVideoProps> = () => {
       setPlayingVideoId(id);
       if (video) {
         video.muted = false;
-        video.play().catch(() => {
-          video.muted = true;
-          video.play().catch(() => {});
-        });
+        video.volume = 1.0;
+        video.play().catch(() => {});
       }
     }
   };
