@@ -59,7 +59,7 @@ export const Logo: React.FC<LogoProps> = ({
       className={`inline-flex items-center justify-center select-none ${className}`}
     >
       <img
-        src="/common/logo.webp"
+        src="/images/common/logo.webp"
         alt="RatGuard Pro Logo"
         className={`${sizeClasses[size] || sizeClasses.md} w-auto object-contain transition-transform duration-200${
           variant === 'light' ? 'brightness-0 invert' : ''

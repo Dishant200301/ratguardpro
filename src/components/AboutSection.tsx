@@ -19,7 +19,7 @@ export const AboutSection: React.FC = () => {
               </div>
 
               <img
-                src="/common/about.webp"
+                src="/images/common/about.webp"
                 alt="Bharat Parmar Founder & Innovation"
                 className="w-full h-auto max-h-[420px] object-contain drop-shadow-xl transform group-hover:scale-105 transition-transform duration-500 select-none"
                 loading="lazy"

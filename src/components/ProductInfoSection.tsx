@@ -138,7 +138,7 @@ export const ProductInfoSection: React.FC<ProductInfoSectionProps> = ({ onBuyNow
           
           {/* Full Graphic Image Background */}
           <img
-            src="/common/productinfo.webp"
+            src="/images/common/productinfo.webp"
             alt="Plug It In. Protection Begins."
             className="absolute inset-0 w-full h-full object-cover object-center select-none pointer-events-none"
             loading="lazy"
