@@ -70,7 +70,7 @@ export const OurSolutionSection: React.FC<OurSolutionSectionProps> = ({
   const bottomFeatures = [
     {
       id: 'f1',
-      title: 'DUAL ULTRASONIC SPEAKERS',
+      title: 'Dual Ultrasonic Speakers',
       subtitle: 'Powerful & Effective',
       icon: (
         <svg viewBox="0 0 36 36" fill="none" className="w-7 h-7 sm:w-8 sm:h-8 text-[#0066FF] shrink-0" stroke="currentColor">
@@ -84,7 +84,7 @@ export const OurSolutionSection: React.FC<OurSolutionSectionProps> = ({
     },
     {
       id: 'f2',
-      title: 'WIDE COVERAGE AREA',
+      title: 'Wide Coverage Area',
       subtitle: 'Up to 1200 sq.ft Coverage',
       icon: (
         <svg viewBox="0 0 36 36" fill="none" className="w-7 h-7 sm:w-8 sm:h-8 text-[#0066FF] shrink-0" stroke="currentColor">
@@ -100,7 +100,7 @@ export const OurSolutionSection: React.FC<OurSolutionSectionProps> = ({
     },
     {
       id: 'f3',
-      title: 'CHEMICAL-FREE & SAFE',
+      title: 'Chemical-Free & Safe',
       subtitle: 'Safe for Family & Pets',
       icon: (
         <svg viewBox="0 0 36 36" fill="none" className="w-7 h-7 sm:w-8 sm:h-8 text-[#0066FF] shrink-0" stroke="currentColor">
@@ -118,7 +118,7 @@ export const OurSolutionSection: React.FC<OurSolutionSectionProps> = ({
     },
     {
       id: 'f4',
-      title: 'NO TRAPS NO POISONS',
+      title: 'No Traps, No Poisons',
       subtitle: '100% Humane Solution',
       icon: (
         <svg viewBox="0 0 36 36" fill="none" className="w-7 h-7 sm:w-8 sm:h-8 text-[#0066FF] shrink-0" stroke="currentColor">
@@ -134,7 +134,7 @@ export const OurSolutionSection: React.FC<OurSolutionSectionProps> = ({
     },
     {
       id: 'f5',
-      title: 'EASY TO INSTALL & USE',
+      title: 'Easy to Install & Use',
       subtitle: 'Just Plug In & Stay Protected',
       icon: (
         <svg viewBox="0 0 36 36" fill="none" className="w-7 h-7 sm:w-8 sm:h-8 text-[#0066FF] shrink-0" stroke="currentColor">
@@ -147,7 +147,6 @@ export const OurSolutionSection: React.FC<OurSolutionSectionProps> = ({
         </svg>
       ),
     },
-    
   ];
 
   const maxSlideIndex = Math.max(0, bottomFeatures.length - visibleCount);
@@ -296,7 +295,7 @@ export const OurSolutionSection: React.FC<OurSolutionSectionProps> = ({
 
                       {/* Text: Heading 1 line & Subtitle 1 line */}
                       <div className="flex flex-col justify-center min-w-0">
-                        <h4 className="text-xs sm:text-[13px] font-bold uppercase text-[#111111] tracking-tight leading-tight font-sans whitespace-nowrap truncate">
+                        <h4 className="text-xs sm:text-[13px] font-bold text-[#111111] tracking-tight leading-tight font-sans whitespace-nowrap truncate">
                           {feat.title}
                         </h4>
                         <p className="text-[11px] sm:text-xs text-neutral-500 font-medium leading-tight mt-0.5 font-sans whitespace-nowrap truncate">

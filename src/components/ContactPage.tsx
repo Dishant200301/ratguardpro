@@ -70,7 +70,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onBackToHome }) => {
       <section className="py-10 sm:py-14 md:py-16 lg:py-20">
         <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
           <div className="flex flex-col lg:grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
-            
+
             {/* LEFT CONTAINER (Col-Span 7 on Desktop): CONTACT FORM */}
             <div className="order-2 lg:order-1 lg:col-span-7 w-full">
               <div className="bg-white rounded-2xl border border-neutral-200/90 p-6 sm:p-8 md:p-10 shadow-sm">
@@ -185,7 +185,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onBackToHome }) => {
 
             {/* RIGHT CONTAINER (Col-Span 5 on Desktop): GET IN TOUCH INFO */}
             <div className="order-1 lg:order-2 lg:col-span-5 w-full flex flex-col lg:border-l lg:border-neutral-200 lg:pl-12 xl:pl-16">
-              
+
               <div>
                 <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#0066FF] block mb-2">
                   CONTACT INFORMATION
@@ -200,7 +200,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onBackToHome }) => {
 
               {/* Information Cards Stack */}
               <div className="mt-8 space-y-6 sm:space-y-8">
-                
+
                 {/* 1. LOCATION */}
                 <div className="flex items-start gap-4 p-4 rounded-2xl bg-neutral-50/80 border border-neutral-200/70 hover:border-blue-200 transition-colors">
                   <div className="w-11 h-11 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-[#0066FF] shrink-0 mt-0.5">
@@ -230,19 +230,19 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onBackToHome }) => {
                     </p>
                     <div>
                       <a
-                        href="tel:+919409445443"
+                        href="tel:+919328623013"
                         className="inline-block text-sm sm:text-base font-bold text-[#111111] hover:text-[#0066FF] transition-colors"
                       >
-                        +91 9409445443
+                        +91 93286 23013
                       </a>
                     </div>
                     <div>
                       <a
-                        href="mailto:support@ratguardpro.com"
+                        href="mailto:ratguardpro9@gmail.com"
                         className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-neutral-600 hover:text-[#0066FF] transition-colors"
                       >
                         <Mail className="w-3.5 h-3.5 text-neutral-400" />
-                        <span>support@ratguardpro.com</span>
+                        <span>ratguardpro9@gmail.com</span>
                       </a>
                     </div>
                   </div>

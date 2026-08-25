@@ -1,5 +1,5 @@
 import React from 'react';
-import { Scale, AlertTriangle, X, Check } from 'lucide-react';
+import { Scale, X, Check } from 'lucide-react';
 import { SolutionCategoryData } from '../../data/categorySolutionsData';
 
 interface CategoryComparisonSectionProps {
@@ -38,33 +38,10 @@ export const CategoryComparisonSection: React.FC<CategoryComparisonSectionProps>
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-6 items-stretch">
+        <div className="max-w-4xl mx-auto">
 
-          {/* Left Column: Visual Image Card (Hidden on Mobile & Tablet, Visible on Laptop/Desktop) */}
-          <div className="hidden lg:flex lg:col-span-4 lg:h-auto min-h-[370px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm border border-neutral-200 relative group flex-col justify-end">
-            <img
-              src={categoryData.comparisonImage}
-              alt="Rat Infestation Damage"
-              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-              loading="lazy"
-            />
-            {/* Dark Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-10" />
-
-            {/* Bottom Card Content Box */}
-            <div className="relative z-20 p-5 sm:p-6 space-y-2">
-              <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-extrabold uppercase tracking-wider text-white bg-[#D91B24] px-2.5 py-1 rounded-md shadow-xs">
-                <AlertTriangle className="w-3.5 h-3.5 stroke-[2.5]" />
-                <span>RAT PROBLEM</span>
-              </span>
-              <p className="text-white text-xs sm:text-sm font-medium leading-relaxed drop-shadow-xs">
-                Rats can cause serious hygiene issues, damage equipment, and put {categoryData.targetSpace.toLowerCase()} safety at risk.
-              </p>
-            </div>
-          </div>
-
-          {/* Right Column: Comparison Table with Horizontal Scroll on Small Mobile Screens */}
-          <div className="w-full lg:col-span-8 bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm border border-neutral-200">
+          {/* Comparison Table with Horizontal Scroll on Small Mobile Screens */}
+          <div className="w-full bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm border border-neutral-200">
             <div className="overflow-x-auto w-full">
               <div className="min-w-[500px] sm:min-w-[560px] lg:min-w-full flex flex-col justify-between h-full">
 

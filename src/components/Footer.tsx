@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import {
   Facebook,
   Instagram,
+  Linkedin,
+  Youtube,
   X,
   CheckCircle2,
 } from 'lucide-react';
@@ -182,11 +184,11 @@ export const Footer: React.FC<FooterProps> = ({
           content: (
             <div className="space-y-4 text-neutral-300 text-sm leading-relaxed">
               <p>
-                We stand firmly behind the ultrasonic efficacy of Pro. If you are not completely satisfied with the product performance, you are entitled to our 7-day risk-free money-back guarantee.
+                We stand firmly behind the ultrasonic efficacy of RatGuardPro. If you are not completely satisfied with the product performance, you are entitled to our 7-day risk-free money-back guarantee.
               </p>
               <h4 className="text-white font-bold text-base pt-2">How Returns Work</h4>
               <p>
-                1. Contact our support team via WhatsApp or phone (+91 9409445443) within 7 days of receiving the package.<br />
+                1. Contact our support team via WhatsApp or phone (+91 93286 23013) within 7 days of receiving the package.<br />
                 2. Our courier team will arrange reverse doorstep pickup.<br />
                 3. Upon receipt and basic inspection, full refund is credited via UPI / Bank Transfer within 48 hours.
               </p>
@@ -202,10 +204,10 @@ export const Footer: React.FC<FooterProps> = ({
           content: (
             <div className="space-y-4 text-neutral-300 text-sm leading-relaxed">
               <p>
-                By accessing or purchasing from Pro, you agree to comply with Indian e-commerce consumer guidelines and our fair usage standards.
+                By accessing or purchasing from RatGuardPro, you agree to comply with Indian e-commerce consumer guidelines and our fair usage standards.
               </p>
               <p>
-                Pro is engineered for pest deterrent purposes using non-lethal, high-frequency ultrasonic waves. The device must be connected to standard 220V AC household/commercial outlets as per the included instruction card.
+                RatGuardPro is engineered for pest deterrent purposes using non-lethal, high-frequency ultrasonic waves. The device must be connected to standard 220V AC household/commercial outlets as per the included instruction card.
               </p>
             </div>
           ),
@@ -219,7 +221,7 @@ export const Footer: React.FC<FooterProps> = ({
           content: (
             <div className="space-y-4 text-neutral-300 text-sm leading-relaxed">
               <p>
-                <strong>Brand Name:</strong>  / Pro<br />
+                <strong>Brand Name:</strong> RatGuard / RatGuardPro<br />
                 <strong>Trade Name:</strong> VAMASHAY & SHYAM INNOVATIONS (Est. 2017)<br />
                 <strong>Registered Office:</strong> Plot No C/25, 1st Floor, Shyamdham Society, Vijayraj Circle, Singanpore Road, Surat, Gujarat - 395004, India.
               </p>
@@ -238,7 +240,7 @@ export const Footer: React.FC<FooterProps> = ({
           content: (
             <div className="space-y-4 text-neutral-300 text-sm leading-relaxed">
               <p>
-                Pro emits specialized ultrasonic frequency sound waves (20 kHz to 65 kHz) which disrupt the auditory and nervous systems of rodents (rats, mice).
+                RatGuardPro emits specialized ultrasonic frequency sound waves (20 kHz to 65 kHz) which disrupt the auditory and nervous systems of rodents (rats, mice).
               </p>
               <p>
                 The frequency is completely inaudible and 100% safe for humans, children, cats, dogs, and birds. It does not penetrate solid brick/concrete walls, so we recommend 1 unit per room or vehicle bonnet space for maximum coverage.
@@ -255,7 +257,7 @@ export const Footer: React.FC<FooterProps> = ({
           content: (
             <div className="space-y-4 text-neutral-300 text-sm leading-relaxed">
               <p>
-                Every Pro unit comes with an official <strong>1-Year Hassle-Free Instant Replacement Warranty</strong> covering any manufacturing defects or electronic component failures.
+                Every RatGuardPro unit comes with an official <strong>1-Year Hassle-Free Instant Replacement Warranty</strong> covering any manufacturing defects or electronic component failures.
               </p>
               <p>
                 In the rare case of any malfunction, simply WhatsApp our support helpline with your order number, and a replacement unit will be dispatched immediately.
@@ -392,58 +394,129 @@ export const Footer: React.FC<FooterProps> = ({
             <div className="flex items-center gap-3 select-none">
               <img
                 src="/apple-touch-icon.webp"
-                alt="Pro Logo"
+                alt="RatGuardPro Logo"
                 className="w-11 h-11 object-contain rounded-xl shadow-md transition-transform duration-200 hover:scale-105"
                 loading="lazy"
               />
-              <span className="text-2xl font-semibold tracking-tight text-white font-sans">
-                <span className="text-[#0066FF]">Pro</span>
+              <span className="text-2xl font-bold tracking-tight text-white font-sans flex items-center">
+                RatGuard<span className="text-[#0066FF] ml-0.5">Pro</span>
               </span>
             </div>
 
             {/* Business Contact Lines */}
             <div className="text-xs text-neutral-300 space-y-1.5 pt-1 leading-relaxed">
               <p>
-                <span className="text-neutral-400">Brand name:</span> <strong className="text-white">Pro</strong>
+                <span className="text-neutral-400">Brand name:</span> <strong className="text-white">RatGuardPro</strong>
               </p>
               <p>
                 <span className="text-neutral-400">Trade name:</span> <strong className="text-white">VAMASHAY</strong>
               </p>
-              <p className="text-neutral-300">
-                Monday–Saturday 10am–7pm
+              
+              <p>
+                <a
+                  href="tel:+919328623013"
+                  className="text-white font-medium hover:text-[#0066FF] transition-colors inline-block footer-link-animated"
+                >
+                  +91 93286 23013
+                </a>
               </p>
               <p>
                 <a
-                  href="tel:+919409445443"
+                  href="mailto:ratguardpro9@gmail.com"
                   className="text-white font-medium hover:text-[#0066FF] transition-colors inline-block footer-link-animated"
                 >
-                  +91 9409445443
+                  ratguardpro9@gmail.com
                 </a>
               </p>
-              <p className="text-neutral-400 text-[11px] leading-normal pt-1 max-w-xs">
-                Plot No C/25, 1st Floor, Shyamdham Society, Vijayraj Circle, Singanpore Road, 395004, Surat, Gujarat India
-              </p>
+              
             </div>
 
             {/* Social Icons */}
-            <div className="flex items-center gap-3 pt-2">
+            <div className="flex flex-wrap items-center gap-2.5 pt-2">
+              {/* Facebook */}
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/profile.php?id=61592663614139"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
-                className="w-8 h-8 rounded-full border border-neutral-700 flex items-center justify-center text-neutral-300 hover:border-[#0066FF] hover:text-[#0066FF] hover:bg-[#0066FF]/10 transition-all"
+                className="w-8 h-8 rounded-full border border-neutral-700 flex items-center justify-center text-neutral-300 hover:border-[#0066FF] hover:text-[#0066FF] hover:bg-[#0066FF]/10 transition-all cursor-pointer"
               >
                 <Facebook className="w-3.5 h-3.5" />
               </a>
+
+              {/* Instagram */}
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/ratguardpro9"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="w-8 h-8 rounded-full border border-neutral-700 flex items-center justify-center text-neutral-300 hover:border-[#0066FF] hover:text-[#0066FF] hover:bg-[#0066FF]/10 transition-all"
+                className="w-8 h-8 rounded-full border border-neutral-700 flex items-center justify-center text-neutral-300 hover:border-[#0066FF] hover:text-[#0066FF] hover:bg-[#0066FF]/10 transition-all cursor-pointer"
               >
                 <Instagram className="w-3.5 h-3.5" />
+              </a>
+
+              {/* Threads */}
+              <a
+                href="https://www.threads.com/@ratguardpro9?hl=en"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Threads"
+                className="w-8 h-8 rounded-full border border-neutral-700 flex items-center justify-center text-neutral-300 hover:border-[#0066FF] hover:text-[#0066FF] hover:bg-[#0066FF]/10 transition-all cursor-pointer overflow-hidden"
+              >
+                <img
+                  src="/images/icons/thread.png"
+                  alt="Threads"
+                  className="w-4.5 h-4.5 object-contain"
+                  loading="lazy"
+                />
+              </a>
+
+              {/* WhatsApp */}
+              <a
+                href="https://wa.me/919328623013"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp"
+                className="w-8 h-8 rounded-full border border-neutral-700 flex items-center justify-center text-neutral-300 hover:border-[#0066FF] hover:text-[#0066FF] hover:bg-[#0066FF]/10 transition-all cursor-pointer"
+              >
+                <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
+                </svg>
+              </a>
+
+              {/* LinkedIn */}
+              <a
+                href="https://www.linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="w-8 h-8 rounded-full border border-neutral-700 flex items-center justify-center text-neutral-300 hover:border-[#0066FF] hover:text-[#0066FF] hover:bg-[#0066FF]/10 transition-all cursor-pointer"
+              >
+                <Linkedin className="w-3.5 h-3.5" />
+              </a>
+
+              {/* X (formerly Twitter) */}
+              <a
+                href="https://x.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="X (Twitter)"
+                className="w-8 h-8 rounded-full border border-neutral-700 flex items-center justify-center text-neutral-300 hover:border-[#0066FF] hover:text-[#0066FF] hover:bg-[#0066FF]/10 transition-all cursor-pointer"
+              >
+                <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
+              </a>
+
+              {/* YouTube */}
+              <a
+                href="https://www.youtube.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="YouTube"
+                className="w-8 h-8 rounded-full border border-neutral-700 flex items-center justify-center text-neutral-300 hover:border-[#0066FF] hover:text-[#0066FF] hover:bg-[#0066FF]/10 transition-all cursor-pointer"
+              >
+                <Youtube className="w-3.5 h-3.5" />
               </a>
             </div>
           </div>
@@ -584,7 +657,7 @@ export const Footer: React.FC<FooterProps> = ({
         {/* 3. BOTTOM ROW: COPYRIGHT & SHOPIFY-STYLE PAYMENT BADGES */}
         <div className="pt-8 flex flex-col lg:flex-row items-center lg:justify-between gap-4 text-xs text-neutral-500">
           <div className="order-1 text-center lg:text-left">
-            © {new Date().getFullYear()} Pro™ by Shyam Innovations & VAMASHAY. All rights reserved.
+            © {new Date().getFullYear()} RatGuardPro™ VAMASHAY. All rights reserved.
           </div>
           {/* Shopify-Style Realistic Payment Cards (Below copyright on mobile/tablet, right-aligned on desktop) */}
           <div className="order-2 flex flex-wrap items-center justify-center lg:justify-end gap-2.5">

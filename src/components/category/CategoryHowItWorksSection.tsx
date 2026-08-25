@@ -11,9 +11,9 @@ export const CategoryHowItWorksSection: React.FC<CategoryHowItWorksSectionProps>
 }) => {
   return (
     <section className="w-full bg-white py-12 sm:py-16 lg:py-20">
-      <div className="max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8">
 
-        <div className="grid grid-cols-1 xl:grid-cols-12 gap-10 xl:gap-14 items-start">
+        <div className="grid grid-cols-1 gap-10 xl:gap-14 items-start">
 
           {/* LEFT COLUMN: HOW IT WORKS (3 Step Cards with Illustrations & Arrows) */}
           <div className="xl:col-span-6">
@@ -107,7 +107,7 @@ export const CategoryHowItWorksSection: React.FC<CategoryHowItWorksSectionProps>
 
           {/* RIGHT COLUMN: WHERE TO INSTALL IN [CATEGORY] */}
           <div className="xl:col-span-6">
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#111111] tracking-tight uppercase text-center sm:text-left mb-8 sm:mb-10 font-sans">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#111111] tracking-tight uppercase text-center sm:text-left mb-4 sm:mb-6 font-sans">
               {categoryData.whereToInstallTitle}
             </h3>
 

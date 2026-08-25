@@ -892,7 +892,7 @@ export const CATEGORY_SOLUTIONS_DATA: Record<string, SolutionCategoryData> = {
       'Inside False Ceiling Cavities & Ducts',
       'Near Shop Shutter Corners & Entrance'
     ],
-    installImage: '/images/home/bento/shop.webp',
+    installImage: '/images/category/shop-install.jpg',
     
     productName: 'RATGUARD SONICARMOR X',
     productTagline: 'Your Ultimate Retail Protection Partner',

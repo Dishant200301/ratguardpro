@@ -5,7 +5,6 @@ import { CategoryProblemSection } from './category/CategoryProblemSection';
 import { OurSolutionSection } from './OurSolutionSection';
 import { CategoryWhyChooseSection } from './category/CategoryWhyChooseSection';
 import { CategoryHowItWorksSection } from './category/CategoryHowItWorksSection';
-import { CategoryProductShowcase } from './category/CategoryProductShowcase';
 import { CategoryComparisonSection } from './category/CategoryComparisonSection';
 import { CategoryFaqSection } from './category/CategoryFaqSection';
 import { CategoryFinalCtaSection } from './category/CategoryFinalCtaSection';
@@ -22,6 +21,7 @@ interface CategorySolutionPageProps {
 export const CategorySolutionPage: React.FC<CategorySolutionPageProps> = ({
   categoryData,
   onOpenBuyModal,
+  onAddToCart,
 }) => {
   // Instant scroll-to-top whenever a category changes
   useEffect(() => {
@@ -61,11 +61,10 @@ export const CategorySolutionPage: React.FC<CategorySolutionPageProps> = ({
       />
 
       {/* 7. PRODUCT SHOWCASE */}
-      {/* <CategoryProductShowcase
-        categoryData={categoryData}
-        onOpenBuyModal={onOpenBuyModal}
-      /> */}
-      <ProductSection/>
+      <ProductSection
+        onBuyNow={onOpenBuyModal}
+        onAddToCart={onAddToCart}
+      />
 
       {/* 8. PROBLEM VS SOLUTION */}
       <CategoryComparisonSection

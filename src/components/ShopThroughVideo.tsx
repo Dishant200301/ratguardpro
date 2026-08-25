@@ -58,7 +58,7 @@ export const ShopThroughVideo: React.FC<ShopThroughVideoProps> = () => {
 
   const handleCardMouseEnter = (id: string) => {
     // Pause and mute any other videos that might be playing
-    Object.entries(videoRefs.current).forEach(([otherId, otherVideo]) => {
+    (Object.entries(videoRefs.current) as [string, HTMLVideoElement | null][]).forEach(([otherId, otherVideo]) => {
       if (otherId !== id && otherVideo) {
         otherVideo.pause();
         otherVideo.muted = true;

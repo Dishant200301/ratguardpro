@@ -363,10 +363,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               <p className="text-xs text-neutral-500">Mon - Sat: 10:00 AM - 7:00 PM</p>
             </div>
             <a
-              href="tel:+919409445443"
+              href="tel:+919328623013"
               className="font-extrabold text-[#0066FF] text-base hover:underline"
             >
-              +91 9409445443
+              +91 93286 23013
             </a>
           </div> */}
         </div>
