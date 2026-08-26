@@ -34,9 +34,6 @@ lerna-debug.log*
 .Trashes
 ehthumbs.db
 Thumbs.db
-.vscode/*
-!.vscode/extensions.json
-!.vscode/settings.json
 .idea/
 *.suo
 *.ntvs*
@@ -47,3 +44,7 @@ Thumbs.db
 # Temporary & Scratch scripts
 scratch/
 *.tmp
+branch_structure.json
+temp_auto_push.bat
+temp_interactive_push.bat
+.gitignore

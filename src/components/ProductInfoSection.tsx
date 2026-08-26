@@ -145,7 +145,7 @@ export const ProductInfoSection: React.FC<ProductInfoSectionProps> = ({ onBuyNow
           />
 
           {/* Heading & Subtitle on Dark Canvas (1-Line Heading & 2-Line Description) */}
-          <div className="relative z-10 w-full max-w-xl">
+          {/* <div className="relative z-10 w-full max-w-xl">
             <h3 className="text-xl xs:text-2xl sm:text-3xl md:text-3xl lg:text-[32px] xl:text-[38px] font-bold uppercase tracking-tight leading-tight font-sans drop-shadow-md">
               <span className="text-white block sm:inline">PLUG IT IN. </span>
               <span className="text-[#0066FF] block sm:inline">PROTECTION BEGINS.</span>
@@ -154,7 +154,7 @@ export const ProductInfoSection: React.FC<ProductInfoSectionProps> = ({ onBuyNow
               It’s simple as that! The RatGuardPro will begin working immediately. No confusing setup or settings to worry about.
               
             </p>
-          </div>
+          </div> */}
 
           {/* Spacer for bottom balance */}
           <div className="relative z-10" />

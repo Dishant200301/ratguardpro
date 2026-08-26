@@ -303,7 +303,7 @@ export const BuyNowModal: React.FC<BuyNowModalProps> = ({ isOpen, onClose }) => 
       {/* Modal Card Container */}
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-2xl bg-white rounded-3xl sm:rounded-[32px] shadow-2xl overflow-hidden transition-all max-h-[92vh] flex flex-col border border-neutral-200/80"
+        className="relative w-full max-w-3xl bg-white rounded-3xl sm:rounded-[32px] shadow-2xl overflow-hidden transition-all max-h-[92vh] flex flex-col border border-neutral-200/80"
       >
         {/* Close Button */}
         <button
@@ -339,7 +339,7 @@ export const BuyNowModal: React.FC<BuyNowModalProps> = ({ isOpen, onClose }) => 
                   <span className="block text-[10px] sm:text-[11px] font-semibold tracking-wider text-neutral-400 font-sans leading-tight">
                     Location
                   </span>
-                  <span className="block text-xs sm:text-sm font-semibold text-neutral-800 font-sans truncate mt-0.5">
+                  <span className="block text-xs lg:text-sm font-semibold text-neutral-800 font-sans truncate mt-0.5">
                     Surat, Gujarat
                   </span>
                 </div>
@@ -357,7 +357,7 @@ export const BuyNowModal: React.FC<BuyNowModalProps> = ({ isOpen, onClose }) => 
                   <span className="block text-[10px] sm:text-[11px] font-semibold tracking-wider text-neutral-400 font-sans leading-tight">
                     Email Us
                   </span>
-                  <span className="block text-xs sm:text-sm font-semibold text-neutral-800 group-hover:text-[#0066FF] font-sans truncate mt-0.5">
+                  <span className="block text-xs lg:text-sm font-semibold text-neutral-800 group-hover:text-[#0066FF] font-sans truncate mt-0.5">
                     ratguardpro9@gmail.com
                   </span>
                 </div>
@@ -375,7 +375,7 @@ export const BuyNowModal: React.FC<BuyNowModalProps> = ({ isOpen, onClose }) => 
                   <span className="block text-[10px] sm:text-[11px] font-semibold tracking-wider text-neutral-400 font-sans leading-tight">
                     Call Direct
                   </span>
-                  <span className="block text-xs sm:text-sm font-semibold text-neutral-800 group-hover:text-[#0066FF] font-sans truncate mt-0.5">
+                  <span className="block text-xs lg:text-sm font-semibold text-neutral-800 group-hover:text-[#0066FF] font-sans truncate mt-0.5">
                     +91 93286 23013
                   </span>
                 </div>
