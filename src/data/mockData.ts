@@ -23,7 +23,7 @@ export const HERO_SLIDES: HeroSlide[] = [
       { icon: 'water', label: 'Water & Heat Proof' },
     ],
     ctaText: 'SHOP NOW',
-    bgImage: '/images/home/hero/hero-1.webp',
+    bgImage: '/images/home/hero/hero-1.webp?v=2',
     accentBadge: 'RATS 24/7',
   },
   {
@@ -39,7 +39,7 @@ export const HERO_SLIDES: HeroSlide[] = [
       { icon: 'water', label: 'Water & Heat Proof' },
     ],
     ctaText: 'SHOP NOW',
-    bgImage: '/images/home/hero/hero-2.webp',
+    bgImage: '/images/home/hero/hero-2.webp?v=2',
     accentBadge: 'RATS 24/7',
   },
   {
@@ -55,7 +55,7 @@ export const HERO_SLIDES: HeroSlide[] = [
       { icon: 'water', label: 'Water & Heat Proof' },
     ],
     ctaText: 'SHOP NOW',
-    bgImage: '/images/home/hero/hero-3.webp',
+    bgImage: '/images/home/hero/hero-3.webp?v=2',
     accentBadge: 'RATS 24/7',
   },
   {
@@ -71,7 +71,7 @@ export const HERO_SLIDES: HeroSlide[] = [
       { icon: 'water', label: 'Water & Heat Proof' },
     ],
     ctaText: 'SHOP NOW',
-    bgImage: '/images/home/hero/hero-4.webp',
+    bgImage: '/images/home/hero/hero-4.webp?v=2',
     accentBadge: 'RATS 24/7',
   },
   {
@@ -87,7 +87,7 @@ export const HERO_SLIDES: HeroSlide[] = [
       { icon: 'water', label: 'Water & Heat Proof' },
     ],
     ctaText: 'SHOP NOW',
-    bgImage: '/images/home/hero/hero-5.webp',
+    bgImage: '/images/home/hero/hero-5.webp?v=2',
     accentBadge: 'RATS 24/7',
   },
   {
@@ -103,7 +103,7 @@ export const HERO_SLIDES: HeroSlide[] = [
       { icon: 'water', label: 'Water & Heat Proof' },
     ],
     ctaText: 'SHOP NOW',
-    bgImage: '/images/home/hero/hero-6.webp',
+    bgImage: '/images/home/hero/hero-6.webp?v=2',
     accentBadge: 'RATS 24/7',
   },
   {
@@ -119,7 +119,7 @@ export const HERO_SLIDES: HeroSlide[] = [
       { icon: 'water', label: 'Water & Heat Proof' },
     ],
     ctaText: 'SHOP NOW',
-    bgImage: '/images/home/hero/hero-7.webp',
+    bgImage: '/images/home/hero/hero-7.webp?v=2',
     accentBadge: 'RATS 24/7',
   },
   {
@@ -135,7 +135,7 @@ export const HERO_SLIDES: HeroSlide[] = [
       { icon: 'water', label: 'Water & Heat Proof' },
     ],
     ctaText: 'SHOP NOW',
-    bgImage: '/images/home/hero/hero-8.webp',
+    bgImage: '/images/home/hero/hero-8.webp?v=2',
     accentBadge: 'RATS 24/7',
   },
 ];

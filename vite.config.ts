@@ -35,7 +35,7 @@ export default defineConfig(() => {
       // Do not modify—file watching is disabled to prevent flickering during agent edits.
       hmr: process.env.DISABLE_HMR !== 'true',
       watch: process.env.DISABLE_HMR === 'true' ? null : {
-        ignored: ['**/public/**', '**/node_modules/**'],
+        ignored: ['**/public/**', '**/node_modules/**', '**/dist/**', '**/*.zip', '**/*.tar.gz'],
       },
     },
   };
