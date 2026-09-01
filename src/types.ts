@@ -54,6 +54,7 @@ export interface CustomerReelItem {
   thumbnail: string;
   videoUrl: string;
   youtubeId?: string;
+  posterTime?: number;
 }
 
 export interface FaqItem {

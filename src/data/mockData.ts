@@ -414,6 +414,7 @@ export const CUSTOMER_REELS: CustomerReelItem[] = [
     quote: '"Zero wire cuts in our luxury fleet after installing RatguardPro!"',
     thumbnail: 'https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?q=80&w=600&auto=format&fit=crop',
     videoUrl: '/images/reels/video-1.mp4',
+    posterTime: 2,
   },
   {
     id: 'story-2',
@@ -423,6 +424,7 @@ export const CUSTOMER_REELS: CustomerReelItem[] = [
     quote: '"Protected 5,000 sq ft grain storage without toxic chemicals."',
     thumbnail: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=600&auto=format&fit=crop',
     videoUrl: '/images/reels/video-2.mp4',
+    posterTime: 1,
   },
   {
     id: 'story-3',
@@ -441,6 +443,7 @@ export const CUSTOMER_REELS: CustomerReelItem[] = [
     quote: '"Stopped rat damage on FMCG inventory from Day 3 onwards."',
     thumbnail: 'https://images.unsplash.com/photo-1578916171728-46686eac8d58?q=80&w=600&auto=format&fit=crop',
     videoUrl: '/images/reels/video-4.mp4',
+    posterTime: 2,
   },
   {
     id: 'story-5',
@@ -450,6 +453,27 @@ export const CUSTOMER_REELS: CustomerReelItem[] = [
     quote: '"Server room cables are completely safe now. Plug and forget!"',
     thumbnail: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=600&auto=format&fit=crop',
     videoUrl: '/images/reels/video-5.mp4',
+    posterTime: 4,
+  },
+  {
+    id: 'story-6',
+    name: 'Neha Verma (Bengaluru)',
+    role: 'Homeowner & Garden Enthusiast',
+    hookTitle: '100% Non-Toxic Protection for Homes & Gardens! 🏡 🌿',
+    quote: '"Safe for my pets and no chemical smell at all. Completely cleared rats!"',
+    thumbnail: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=600&auto=format&fit=crop',
+    videoUrl: '/images/reels/video-6.mp4',
+    posterTime: 1,
+  },
+  {
+    id: 'story-7',
+    name: 'Manoj Joshi (Jaipur)',
+    role: 'Factory & Manufacturing Plant Manager',
+    hookTitle: 'Heavy-Duty 360° Industrial Rodent Repulsion! 🏭 ⚡',
+    quote: '"Industrial grade coverage that saved our manufacturing machinery wiring."',
+    thumbnail: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=600&auto=format&fit=crop',
+    videoUrl: '/images/reels/video-7.mp4',
+    posterTime: 2,
   },
 ];
 

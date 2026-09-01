@@ -57,10 +57,12 @@ export const ShopThroughVideo: React.FC<ShopThroughVideoProps> = () => {
   }, [playingVideoId]);
 
   const handleCardMouseEnter = (id: string) => {
-    // Pause and mute any other videos that might be playing
+    // Pause any other videos that might be playing and reset to their poster frames
     (Object.entries(videoRefs.current) as [string, HTMLVideoElement | null][]).forEach(([otherId, otherVideo]) => {
       if (otherId !== id && otherVideo) {
         otherVideo.pause();
+        const otherItem = CUSTOMER_REELS.find((r) => r.id === otherId);
+        otherVideo.currentTime = otherItem?.posterTime ?? 0;
         otherVideo.muted = true;
       }
     });
@@ -68,14 +70,15 @@ export const ShopThroughVideo: React.FC<ShopThroughVideoProps> = () => {
     setPlayingVideoId(id);
     const video = videoRefs.current[id];
     if (video) {
+      video.currentTime = 0; // Starts playing from the start on hover
       video.muted = false;
       video.volume = 1.0;
       const playPromise = video.play();
       if (playPromise !== undefined) {
         playPromise.catch(() => {
-          // Retry unmuting and playing
-          video.muted = false;
-          video.volume = 1.0;
+          // If browser policy blocks sound before user interaction, play muted so video still plays smoothly!
+          video.muted = true;
+          video.play().catch(() => {});
         });
       }
     }
@@ -86,7 +89,8 @@ export const ShopThroughVideo: React.FC<ShopThroughVideoProps> = () => {
       const video = videoRefs.current[id];
       if (video) {
         video.pause();
-        video.currentTime = 0;
+        const item = CUSTOMER_REELS.find((r) => r.id === id);
+        video.currentTime = item?.posterTime ?? 0;
       }
       setPlayingVideoId(null);
     }
@@ -98,17 +102,27 @@ export const ShopThroughVideo: React.FC<ShopThroughVideoProps> = () => {
     if (playingVideoId === id) {
       if (video) {
         video.pause();
+        const item = CUSTOMER_REELS.find((r) => r.id === id);
+        video.currentTime = item?.posterTime ?? 0;
       }
       setPlayingVideoId(null);
     } else {
-      if (playingVideoId && videoRefs.current[playingVideoId]) {
-        videoRefs.current[playingVideoId]?.pause();
-      }
+      (Object.entries(videoRefs.current) as [string, HTMLVideoElement | null][]).forEach(([otherId, otherVideo]) => {
+        if (otherId !== id && otherVideo) {
+          otherVideo.pause();
+          const otherItem = CUSTOMER_REELS.find((r) => r.id === otherId);
+          otherVideo.currentTime = otherItem?.posterTime ?? 0;
+        }
+      });
       setPlayingVideoId(id);
       if (video) {
+        video.currentTime = 0;
         video.muted = false;
         video.volume = 1.0;
-        video.play().catch(() => {});
+        video.play().catch(() => {
+          video.muted = true;
+          video.play().catch(() => {});
+        });
       }
     }
   };
@@ -177,21 +191,34 @@ export const ShopThroughVideo: React.FC<ShopThroughVideoProps> = () => {
         >
           {CUSTOMER_REELS.map((item) => {
             const isPlaying = playingVideoId === item.id;
+            const posterSecond = item.posterTime ?? 0;
+
             return (
               <div
                 key={item.id}
                 onMouseEnter={() => handleCardMouseEnter(item.id)}
                 onMouseLeave={() => handleCardMouseLeave(item.id)}
                 onClick={(e) => handleTogglePlayPause(e, item.id)}
-                className="shrink-0 w-[80vw] xs:w-[280px] sm:w-[310px] md:w-[320px] lg:w-[330px] xl:w-[340px] h-[450px] xs:h-[470px] sm:h-[490px] lg:h-[510px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg transition-all duration-300 relative flex flex-col justify-end p-4 sm:p-5 group cursor-pointer border border-neutral-200/60 select-none snap-start snap-always bg-neutral-950"
+                className="shrink-0 w-[80vw] xs:w-[280px] sm:w-[310px] md:w-[320px] lg:w-[330px] xl:w-[340px] h-[450px] xs:h-[470px] sm:h-[490px] lg:h-[510px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg transition-all duration-300 relative flex flex-col justify-end p-4 sm:p-5 group cursor-pointer select-none snap-start snap-always"
               >
-                {/* Video Element (Direct video frame without external photo, controls false, plays on hover) */}
+                {/* Video Element (Frozen on 2s frame initially, starts playing on hover) */}
                 <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none bg-neutral-900">
                   <video
                     ref={(el) => {
                       videoRefs.current[item.id] = el;
+                      if (el && !el.dataset.initialized) {
+                        el.dataset.initialized = 'true';
+                        if (posterSecond > 0) {
+                          el.currentTime = posterSecond;
+                        }
+                      }
                     }}
-                    src={item.videoUrl}
+                    onLoadedMetadata={(e) => {
+                      if (posterSecond > 0 && playingVideoId !== item.id) {
+                        e.currentTarget.currentTime = posterSecond;
+                      }
+                    }}
+                    src={posterSecond > 0 ? `${item.videoUrl}#t=${posterSecond}` : item.videoUrl}
                     preload="auto"
                     loop
                     playsInline
@@ -208,11 +235,11 @@ export const ShopThroughVideo: React.FC<ShopThroughVideoProps> = () => {
                       : 'opacity-100 bg-black/15 group-hover:bg-black/25'
                   }`}
                 >
-                  <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-white/25 backdrop-blur-md border border-white/40 text-white flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-[#0066FF] group-hover:border-[#0066FF] transition-all duration-200">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/25 backdrop-blur-md text-white flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-[#0066FF] group-hover:border-[#0066FF] transition-all duration-200">
                     {isPlaying ? (
                       <Pause className="w-6 h-6 fill-current text-white" />
                     ) : (
-                      <Play className="w-6 h-6 fill-current ml-1 text-white" />
+                      <Play className="w-6 h-6 fill-current text-white" />
                     )}
                   </div>
                 </div>
